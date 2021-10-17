@@ -8,6 +8,7 @@ The project Life Notes is a web app the helps people to take four main types of 
 
 # History of the Lifenote
 [Link to the contributing.md](https://github.com/software-students-fall2021/project-setup-nick-wang/blob/master/CONTRIBUTING.md)
+
 It's kind of too tedious to have so many different apps to manage in our life. Therefore, we had this idea to create an app to merge things like diary and account book into one.
 The project idea was proposed for the class Software Engineering in September 2021. 
 
