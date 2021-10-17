@@ -1,92 +1,45 @@
-# Contributing
+# Contributing to EventEdge
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+## Team Norms
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+### Team Values:
+* Work Together
+   * Tasks are assigned on a weekly base. Everyone is supposed to complete their work on time. 
+   * When one team member encounters problems or obstacles, others should help.
+* When there is a conflict we will vote among the 5 of us
+  * If a group member is not delivering obligations, we will give them warnings and then notify the stakeholders
+* Respond to directed messages within a day
 
-## Pull Request Process
+### Sprint Cadence
+* 2 weeks/sprint, each sprint the whole team should contribute approximate 25 hours/week
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
-   build.
-2. Update the README.md with details of changes to the interface, this includes new environment 
-   variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this
-   Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
-   do not have permission to do that, you may request the second reviewer to merge it for you.
+### Daily Standup
+* 2 standups of 15 mins: Tuesday evening, Friday evening
 
-## Code of Conduct
+### Coding standards
+* Designate a code editor and code linter all team members will use to standardize code formatting.
+* Don't over-engineer. Write minimum code to get things working end to end, only then iterate to improve. - Code for each task and spike must be peer-reviewed and pass tests before merging into the main branch of code.
+* Always push working code, if you break the pipeline/build then fix it.
+* Make granular and small commits, per feature or per bug fix.
+* Provide descriptive commit messages.
+* Write self documenting code. Use descriptive variable and function names. Avoid unnecessary name shortening.
+* Don't leave dead/commented out code behind. If you see such code, delete it.
+* Write automated tests to cover critical integration points and functionality (once you learn how to do that).
+## Git Workflow
+* Decentralized
 
-### Our Pledge
+## A detailed description of the rules of contributing / PULL REQUEST guidelines
+* Always make a PR for a feature
+* Never merge PR before at least one review has been made
+* With each PR, please include a description of the changes:
+  * Which task/spike does the PR refer to (issue number)
+  * What changes have been made
+* Review other open PRs if they are not yet reviewed
+* Commit titles should be of the following format: `“Add feature”`, `“Change something”` and etc.
+* Make sure you format the files before opening a PR by running `npm run format`
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, gender identity and expression, level of experience,
-nationality, personal appearance, race, religion, or sexual identity and
-orientation.
+## Instructions for setting up the local development environment
+* _TBD_
 
-### Our Standards
-
-Examples of behavior that contributes to creating a positive environment
-include:
-
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
-
-Examples of unacceptable behavior by participants include:
-
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
-  address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
-  professional setting
-
-### Our Responsibilities
-
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
-
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
-
-### Scope
-
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
-
-### Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [INSERT EMAIL ADDRESS]. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
-
-Project maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
-
-### Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at [http://contributor-covenant.org/version/1/4][version]
-
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+## Instructions for building and testing the project
+* _TBD_
