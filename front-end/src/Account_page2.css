@@ -1,0 +1,29 @@
+section {
+  
+    display: flex;
+    padding: 20px;
+  }
+  
+  article {
+    flex: auto;
+    border: 1px dotted green;
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  p {
+    color: grey;
+  }
+  
+  h{
+    font-weight: bold;
+    font-size: 20px
+    margin = 20px
+    height = 400
+    width = 600
+  }
