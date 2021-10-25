@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrimaryNav from './PrimaryNav'
-import Home from './Home'
+import StickyNav from "./StickyNav";
+import Home from "./Home";
+import Login from "./Login";
 import "./App.css";
 
 function App() {
@@ -9,8 +10,12 @@ function App() {
     <div className="container">
       <Router>
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+
           <Route path="/">
-            <PrimaryNav />
+            <StickyNav />
             <Home />
           </Route>
         </Switch>
