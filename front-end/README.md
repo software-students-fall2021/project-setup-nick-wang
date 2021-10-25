@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install --save ag-grid-community ag-grid-react`
+
 ### `npm start`
 
 Runs the app in the development mode.\
