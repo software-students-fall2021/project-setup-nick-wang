@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrimaryNav from './PrimaryNav'
+// import PrimaryNav from './PrimaryNav'
 import AccountBookMain from './AccountBookMain'
-import Home from './Home'
+import "./AccountBookMain.css"
+// import Home from './Home'
 import "./App.css";
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
             <AccountBookMain />
             {/* <Home /> */}
           </Route>
+
+          <Route path="/moreTransaction">
+          </Route>
+
         </Switch>
       </Router>
     </div>
