@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrimaryNav from './PrimaryNav'
+import AccountBookMain from './AccountBookMain'
 import Home from './Home'
 import "./App.css";
 
@@ -10,8 +11,9 @@ function App() {
       <Router>
         <Switch>
           <Route path="/">
-            <PrimaryNav />
-            <Home />
+            {/* <PrimaryNav /> */}
+            <AccountBookMain />
+            {/* <Home /> */}
           </Route>
         </Switch>
       </Router>
