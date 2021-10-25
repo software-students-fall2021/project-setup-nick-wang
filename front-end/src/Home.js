@@ -28,7 +28,7 @@ const Home = (props) => {
           <Divider vertical>Or</Divider>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-              <Header icon as={Link} to="/">
+              <Header icon as={Link} to="/diary_overview">
                 <Icon name="pencil alternate" />
                 Diary
               </Header>
