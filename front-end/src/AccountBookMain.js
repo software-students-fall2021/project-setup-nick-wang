@@ -28,13 +28,16 @@ function AccountBookMain(){
 
             <form action="#">
                 <div className="search" >
-                <input className="searchBar" type="text" id="search" name="search" placeholder="Search"></input>   
+                <input className="searchBar" type="text" id="search" name="search" placeholder="Search an transaction"></input>   
                 </div>
             </form>
 
             <form action="#">
                 <div className="add">
-                <input className="addBar" type="text" id="search" name="search" placeholder="Add a transaction"></input>
+                <input className="addBar" type="text" id="trsc" name="trsc" placeholder="Add a transaction"></input>
+                <input className="addBar" type="number" id="amount" name="amount" step=".01" placeholder="$ amount"></input>
+                <input className="addBar" type="text" id="type" name="type" placeholder="type"></input>
+                <input type="submit" name="submit" value="Submit"></input>
                 </div>
             </form>
 
