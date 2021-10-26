@@ -12,7 +12,7 @@ function AccountBookMain(){
     useEffect(() => {
         async function fetchData(){
             const result = await axios(
-                "https://my.api.mockaroo.com/users.json?key=157fcab0"
+                "https://my.api.mockaroo.com/test2.json?key=9c8bd880"
             );
 
             setData(result.data)
@@ -58,22 +58,22 @@ function AccountBookMain(){
             </div>
             
             <div className="pieChart">
-                <PieChart radius="35"
-                    data={[
-                        { title: 'One', value: 10, color: '#E38627' },
-                        { title: 'Two', value: 15, color: '#C13C37' },
-                        { title: 'Three', value: 20, color: '#6A2135' },
-                    ]}
+                <PieChart radius="20"
+                    data={data.map(item => (
+                        {title: item.type, value: item.amount, color: item.color}
+                    ))}
+                        
                     label={({ dataEntry }) => dataEntry.title}
                     labelStyle={{
                         fontSize: '6px',
                         fontFamily: 'Impact',
                         fill: 'grey'
                     }}
+                    labelPosition={112}
                 />
  
                 <PieChart radius="35"
-                    data={[{ value: 100, key: 1, color: "red" }]}
+                    data={[{ value: 100, key: 1, color: 'green' }]}
                     startAngle={270}
                     reveal={50}
                     lineWidth={30}
