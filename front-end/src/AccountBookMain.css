@@ -46,14 +46,9 @@
     border-radius: 10px;
 }
 
-.progressBar{
-    text-align: center;
-    margin: 10px;
-    padding: 5px;
-}
-
 .pieChart{
-    text-align: center;
+    display: flex;
+    flex-direction: row;
     margin: 10px;
     padding: 10px;
 }
