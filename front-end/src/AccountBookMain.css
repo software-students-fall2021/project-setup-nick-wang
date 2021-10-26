@@ -46,6 +46,16 @@
     border-radius: 10px;
 }
 
+.progressBar{
+    text-align: center;
+    margin: 10px;
+}
+
+.grid{
+    width: 1000px;
+    height: 50px;
+}
+
 .allTypes{
     text-align: center;
     margin: 10px;
@@ -91,3 +101,4 @@ a:active
 {
 	opacity: 0.5;
 }
+

@@ -33,6 +33,13 @@ function AccountBookMain(){
                 <Link className="moreTranscations" to="">More Transactions</Link>
             </div>
             
+            <div className="progressBar">
+                <svg className="grid">
+                    <rect classNam="bar" width="1000" height="50"  stroke="black" stroke-width="2" fill="grey"  />
+                    <text x="440" y="30" fill="black"> Monthly Budget</text>
+                </svg>
+            </div>
+
             <div className="allTypes">
                 <div className="typeRow">
                     <Link className="type" to="">Type 1</Link>
