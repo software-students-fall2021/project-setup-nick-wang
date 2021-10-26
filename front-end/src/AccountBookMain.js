@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { PieChart } from 'react-minimal-pie-chart';
 import { Link } from "react-router-dom";
 import Transaction from "./Transaction";
 import "./AccountBookMain.css";
 import axios from "axios";
+
 
 function AccountBookMain(){
     const [data, setData] = useState([]);
@@ -54,6 +56,40 @@ function AccountBookMain(){
                 <Link className="moreTranscations" to="">More Transactions</Link>
             </div>
             
+            <div className="pieChart">
+                <PieChart radius="35"
+                    data={[
+                        { title: 'One', value: 10, color: '#E38627' },
+                        { title: 'Two', value: 15, color: '#C13C37' },
+                        { title: 'Three', value: 20, color: '#6A2135' },
+                    ]}
+                    label={({ dataEntry }) => dataEntry.title}
+                    labelStyle={{
+                        fontSize: '6px',
+                        fontFamily: 'Impact',
+                        fill: 'grey'
+                    }}
+                />
+ 
+                <PieChart radius="35"
+                    data={[{ value: 100, key: 1, color: "red" }]}
+                    startAngle={270}
+                    reveal={50}
+                    lineWidth={30}
+                    background="grey"
+                    lengthAngle={360}
+                    rounded
+                    animate
+                    label={({ dataEntry }) => dataEntry.value}
+                    labelStyle={{
+                      fontSize: '10px',
+                      fontFamily: 'Impact',
+                      fill: 'grey',
+                    }}
+                    labelPosition={0}
+                />
+            </div>
+
             <div className="allTypes">
                 <h2>Categories</h2>
                 <div className="typeRow">
