@@ -1,13 +1,27 @@
-import React from "react"
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-//import Button from "@mui/material/Button";
-import "./AccountBookMain.css"
+import Transaction from "./Transaction";
+import "./AccountBookMain.css";
+import axios from "axios";
 
 function AccountBookMain(){
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function fetchData(){
+            const result = await axios(
+                "https://my.api.mockaroo.com/users.json?key=157fcab0"
+            );
+
+            setData(result.data)
+        }
+        fetchData();
+    }, [])
+
     return (
         <body className="body">
             <header className="header">
-                <h1>LifeNote</h1>
+                <h1>Account Book</h1>
             </header>
             
             <button className="backButton">Back</button>
@@ -20,16 +34,20 @@ function AccountBookMain(){
 
             <form action="#">
                 <div className="add">
-                <input className="addBar" type="text" id="search" name="search" placeholder="Add transaction"></input>
+                <input className="addBar" type="text" id="search" name="search" placeholder="Add a transaction"></input>
                 </div>
             </form>
 
             <div className="transactions">
-                <p className="">Transaction 1</p>
-                <p>Transaction 2</p>
-                <p>Transaction 3</p>
-                <p>Transaction 4</p>
-                <p>Transaction 5</p>
+                <>
+                <h2>Recent Transactions</h2>
+                <section className="">
+                    {data.map(item => (
+                    <Transaction key={item.id} details={item} />
+                    ))}
+                </section>
+                </>
+
                 <Link className="moreTranscations" to="">More Transactions</Link>
             </div>
             
@@ -41,6 +59,7 @@ function AccountBookMain(){
             </div>
 
             <div className="allTypes">
+                <h2>Categories</h2>
                 <div className="typeRow">
                     <Link className="type" to="">Type 1</Link>
                     <Link className="type" to="">Type 2</Link>
