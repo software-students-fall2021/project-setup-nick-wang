@@ -13,6 +13,7 @@
     border-radius: 10px;
     border: 2px solid black;
     margin: 10px;
+    background-color: white;
 }
 
 .homeButton{
@@ -30,12 +31,23 @@
 }
 
 .add{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
     text-align: center;
+    margin-left: 15%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
 }
 
 .addBar{
     padding: 12px 20px;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .transactions{
@@ -44,6 +56,7 @@
     padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
+    background-color: white;
 }
 
 .pieChart{
@@ -59,6 +72,7 @@
     padding: auto;
     border: 2px solid black;
     border-radius: 10px;
+    background-color: white;
 }
 
 .typeRow{
