@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-
+import {useHistory} from "react-router-dom";
 
 const ongrid = (props) => {
 	return (
@@ -19,8 +19,15 @@ const ongrid = (props) => {
   )
 }
 
+const Footer = () => (
+  <div className="footer">
+    <p>LifeNote2021</p>
+  </div>
+);
+
 function App() {
   const [count, setCount] = useState(0);
+  const history = useHistory();
 
   const rowData = [
     {Name: "Fruits", Date: "10.04.2021", Amount: 35},
@@ -39,7 +46,11 @@ function App() {
     alert("NMD");
   }
 
-  
+  const goBack = () => {
+    history.goBack()
+  }
+
+
 	return (
     
     <div>
@@ -49,13 +60,10 @@ function App() {
         <img src="logo01.png" className = "center"/>
       </a>
       <div>
-        <form onSubmit={handleSubmit}>
-          <button type="submit"> Return </button>
-        </form>
-       <button onClick={handleClick}> Return </button>
-       <h> Most Recent Transaction</h>
+       <button onClick={() => history.goBack()}>Go Back</button>
+       <h> Transaction of food</h>
       </div>
-        <div style={{ width: '100%', height: '50%' }}>
+        <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
             <div id="left"></div>
             <div id="center">
@@ -69,16 +77,18 @@ function App() {
               >
                 <AgGridReact
                   rowData={rowData}>
-                  <AgGridColumn field="Name" sortable={ true } filter={ true } editable={true}></AgGridColumn>
-                  <AgGridColumn field="Date" sortable={ true } filter={ true } editable={true}></AgGridColumn>
-                  <AgGridColumn field="Amount" sortable={ true } filter={ true } editable={true}></AgGridColumn>
+                  <AgGridColumn field="Name" sortable={ true } filter={true} editable = {true}></AgGridColumn>
+                  <AgGridColumn field="Amount" sortable={ true }  filter={true} editable = {true}></AgGridColumn>
+                  <AgGridColumn field="Date" sortable={ true } filter={true} editable = {true}></AgGridColumn>
               </AgGridReact>
               </div>
             </div>
             <div id="right"></div>
           </div>
         </div>
+        <Footer/>
       </div>
+      
 );
 }
 
