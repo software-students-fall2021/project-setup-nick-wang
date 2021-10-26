@@ -61,7 +61,7 @@ function App() {
       </a>
       <div>
        <button onClick={() => history.goBack()}>Go Back</button>
-       <h> Most Recent Transaction</h>
+       <h> Transaction of food</h>
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
@@ -77,9 +77,9 @@ function App() {
               >
                 <AgGridReact
                   rowData={rowData}>
-                  <AgGridColumn field="Name"  ></AgGridColumn>
-                  <AgGridColumn field="Amount"   ></AgGridColumn>
-                  <AgGridColumn field="Date" sortable={ true }  ></AgGridColumn>
+                  <AgGridColumn field="Name" sortable={ true } filter={true} editable = {true}></AgGridColumn>
+                  <AgGridColumn field="Amount" sortable={ true }  filter={true} editable = {true}></AgGridColumn>
+                  <AgGridColumn field="Date" sortable={ true } filter={true} editable = {true}></AgGridColumn>
               </AgGridReact>
               </div>
             </div>
