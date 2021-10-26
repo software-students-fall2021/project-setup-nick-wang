@@ -5,6 +5,7 @@ import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 const ongrid = (props) => {
 	return (
@@ -26,30 +27,29 @@ const Footer = () => (
 );
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
   const history = useHistory();
 
-  const rowData = [
-    {Name: "Fruits", Date: "10.04.2021", Amount: 35},
-    {Name: "Gas", Date: "10.05.2021", Amount: 200},
-    {Name: "Meat", Date: "10.03.2021", Amount: 35}
-  ];
+  const url = 'https://my.api.mockaroo.com/users.json?key=34da9040';
 
-  const handleClick = e => {
-    console.log("clicked!");
-    // update the counter
-    setCount(count + 1);
-  };
+  useEffect(() => {
+    // a nested function that fetches the data
+    async function fetchData() {
+      // axios is a 3rd-party module for fetching data from servers
+      const result = await axios(
+        // retrieving some mock data about animals for sale
+        "https://my.api.mockaroo.com/test1.json?key=34da9040"
+      );
+      // set the state variable
+      // this will cause a re-render of this component
+      setData(result.data);
+    }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    alert("NMD");
-  }
-
-  const goBack = () => {
-    history.goBack()
-  }
-
+    // fetch the data!
+    fetchData();
+    
+    // the blank array below causes this callback to be executed only once on component load
+  }, []);
 
 	return (
     
@@ -75,11 +75,12 @@ function App() {
                 }}
                 className="ag-theme-material"
               >
+                
                 <AgGridReact
-                  rowData={rowData}>
+                  rowData={data}>
                   <AgGridColumn field="Name"  ></AgGridColumn>
                   <AgGridColumn field="Amount"   ></AgGridColumn>
-                  <AgGridColumn field="Date" sortable={ true }  ></AgGridColumn>
+                  <AgGridColumn field="Date" sortable={ true } ></AgGridColumn>
               </AgGridReact>
               </div>
             </div>

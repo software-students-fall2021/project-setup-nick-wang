@@ -5,11 +5,15 @@
 
 ### `npm start`
 
+### `npm install axios
+
+### `npm install --save react-router-dom`
+
 ### Contribution:
 
 Letian Ye: Home, Login, Sticky Navigation, DiaryOverview, Global Router
 
-xxx:
+Zhuofeng Wang: Account Page2, Account Page3
 
 xxx:
 
