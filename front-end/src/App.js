@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrimaryNav from './PrimaryNav'
-import Home from './Home'
+// import PrimaryNav from './PrimaryNav'
+// import Home from './Home'
+import Diary from './Diary/Diary'
 import "./App.css";
 
 function App() {
@@ -10,8 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/">
-            <PrimaryNav />
-            <Home />
+            <Diary />
           </Route>
         </Switch>
       </Router>
