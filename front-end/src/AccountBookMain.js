@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { PieChart } from 'react-minimal-pie-chart';
 import { Link } from "react-router-dom";
 import Transaction from "./Transaction";
 import "./AccountBookMain.css";
 import axios from "axios";
+
 
 function AccountBookMain(){
     const [data, setData] = useState([]);
@@ -51,11 +53,23 @@ function AccountBookMain(){
                 <Link className="moreTranscations" to="">More Transactions</Link>
             </div>
             
-            <div className="progressBar">
-                <svg className="grid">
-                    <rect classNam="bar" width="1000" height="50"  stroke="black" stroke-width="2" fill="grey"  />
-                    <text x="440" y="30" fill="black"> Monthly Budget</text>
+            <div className="pieChart">
+                <svg width="100%" height="100%">
+                    <PieChart
+                        data={[
+                            { title: 'One', value: 10, color: '#E38627' },
+                            { title: 'Two', value: 15, color: '#C13C37' },
+                            { title: 'Three', value: 20, color: '#6A2135' },
+                        ]}
+                    />
                 </svg>
+            </div>
+
+            <div className="progressBar">
+                <svg width="100%" height="50">
+                    <rect width="100%" height="100%" stroke="black" stroke-width="2" ry="10" rx="10" fill="grey"  />
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black"> Monthly Budget</text>
+                </svg>                    
             </div>
 
             <div className="allTypes">
