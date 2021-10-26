@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import StickyNav from "./StickyNav";
 import Home from "./Home";
 import Login from "./Login";
+import DiaryOverview from "./DiaryOverview";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,11 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+
+          <Route path="/diary_overview">
+            <StickyNav />
+            <DiaryOverview />
           </Route>
 
           <Route path="/">
