@@ -7,6 +7,8 @@
 
 ### `npm install axios`
 
+### `npm install react-minimal-pie-chart`
+
 ### `npm start`
 
 ### `npm install axios
@@ -21,7 +23,7 @@ Zhuofeng Wang: Account Page2, Account Page3
 
 Susan Liu: Diary folder, component folder
 
-xxx:
+Yiming Yu: Accountbook main page charts, links between Pages
 
 xxx:
 
