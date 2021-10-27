@@ -3,6 +3,10 @@
 =======
 ### `npm install --save ag-grid-community ag-grid-react`
 
+### `npm install --save react-router-dom`
+
+### `npm install axios`
+
 ### `npm start`
 
 ### `npm install axios
