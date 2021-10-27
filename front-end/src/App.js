@@ -1,9 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// import PrimaryNav from './PrimaryNav'
+import AccountBookMain from './AccountBookMain'
+import "./AccountBookMain.css"
+// import Home from './Home'
+
 import StickyNav from "./StickyNav";
 import Home from "./Home";
 import Login from "./Login";
 import DiaryOverview from "./DiaryOverview";
+
 import "./App.css";
 
 function App() {
@@ -21,9 +28,16 @@ function App() {
           </Route>
 
           <Route path="/">
+
+            <AccountBookMain />
+
             <StickyNav />
             <Home />
           </Route>
+
+          <Route path="/moreTransaction">
+          </Route>
+
         </Switch>
       </Router>
     </div>
