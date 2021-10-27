@@ -113,6 +113,7 @@ function AccountBookMain(){
                     <Link className="type" to="/account_book/category">Type 6</Link>
                 </div>
             </div>
+            
             <footer className="footer">
                 <p>&copy;2021 LifeNote Team</p>  
             </footer>     
