@@ -1,6 +1,7 @@
 # LifeNote Front End
 
 =======
+
 ### `npm install --save ag-grid-community ag-grid-react`
 
 ### `npm install --save react-router-dom`
@@ -15,6 +16,7 @@
 
 ### `npm install --save react-router-dom`
 
+=======
 ### Contribution:
 
 Letian Ye: Home, Login, Sticky Navigation, DiaryOverview, Global Router
@@ -25,9 +27,7 @@ Susan Liu: Diary folder, component folder
 
 Yiming Yu: Accountbook main page charts, links between Pages
 
-xxx:
-
-
+Yaolin Zhang: Account Book main page
 
 Product Owner: Letian Ye
 
