@@ -55,7 +55,7 @@ function AccountBookMain(){
                 </section>
                 </>
 
-                <Link className="moreTranscations" to="">More Transactions</Link>
+                <Link className="moreTranscations" to="/account_book/overview">More Transactions</Link>
             </div>
             
             <div className="summary">
@@ -99,18 +99,18 @@ function AccountBookMain(){
             <div className="allTypes">
                 <h2>Categories</h2>
                 <div className="typeRow">
-                    <Link className="type" to="">Type 1</Link>
-                    <Link className="type" to="">Type 2</Link>
+                    <Link className="type" to="/account_book/category">Type 1</Link>
+                    <Link className="type" to="/account_book/category">Type 2</Link>
                 </div>
 
                 <div className="typeRow">
-                    <Link className="type" to="">Type 3</Link>
-                    <Link className="type" to="">Type 4</Link>
+                    <Link className="type" to="/account_book/category">Type 3</Link>
+                    <Link className="type" to="/account_book/category">Type 4</Link>
                 </div>
 
                 <div className="typeRow">
-                    <Link className="type" to="">Type 5</Link>
-                    <Link className="type" to="">Type 6</Link>
+                    <Link className="type" to="/account_book/category">Type 5</Link>
+                    <Link className="type" to="/account_book/category">Type 6</Link>
                 </div>
             </div>
             <footer className="footer">

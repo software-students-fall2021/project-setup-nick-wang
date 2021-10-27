@@ -35,7 +35,7 @@ const Home = (props) => {
             </Grid.Column>
 
             <Grid.Column>
-              <Header icon as={Link} to="/">
+              <Header icon as={Link} to="/account_book">
                 <Icon name="dollar sign" />
                 Account Book
               </Header>
