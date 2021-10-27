@@ -15,7 +15,7 @@ xxx:
 
 
 
-Product Owner: Letian Ye
+Product Owner: Susan
 
-Scrum Master: Susan
+Scrum Master: Letian Ye
 
