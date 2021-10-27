@@ -4,17 +4,18 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import DatePicker from '@material-ui/lab/DatePicker';
 
+const today = new Date()
+
 export default function BasicDatePicker() {
 
-  const [date, setDate] = React.useState(null);
-  const [month, setMonth] = React.useState(null);
+  const [pickedDate, setPickedDate] = React.useState(today);
+
+  //console.log(pickedDate)
 
   const handleOnChange = (newDate) =>{
-    setDate(newDate)
-    const month = new Date(date)
-    setMonth(month.getMonth())
+    const date = new Date(newDate)
+    setPickedDate(date)
   }
-  //console.log(month)
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -22,10 +23,9 @@ export default function BasicDatePicker() {
         variant="inline"
         views={['year','month']}
         label="Choose Month"
-        value={date}
+        value={pickedDate}
         onChange={handleOnChange}
         renderInput={(params) => <TextField {...params} />}
-
       />
     </LocalizationProvider>
   );

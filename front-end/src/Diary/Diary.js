@@ -23,7 +23,7 @@ const Diary = () => {
     //console.log(content)
     return (
         <div className="Diary">
-           <HomeButton></HomeButton>
+            <HomeButton></HomeButton>
             <DiaryStack>
             </DiaryStack>    
             <BottomNav>
