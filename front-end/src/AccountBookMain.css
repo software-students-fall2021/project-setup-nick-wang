@@ -1,0 +1,125 @@
+.body{
+    background-color: #f6f5f7;
+}
+.backButton{
+    width: 15%;
+    margin: 5px;
+    padding: 10px;
+    color: black;
+}
+
+.header{
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: 10px;
+    background-color: white;
+}
+
+.homeButton{
+    width: 90%;
+}
+
+.search{
+    text-align: center;
+    margin: 10px;
+}
+
+.searchBar{
+    padding: 12px 20px;
+    border-radius: 10px;
+}
+
+.add{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    margin-left: 15%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+.addBar{
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.transactions{
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.pieChart{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 10px;
+}
+
+.allTypes{
+    text-align: center;
+    margin: 10px;
+    padding: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.typeRow{
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+.type{
+    margin: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.footer{
+    margin-top: 50px;
+    text-align: center;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+a:visited
+{
+	color: navy;
+}
+
+a:hover
+{
+	background-color: #dae6e6;
+	border: 2px solid white;
+	border-radius: 5px;
+}
+
+a:active
+{
+	opacity: 0.5;
+}
+
+.summary{
+    margin: 10px;
+    padding: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+.spendingSumHead{
+    text-align: center;
+}

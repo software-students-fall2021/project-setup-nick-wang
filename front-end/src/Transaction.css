@@ -1,0 +1,20 @@
+/* Stylesheet for Transaction */
+
+.transaction{
+    margin-bottom:10px
+}
+
+.transaction:hover {
+    background-color: black;
+    color: #909090;
+}
+
+.date{
+    color: grey;
+}
+.amount{
+    color: blue;
+}
+.trscType{
+    color: orange;
+}
