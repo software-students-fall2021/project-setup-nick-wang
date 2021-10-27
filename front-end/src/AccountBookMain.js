@@ -58,38 +58,42 @@ function AccountBookMain(){
                 <Link className="moreTranscations" to="">More Transactions</Link>
             </div>
             
-            <div className="pieChart">
-                <PieChart radius="20"
-                    data={data.map(item => (
-                        {title: item.type, value: item.amount, color: item.color}
-                    ))}
-                        
-                    label={({ dataEntry }) => dataEntry.title}
-                    labelStyle={{
-                        fontSize: '6px',
+            <div className="summary">
+                <h2 className="spendingSumHead">Your Spending Summary</h2>
+                <div className="pieChart">
+
+                    <PieChart radius="20"
+                        data={data.map(item => (
+                            {title: item.type, value: item.amount, color: item.color}
+                        ))}
+                            
+                        label={({ dataEntry }) => dataEntry.title}
+                        labelStyle={{
+                            fontSize: '6px',
+                            fontFamily: 'Impact',
+                            fill: 'grey'
+                        }}
+                        labelPosition={112}
+                    />
+    
+                    <PieChart radius="35"
+                        data={[{ value: 100, key: 1, color: 'green' }]}
+                        startAngle={270}
+                        reveal={50}
+                        lineWidth={30}
+                        background="grey"
+                        lengthAngle={360}
+                        rounded
+                        animate
+                        label={({ dataEntry }) => dataEntry.value}
+                        labelStyle={{
+                        fontSize: '10px',
                         fontFamily: 'Impact',
-                        fill: 'grey'
-                    }}
-                    labelPosition={112}
-                />
- 
-                <PieChart radius="35"
-                    data={[{ value: 100, key: 1, color: 'green' }]}
-                    startAngle={270}
-                    reveal={50}
-                    lineWidth={30}
-                    background="grey"
-                    lengthAngle={360}
-                    rounded
-                    animate
-                    label={({ dataEntry }) => dataEntry.value}
-                    labelStyle={{
-                      fontSize: '10px',
-                      fontFamily: 'Impact',
-                      fill: 'grey',
-                    }}
-                    labelPosition={0}
-                />
+                        fill: 'grey',
+                        }}
+                        labelPosition={0}
+                    />
+                </div>
             </div>
 
             <div className="allTypes">
