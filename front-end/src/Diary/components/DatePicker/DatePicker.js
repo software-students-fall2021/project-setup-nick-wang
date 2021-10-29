@@ -4,13 +4,8 @@ import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import DatePicker from '@material-ui/lab/DatePicker';
 
-const today = new Date()
 
-export default function BasicDatePicker() {
-
-  const [pickedDate, setPickedDate] = React.useState(today);
-
-  //console.log(pickedDate)
+export default function BasicDatePicker({pickedDate, setPickedDate}) {
 
   const handleOnChange = (newDate) =>{
     const date = new Date(newDate)

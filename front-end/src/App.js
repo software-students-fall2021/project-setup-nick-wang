@@ -12,9 +12,12 @@ import Account_page2 from "./Account_page2";
 import Account_page3 from "./Account_page3";
 import DiaryOverview from "./DiaryOverview";
 
+import Diary from './Diary/Diary'
+import DiaryDetail from './Diary/components/DiaryDetail/DiaryDetail'
 import "./App.css";
 
 function App() {
+
   return (
       <Router>
         <Switch>
@@ -31,6 +34,14 @@ function App() {
 
           <Route path="/login">
             <Login />
+          </Route>
+
+          <Route path="/Diary">
+            <Diary />
+          </Route>
+
+          <Route path="/Detail">
+            <DiaryDetail />
           </Route>
 
           <Route path="/diary_overview">

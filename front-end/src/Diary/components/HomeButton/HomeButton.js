@@ -5,7 +5,7 @@ import "./HomeButton.css"
 
 const handleClick = () => {
   return (
-    alert("Should go back to Home page!")
+    "location.href = '/'"
   )
 }
 

@@ -10,12 +10,11 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import BasicDatePicker from '../DatePicker/DatePicker'
 import './BottomNav.css';
 
-const BottomNav = () => {
+const BottomNav = (props) => {
     const [value, setValue] = React.useState(0);
     return(
-        //<StylesProvider injectFirst>
         <div className="navBox">
-        <Box>
+        <Box sx={{marginTop:'30px'}}>
             <BottomNavigation
                 showLabels
                 value={value}
@@ -23,7 +22,7 @@ const BottomNav = () => {
                     setValue(newValue);
                 }}
             >
-                <BasicDatePicker></BasicDatePicker>
+                <BasicDatePicker pickedDate={props.pickedDate} setPickedDate={props.setPickedDate}></BasicDatePicker>
                 <BottomNavigationAction label="Create" icon={<CreateIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
                 <BottomNavigationAction label="WordsCloud" icon={<CloudIcon />} />
@@ -31,7 +30,6 @@ const BottomNav = () => {
             </BottomNavigation>
         </Box>
         </div>
-        //</StylesProvider>
     )
 }
 
