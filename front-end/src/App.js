@@ -36,14 +36,6 @@ function App() {
             <Login />
           </Route>
 
-          <Route path="/Diary">
-            <Diary />
-          </Route>
-
-          <Route path="/Detail">
-            <DiaryDetail />
-          </Route>
-
           <Route path="/diary_overview">
             <StickyNav />
             <DiaryOverview />
