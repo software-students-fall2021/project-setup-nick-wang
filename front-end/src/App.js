@@ -12,48 +12,54 @@ import Account_page2 from "./Account_page2";
 import Account_page3 from "./Account_page3";
 import DiaryOverview from "./DiaryOverview";
 
-import Diary from './Diary/Diary'
-import DiaryDetail from './Diary/components/DiaryDetail/DiaryDetail'
+import Diary from "./Diary/Diary";
+import DiaryDetail from "./Diary/components/DiaryDetail/DiaryDetail";
 import "./App.css";
 
 function App() {
-
   return (
-      <Router>
-        <Switch>
+    <Router>
+      <Switch>
+        <Route path="/account_book/category">
+          <StickyNav />
+          <Account_page3 />
+        </Route>
 
-          <Route path="/account_book/category">
-            <StickyNav />
-            <Account_page3 />
-          </Route>
+        <Route path="/account_book/overview">
+          <StickyNav />
+          <Account_page2 />
+        </Route>
 
-          <Route path="/account_book/overview">
-            <StickyNav />
-            <Account_page2 />
-          </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+        <Route path="/Diary">
+          <StickyNav />
+          <Diary />
+        </Route>
 
-          <Route path="/Diary" exact component={Diary} />
-          <Route path="/Detail" component={DiaryDetail} />
+        <Route path="/Detail">
+          <StickyNav />
+          <DiaryDetail />
+        </Route>
 
-          <Route path="/diary_overview">
-            <StickyNav />
-            <DiaryOverview />
-          </Route>
+        <Route path="/diary_overview">
+          <StickyNav />
+          <DiaryOverview />
+        </Route>
 
-          <Route path="/account_book">
-            <StickyNav />
-            <AccountBookMain />
-          </Route>
+        <Route path="/account_book">
+          <StickyNav />
+          <AccountBookMain />
+        </Route>
 
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+        <Route path="/">
+          <StickyNav />
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
