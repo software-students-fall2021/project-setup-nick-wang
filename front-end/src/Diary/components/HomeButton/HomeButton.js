@@ -5,7 +5,7 @@ import "./HomeButton.css"
 
 const handleClick = () => {
   return (
-    "location.href = '/'"
+    "location.href = '/Diary'"
   )
 }
 
@@ -15,7 +15,7 @@ const HomeButton = () => {
       <Button
         variant="contained"
         onClick={handleClick}
-        href="/"
+        href="/Diary"
         sx={{
           backgroundColor: 'lightskyblue',
           width: '1600px',

@@ -58,6 +58,8 @@ function App() {
             <Home />
           </Route>
 
+          <Route path="/Diary" exact component={Diary} />
+          <Route path="/Detail" component={DiaryDetail} />
         </Switch>
       </Router>
   );

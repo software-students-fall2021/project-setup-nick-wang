@@ -67,7 +67,7 @@ export default function DiaryDetail(props) {
     }
     return (
         <div className="DiaryDetail">
-            <Button variant='contained' href="/"
+            <Button variant='contained' href="/Diary"
                     sx={{
                         backgroundColor:'lightskyblue',
                         marginTop:'20px',
