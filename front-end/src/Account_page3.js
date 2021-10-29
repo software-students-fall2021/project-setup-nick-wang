@@ -7,19 +7,6 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 
-const ongrid = (props) => {
-	return (
-    <article>
-      <section>
-        <h1>{props.T_Date}</h1> <p>{props.T_amount}</p>
-      </section>
-      <section>
-       <p>{props.T_Name}</p>
-      </section>
-    </article>
-  )
-}
-
 const Footer = () => (
   <div className="footer">
     <p>LifeNote2021</p>
@@ -60,8 +47,9 @@ function App() {
         <img src="logo01.png" className = "center"/>
       </a>
       <div>
-       <button onClick={() => history.goBack()}>Go Back</button>
+      <h></h>
        <h> Transaction of certain category</h>
+       <button onClick={() => history.goBack()}>Go Back</button>
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">

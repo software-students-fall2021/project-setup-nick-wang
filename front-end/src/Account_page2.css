@@ -48,7 +48,7 @@
 }
   
 h{
-  font-family: eorgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color: #000;
   display: block;
   font-size: 50px;
@@ -85,7 +85,6 @@ button:hover{
 }
 
 .footer{
-  font-family: eorgia, 'Times New Roman', Times, serif;
   font-size: 20px;
   text-align:center;
   margin-top: 3rem;

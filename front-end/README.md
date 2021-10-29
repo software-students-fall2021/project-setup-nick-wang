@@ -1,5 +1,18 @@
 # LifeNote Front End
 
+=======
+
+### `npm install --save ag-grid-community ag-grid-react`
+
+### `npm install --save react-router-dom`
+
+### `npm install axios`
+
+### `npm i date-fns`
+
+### `npm install react-minimal-pie-chart`
+
+### `npm start`
 
 
 ### Contribution:

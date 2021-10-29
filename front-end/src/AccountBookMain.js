@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import Transaction from "./Transaction";
 import "./AccountBookMain.css";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 
 function AccountBookMain(){
     const [data, setData] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         async function fetchData(){
@@ -23,11 +25,12 @@ function AccountBookMain(){
 
     return (
         <body className="body">
+            <h1></h1><h1></h1>
             <header className="header">
                 <h1>Account Book</h1>
             </header>
             
-            <button className="backButton">Back</button>
+            <button onClick={() => history.goBack()}>Go Back</button>
 
             <form action="#">
                 <div className="search" >
