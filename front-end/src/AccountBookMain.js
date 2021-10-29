@@ -30,8 +30,6 @@ function AccountBookMain(){
                 <h1>Account Book</h1>
             </header>
             
-            <button onClick={() => history.goBack()}>Go Back</button>
-
             <form action="#">
                 <div className="search" >
                     <input className="searchBar" type="text" id="search" name="search" placeholder="Search an transaction"></input>   
