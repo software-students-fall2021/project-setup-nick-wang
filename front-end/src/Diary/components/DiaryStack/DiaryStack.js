@@ -55,7 +55,9 @@ export default function DiaryStack(props) {
                   textAlign: 'center',
                   paddingTop:'10px',
                   width:'250px',
-                  height: '250px'
+                  height: '250px',
+                  fontWeight:'bold',
+                  color:'black'
                  }}>
                     {month}/{i + 1}
                 </Typography>
@@ -67,7 +69,7 @@ export default function DiaryStack(props) {
     return (
       <div>
         <Grid 
-        container justifyContent="center"
+         container justifyContent="center"
         >
             {diaries}
         </Grid>

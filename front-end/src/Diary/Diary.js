@@ -23,10 +23,8 @@ const Diary = () => {
 
     return (
         <div className="Diary">
-             <DiaryStack pickedDate={pickedDate}>
-            </DiaryStack>    
-            <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}>
-            </BottomNav>
+            <DiaryStack pickedDate={pickedDate}></DiaryStack>    
+            <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
         </div>
     )
 }

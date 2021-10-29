@@ -3,6 +3,7 @@ import HomeButton from '../HomeButton/HomeButton'
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import "./DiaryDetail.css"
 
 export default function DiaryDetail(props) {
 
@@ -19,51 +20,52 @@ export default function DiaryDetail(props) {
         )
     }
     if(isEditing){
-        return (
-            <div className="DiaryDetail">
-            <Button variant='contained' href="/"
-                    sx={{
-                        backgroundColor:'lightskyblue',
-                        marginTop:'20px',
-                        marginLeft:'40px',
-                    }}
-            >
-                BACK
-            </Button>
-            <Container sx={{ 
-                backgroundColor: '#FFFAF0',
-                padding:'10px',
-                marginTop:'20px',
-                height:'450px'
-            }}>
-                <TextField
-                    label="HOW IS YOUR DAY?"
-                    onChange={handleEdit}
-                    variant="outlined"
-                    multiline={true}
-                    maxRows={10}
-                    defaultValue={value}
-                    fullWidth={true}
-                    style={{
-                        marginTop:'auto'
-                    }}
-                />
-            </Container>
-            <Button 
-             size="larger"
-             onClick={allowEdit} 
-             variant='contained' 
-             sx={{
-                backgroundColor: 'lightskyblue',
-                marginTop: '20px',
-                marginLeft: '91.5%',
-                marginRight: '20px',
-                size:'larger'
-            }}>
-                Done
-            </Button>
-            </div>
-        );
+    return (
+        <div className="DiaryDetail">
+        <Button variant='contained' href="/Diary"
+                sx={{
+                    backgroundColor:'lightskyblue',
+                    marginTop:'20px',
+                    marginLeft:'40px',
+                }}
+        >
+            BACK
+        </Button>
+        <Container sx={{ 
+            backgroundColor: '#FFFAF0',
+            padding:'10px',
+            marginTop:'20px',
+            height:'450px'
+        }}>
+            <TextField
+                label="HOW IS YOUR DAY?"
+                onChange={handleEdit}
+                variant="outlined"
+                multiline={true}
+                maxRows={10}
+                defaultValue={value}
+                fullWidth={true}
+                style={{
+                    marginTop:'auto'
+                }}
+            />
+        </Container>
+        <Button 
+         size="larger"
+         onClick={allowEdit} 
+         variant='contained' 
+         sx={{
+            backgroundColor: 'lightskyblue',
+            fontWeight: 'bold',
+            marginTop: '20px',
+            marginLeft: '91.5%',
+            marginRight: '20px',
+            size:'larger'
+        }}>
+            Done
+        </Button>
+        </div>
+    );
     }
     return (
         <div className="DiaryDetail">
@@ -95,6 +97,7 @@ export default function DiaryDetail(props) {
              variant='contained' 
              sx={{
                  backgroundColor: 'lightskyblue',
+                 fontWeight: 'bold',
                  marginTop: '20px',
                  marginLeft: '91.5%',
                  marginRight: '20px',
