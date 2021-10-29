@@ -7,9 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import StickyNav from "./StickyNav";
 import Home from "./Home";
 import Login from "./Login";
-import AccountBookMain from "./AccountBookMain";
-import Account_page2 from "./Account_page2";
-import Account_page3 from "./Account_page3";
+import AccountBookMain from "./AccountBook/AccountBookMain";
+import Account_page2 from "./AccountBook/Account_page2";
+import Account_page3 from "./AccountBook/Account_page3";
 import DiaryOverview from "./DiaryOverview";
 
 import Diary from "./Diary/Diary";
