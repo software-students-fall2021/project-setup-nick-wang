@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import HomeButton from './components/HomeButton/HomeButton'
-import DiaryContainer from './components/DiaryContainer/DiaryContainer'
 import DiaryStack from './components/DiaryStack/DiaryStack'
 import BottomNav from './components/BottomNav/BottomNav'
 import request from './service'
@@ -21,7 +20,7 @@ const Diary = () => {
             console.log("No Data Found")
         }
     });
-    //console.log(content)
+
     return (
         <div className="Diary">
             <HomeButton></HomeButton>
