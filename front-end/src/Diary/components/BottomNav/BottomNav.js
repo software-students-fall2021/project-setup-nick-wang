@@ -1,5 +1,5 @@
 import React from "react";
-//import { makeStyles } from '@material-ui/styles';
+import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box/Box';
 import BottomNavigation from '@material-ui/core/BottomNavigation/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction/BottomNavigationAction';
@@ -23,9 +23,8 @@ const BottomNav = (props) => {
                 }}
             >
                 <BasicDatePicker pickedDate={props.pickedDate} setPickedDate={props.setPickedDate}></BasicDatePicker>
-                <BottomNavigationAction label="Create" icon={<CreateIcon />} />
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                <BottomNavigationAction label="WordsCloud" icon={<CloudIcon />} />
+                <BottomNavigationAction label="WordsCloud" icon={<CloudIcon />} component={Link} to="/diary_overview" />
                 <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
             </BottomNavigation>
         </Box>

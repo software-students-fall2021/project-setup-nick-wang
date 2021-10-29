@@ -36,6 +36,9 @@ function App() {
             <Login />
           </Route>
 
+          <Route path="/Diary" exact component={Diary} />
+          <Route path="/Detail" component={DiaryDetail} />
+
           <Route path="/diary_overview">
             <StickyNav />
             <DiaryOverview />
@@ -49,9 +52,6 @@ function App() {
           <Route path="/">
             <Home />
           </Route>
-
-          <Route path="/Diary" exact component={Diary} />
-          <Route path="/Detail" component={DiaryDetail} />
         </Switch>
       </Router>
   );
