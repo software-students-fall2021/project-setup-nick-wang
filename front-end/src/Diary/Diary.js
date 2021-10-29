@@ -23,7 +23,6 @@ const Diary = () => {
 
     return (
         <div className="Diary">
-            <HomeButton></HomeButton>
              <DiaryStack pickedDate={pickedDate}>
             </DiaryStack>    
             <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}>
