@@ -10,7 +10,7 @@ import Login from "./Login";
 import AccountBookMain from "./AccountBook/AccountBookMain";
 import Account_page2 from "./AccountBook/Account_page2";
 import Account_page3 from "./AccountBook/Account_page3";
-import DiaryOverview from "./DiaryOverview";
+import DiaryOverview from "./Diary/DiaryOverview";
 
 import Diary from "./Diary/Diary";
 import DiaryDetail from "./Diary/components/DiaryDetail/DiaryDetail";
