@@ -26,7 +26,7 @@ const BottomNav = (props) => {
                     <BasicDatePicker pickedDate={props.pickedDate} setPickedDate={props.setPickedDate}></BasicDatePicker>
                 </Box>
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-                <BottomNavigationAction label="WordsCloud" icon={<CloudIcon />} component={Link} to="/diary_overview" />
+                <BottomNavigationAction label="Overview" icon={<CloudIcon />} component={Link} to="/diary_overview" />
                 <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
             </BottomNavigation>
         </Box>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactWordcloud from "react-wordcloud";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import "./DiaryOverview.css";
-import { Container, Dropdown } from "semantic-ui-react";
+import { Container, Dropdown, Button } from "semantic-ui-react";
 
 const testYear = [
   { key: 2010, text: 2010, value: 2010 },
@@ -107,18 +108,23 @@ const DiaryOverview = (props) => {
     getWordCloud("https://my.api.mockaroo.com/WordCloud.json?key=a7a93cb0");
   }, []);
 
-  const size = [600, 400];
+  // const size = [640, 360];
   const options = {
-    fontSizes: [10, 45],
+    fontSizes: [12, 60],
     rotations: 3,
     rotationAngles: [0, 90],
   };
 
   return (
     <>
+      <div id="Back">
+        <Container>
+          <Button as={Link} to="/Diary" content="Back" icon="left arrow" labelPosition="left" />
+        </Container>
+      </div>
       <div id="WordCloud">
-        <Container text textAlign="center">
-          <ReactWordcloud words={testWordCloud} options={options} size={size} />
+        <Container fluid text textAlign="center">
+          <ReactWordcloud words={wordCloud} options={options} />
         </Container>
       </div>
       <Container text textAlign="center">
