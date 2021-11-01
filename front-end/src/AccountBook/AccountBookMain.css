@@ -14,6 +14,7 @@
     border: 2px solid black;
     margin: 10px;
     background-color: white;
+    padding: 20px;
 }
 
 .homeButton{
@@ -42,6 +43,7 @@
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 10%;
+    padding-top: 20px;
 }
 
 .addBar{
@@ -69,7 +71,7 @@
 .allTypes{
     text-align: center;
     margin: 10px;
-    padding: auto;
+    padding: 20px;
     border: 2px solid black;
     border-radius: 10px;
     background-color: white;
@@ -87,7 +89,7 @@
     padding: 5px;
 }
 
-.footer{
+.footerABM{
     margin-top: 50px;
     text-align: center;
 }
@@ -122,4 +124,5 @@ a:active
 }
 .spendingSumHead{
     text-align: center;
+    padding-top: 20px;
 }

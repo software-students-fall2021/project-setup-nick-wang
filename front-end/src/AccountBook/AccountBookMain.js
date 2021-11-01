@@ -39,9 +39,9 @@ function AccountBookMain(){
             <form action="#">
                 <div className="add">
                     <h2>Add a transaction</h2>
-                    <input className="addBar" type="text" id="trscName" name="trscName" placeholder="Transaction's name"></input>
-                    <input className="addBar" type="number" id="trscAmount" name="trscAmount" step=".01" placeholder="$ amount"></input>
-                    <input className="addBar" type="text" id="trscType" name="trscType" placeholder="type"></input>
+                    <input className="addBar" type="text" id="trscName" name="trscName" placeholder="Description"></input>
+                    <input className="addBar" type="number" id="trscAmount" name="trscAmount" step=".01" placeholder="$ Amount"></input>
+                    <input className="addBar" type="text" id="trscType" name="trscType" placeholder="Type"></input>
                     <input type="submit" name="submit" value="Add"></input>
                 </div>
             </form>
@@ -115,7 +115,7 @@ function AccountBookMain(){
                 </div>
             </div>
             
-            <footer className="footer">
+            <footer className="footerABM">
                 <p>&copy;2021 LifeNote Team</p>  
             </footer>     
         </body>
