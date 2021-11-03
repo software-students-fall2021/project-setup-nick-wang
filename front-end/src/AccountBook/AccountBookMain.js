@@ -30,13 +30,13 @@ function AccountBookMain(){
                 <h1>Account Book</h1>
             </header>
             
-            <form action="#">
+            <form action="http://localhost:3001/post-search" method="post">
                 <div className="search" >
                     <input className="searchBar" type="text" id="search" name="search" placeholder="Search an transaction"></input>   
                 </div>
             </form>
 
-            <form action="#">
+            <form action="http://localhost:3001/post-add" method="post">
                 <div className="add">
                     <h2>Add a transaction</h2>
                     <input className="addBar" type="text" id="trscName" name="trscName" placeholder="Description"></input>
