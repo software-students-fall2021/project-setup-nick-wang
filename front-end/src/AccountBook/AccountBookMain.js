@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PieChart } from 'react-minimal-pie-chart';
 import { Link } from "react-router-dom";
-import Transaction from "./Transaction";
 import "./AccountBookMain.css";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import Transaction from './components/transactions/Transaction'
+import Footer from "./components/footer/footer"
 
 
 function AccountBookMain(){
@@ -115,9 +116,7 @@ function AccountBookMain(){
                 </div>
             </div>
             
-            <footer className="footerABM">
-                <p>&copy;2021 LifeNote Team</p>  
-            </footer>     
+            <Footer/>     
         </body>
     )
 }

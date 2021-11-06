@@ -1,0 +1,16 @@
+.footer{
+    font-size: 20px;
+    text-align:center;
+    margin-top: 3rem;
+    height: 10%;
+    padding: 1rem;
+    background-color: grey;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .footer:hover{
+    background-color: lightgrey;
+  }
