@@ -39,7 +39,7 @@ function App() {
           <Diary />
         </Route>
 
-        <Route path="/Detail">
+        <Route path="/Detail/:date">
           <StickyNav />
           <DiaryDetail />
         </Route>
