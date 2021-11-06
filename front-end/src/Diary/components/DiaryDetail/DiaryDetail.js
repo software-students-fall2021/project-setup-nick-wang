@@ -43,13 +43,7 @@ export default function DiaryDetail(props) {
     if(isEditing){
     return (
         <div className="DiaryDetail">
-        <Button className="button1" href="/Diary"
-                // sx={{
-                //     backgroundColor:'lightskyblue',
-                //     marginTop:'20px',
-                //     marginLeft:'40px',
-                // }}
-        >
+        <Button className="button1" href="/Diary">
             BACK
         </Button>
         <Container sx={{ 
