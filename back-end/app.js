@@ -31,6 +31,7 @@ app.post("/post-search", (req, res) => {
 
 // add transaction function; post from client
 app.post("/post-add", (req, res) => {
+    console.log(JSON.stringify(req.body, null, 2))
     // now do something amazing with the data we received from the client
     const data = {
       status: "amazing success!",
