@@ -14,14 +14,59 @@ function AccountBookMain(){
     useEffect(() => {
         async function fetchData(){
             const result = await axios(
-                "https://my.api.mockaroo.com/test2.json?key=9c8bd880"
+                //"https://my.api.mockaroo.com/test2.json?key=9c8bd880"
                 // "https://my.api.mockaroo.com/users.json?key=157fcab0"
+                "http://localhost:9000/static-file"
             );
 
             setData(result.data)
         }
         fetchData();
     }, [])
+
+    const [status, setStatus] = useState({})
+    const handleSubmit = async e => {
+        // prevent html form from submiting and reloading
+        e.preventDefault();
+
+        // get data
+        const name = e.target.trscName.value
+        const amount = e.target.trscAmount.value
+        const type = e.target.trscType.value
+
+        // send the data to api
+        const formData = new FormData()
+        formData.append('trscName', name)
+        formData.append('trscAmount', amount)
+        formData.append('trscType', type)
+        
+        for (var pair of formData.entries())
+        {
+            console.log(pair[0] + pair[1])
+        }
+        try {
+            // send the request to the server
+            const response = await axios({
+                method: "post",
+                url: "http://localhost:9000/post-add",
+                data: formData,
+                headers: { "Content-Type": "application/json" },
+            })
+            // const blog = { trscName, trscAmount, trscName}
+            // fetch('http://localhost:9000/post-add', {
+            //     method: 'POST',
+            //     headers: { "Content-Type": "multipart/form-data" },
+            //     body: JSON.stringify(blog)
+            // })
+            console.log(response.data)
+            setStatus(response.data)
+        }
+        catch (err) {
+            // throw an error
+            throw new Error(err)
+          }
+        }
+    
 
     return (
         <body className="body">
@@ -30,13 +75,13 @@ function AccountBookMain(){
                 <h1>Account Book</h1>
             </header>
             
-            <form action="http://localhost:3001/post-search" method="post">
+            <form action="http://localhost:9000/post-search" method="post">
                 <div className="search" >
                     <input className="searchBar" type="text" id="search" name="search" placeholder="Search an transaction"></input>   
                 </div>
             </form>
 
-            <form action="http://localhost:3001/post-add" method="post">
+            <form onSubmit={handleSubmit}>
                 <div className="add">
                     <h2>Add a transaction</h2>
                     <input className="addBar" type="text" id="trscName" name="trscName" placeholder="Description"></input>
