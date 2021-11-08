@@ -1,0 +1,7 @@
+[
+    {"name":"Steak", "date": "11/4/2021", "amount": 13, "type": "Food"},
+    {"name":"iphone", "date": "11/4/2021", "amount": 1000, "type": "School"},
+    {"name":"macbook pro", "date": "11/4/2021", "amount": 2000, "type": "School"},
+    {"name":"pencil", "date": "11/4/2021", "amount": 1.9, "type": "School"},
+    {"name":"shirt", "date": "11/4/2021", "amount": 50, "type": "Clothing"}
+]
