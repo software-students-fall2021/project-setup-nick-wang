@@ -9,6 +9,7 @@ import Footer from "./components/footer/footer"
 
 function AccountBookMain() {
   const [data, setData] = useState([])
+  const [limit, setLimit] = useState([])
   const history = useHistory()
 
   useEffect(() => {
@@ -20,6 +21,10 @@ function AccountBookMain() {
       )
 
       setData(result.data)
+
+      const budget = await axios('http://localhost:9000/get-monthly-budget')
+
+      setLimit(budget.data)
     }
     fetchData()
   }, [])
@@ -153,9 +158,10 @@ function AccountBookMain() {
 
       <div className="summary">
         <h2 className="spendingSumHead">Your Spending Summary</h2>
+        
         <div className="pieChart">
           <PieChart
-            radius="20"
+            radius="30"
             data={data.map(item => ({
               title: item.type,
               value: item.amount,
@@ -163,24 +169,24 @@ function AccountBookMain() {
             }))}
             label={({ dataEntry }) => dataEntry.title}
             labelStyle={{
-              fontSize: "6px",
-              fontFamily: "Impact",
-              fill: "grey",
+              fontSize: "5px",
+              fontFamily: "Arial",
+              fill: "black",
             }}
-            labelPosition={112}
+            labelPosition={50}
           />
 
           <PieChart
             radius="35"
-            data={[{ value: 100, key: 1, color: "green" }]}
+            data={[{ value: limit.monthlySpending, key: 1, color: "blue" }]}
             startAngle={270}
-            reveal={50}
+            reveal={ limit.monthlySpending/limit.monthlyLimit * 100}
             lineWidth={30}
             background="grey"
             lengthAngle={360}
             rounded
             animate
-            label={({ dataEntry }) => dataEntry.value}
+            label={({ dataEntry }) => '$' + dataEntry.value}
             labelStyle={{
               fontSize: "10px",
               fontFamily: "Impact",
@@ -189,6 +195,11 @@ function AccountBookMain() {
             labelPosition={0}
           />
         </div>
+
+          <form text-align="center" action="http://localhost:9000/set-monthly-budget" method="post">
+            <input type="number" name="amount" step="1" placeholder="Monthly Budget"></input>
+            <input type="submit" value="Submit"/>
+          </form>
       </div>
 
       <div className="allTypes">
