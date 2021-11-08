@@ -61,6 +61,18 @@
     background-color: white;
 }
 
+.summary{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
 .pieChart{
     display: flex;
     flex-direction: row;
@@ -115,14 +127,3 @@ a:active
 	opacity: 0.5;
 }
 
-.summary{
-    margin: 10px;
-    padding: auto;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: white;
-}
-.spendingSumHead{
-    text-align: center;
-    padding-top: 20px;
-}
