@@ -21,18 +21,23 @@ const Login = () => (
       </Container>
     </Menu>
 
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle" className="LoginForm">
+    <Grid
+      textAlign="center"
+      style={{ height: "100vh" }}
+      verticalAlign="middle"
+      className="LoginForm"
+    >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
           Log-in to your account
         </Header>
-        <Form size="large">
+        <Form size="large" action="http://localhost:9000/login" method="post">
           <Segment stacked>
             <Form.Input
               fluid
               icon="user"
               iconPosition="left"
-              placeholder="E-mail address"
+              placeholder="Username"
             />
             <Form.Input
               fluid
@@ -42,7 +47,7 @@ const Login = () => (
               type="password"
             />
 
-            <Button color="teal" fluid size="large">
+            <Button color="teal" fluid size="large" type="submit">
               Login
             </Button>
           </Segment>
