@@ -2,6 +2,13 @@ const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
 const path = require("path")
 
+// BodyParser
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json())
+
 // import some useful middleware
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
 const axios = require("axios") // middleware for making requests to APIs
@@ -9,9 +16,6 @@ require("dotenv").config({ silent: true }) // load environmental variables from 
 const morgan = require("morgan")
 // require cors
 const cors = require("cors")
-
-const diaryWordCloud = require("./routes/Diary/Overview")
-
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -23,10 +27,18 @@ app.use("/static", express.static("public"))
 // use cors
 app.use(cors())
 
-// ==============================================================
-// route for HTTP GET requests to the root document
-app.use("/", diaryWordCloud)
+// Api
+const diaryWordCloudRouter = require("./routes/Diary/Overview")
+const loginRouter = require("./routes/User/Login")
 
+// ==============================================================
+// router for Login (Basic)
+app.use("/", loginRouter)
+
+// router for HTTP GET requests to the root document
+app.use("/", diaryWordCloudRouter)
+
+// Test
 app.get("/", (req, res) => {
   res.send("Hello world!")
 })
