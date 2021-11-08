@@ -1,22 +1,47 @@
 const express = require("express") // CommonJS import style!
-const cors = require("cors")
+const app = express() // instantiate an Express object
+const path = require("path")
+
+// BodyParser
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json())
+
+// import some useful middleware
+const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
+const axios = require("axios") // middleware for making requests to APIs
+require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 const morgan = require("morgan")
+// require cors
+const cors = require("cors")
 //const axios = require("axios")
 
-const app = express() // instantiate an Express object
-
-// we will put some server logic here later...
-// export the express app we created to make it available to other modules
+// use the morgan middleware to log all incoming http requests
+app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
+// use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 app.use(cors())
-app.use(morgan("dev")) // outputs each request for debugging
 
 // mark the public directory as all static files that do not require pre-processing
 app.use("/static", express.static("public"))
 
 // listens for any HTTP GET request for the / path,
 // and responds with the plain text, 'Hello!'
+// Api
+const diaryWordCloudRouter = require("./routes/Diary/Overview")
+const loginRouter = require("./routes/User/Login")
+
+// ==============================================================
+// router for Login (Basic)
+app.use("/", loginRouter)
+
+// router for HTTP GET requests to the root document
+app.use("/", diaryWordCloudRouter)
+
+// Test
 app.get("/", (req, res) => {
   res.send("Hello!")
 })
@@ -29,6 +54,13 @@ const mockFile = [
   { name: "pencil", date: "11/4/2021", amount: 1.9, type: "School", "color": "green" },
   { name: "shirt", date: "11/4/2021", amount: 50, type: "Clothing", "color": "navy" },
 ]
+app.get("/Account_transaction_data", (req, res, next) => {
+  // insert the environmental variable into the URL we're requesting
+  axios
+    .get(`${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}&num=10`)
+    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
+    .catch(err => next(err)) // pass any errors to express
+})
 
 app.get("/static-file", (req, res) => {
   // axios
