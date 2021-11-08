@@ -8,7 +8,7 @@ export default function DiaryStack(props) {
     let diaries = []
     const [isEditing, setIsEditing] = React.useState(false);
     const numOfDates = monthToNumOfDates(props.pickedDate);
-    const year = props.pickedDate.getYear();
+    const year = props.pickedDate.getYear() + 1900;
     const month = props.pickedDate.getMonth() + 1;
 
     let diariesContent = []
@@ -34,6 +34,7 @@ export default function DiaryStack(props) {
     };
     for (var i = 0; i < numOfDates; i++) {
         const onChange = setIthValue(i);
+        const date = "" + month + "-" + (i+1) + "-" + year;
         diaries.push(
         <Card
          fullWidth={true}
@@ -48,7 +49,7 @@ export default function DiaryStack(props) {
              marginTop: '20px',
          }}
         >
-            <CardActionArea href="/Detail">
+            <CardActionArea href={"/Detail/" + date}>
                 <Typography
                  sx={{
                   fontSize:'larger',

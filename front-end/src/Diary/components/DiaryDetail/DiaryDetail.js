@@ -1,34 +1,49 @@
 import { Container, Typography } from "@mui/material";
-import HomeButton from '../HomeButton/HomeButton'
-import React from "react";
+import axios from "axios";
+import { useParams } from "react-router";
+import React, { useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import "./DiaryDetail.css"
 
 export default function DiaryDetail(props) {
 
+    const { date } = useParams();
     const [isEditing, setIsEditing] = React.useState(false);
     const [value, setValue] = React.useState("");
+    const [unSaveValue, setUnSaveValue] = React.useState("");
+
+    const apiUrl = "http://localhost:9000/Details/" + date
+
+    useEffect(() => {
+        axios.get(apiUrl)
+        .then((response) => {setValue(response.data[0].content)})
+    },[]);
 
     const allowEdit = () => {
         setIsEditing((b) => !b)
     }
 
-    const handleEdit = (e) =>{
-        return (
-            setValue(e.target.value)
-        )
+    const handleEditing = (event) => {
+        setUnSaveValue(event.target.value);
     }
+
+    const handleDone = (e) =>{
+        setValue(unSaveValue);
+        const newDiary = {
+            date: date,
+            content: unSaveValue,
+        }
+        axios.put(apiUrl, newDiary)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+        setIsEditing((b) => !b)
+    }
+
     if(isEditing){
     return (
         <div className="DiaryDetail">
-        <Button variant='contained' href="/Diary"
-                sx={{
-                    backgroundColor:'lightskyblue',
-                    marginTop:'20px',
-                    marginLeft:'40px',
-                }}
-        >
+        <Button className="button1" href="/Diary">
             BACK
         </Button>
         <Container sx={{ 
@@ -39,20 +54,22 @@ export default function DiaryDetail(props) {
         }}>
             <TextField
                 label="HOW IS YOUR DAY?"
-                onChange={handleEdit}
+                //onChange={handleEdit}
                 variant="outlined"
                 multiline={true}
                 maxRows={10}
                 defaultValue={value}
+                value={unSaveValue}
                 fullWidth={true}
                 style={{
                     marginTop:'auto'
                 }}
+                onChange={handleEditing}
             />
         </Container>
         <Button 
          size="larger"
-         onClick={allowEdit} 
+         onClick={handleDone} 
          variant='contained' 
          sx={{
             backgroundColor: 'lightskyblue',

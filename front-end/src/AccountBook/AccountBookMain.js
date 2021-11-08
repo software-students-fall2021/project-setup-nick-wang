@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PieChart } from 'react-minimal-pie-chart';
 import { Link } from "react-router-dom";
-import Transaction from "./Transaction";
 import "./AccountBookMain.css";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import Transaction from './components/transactions/Transaction'
+import Footer from "./components/footer/footer"
 
 
 function AccountBookMain(){
@@ -30,13 +31,13 @@ function AccountBookMain(){
                 <h1>Account Book</h1>
             </header>
             
-            <form action="http://localhost:3001/post-search" method="post">
+            <form action="http://localhost:9000/post-search" method="post">
                 <div className="search" >
                     <input className="searchBar" type="text" id="search" name="search" placeholder="Search an transaction"></input>   
                 </div>
             </form>
 
-            <form action="http://localhost:3001/post-add" method="post">
+            <form action="http://localhost:9000/post-add" method="post">
                 <div className="add">
                     <h2>Add a transaction</h2>
                     <input className="addBar" type="text" id="trscName" name="trscName" placeholder="Description"></input>
@@ -115,9 +116,7 @@ function AccountBookMain(){
                 </div>
             </div>
             
-            <footer className="footerABM">
-                <p>&copy;2021 LifeNote Team</p>  
-            </footer>     
+            <Footer/>     
         </body>
     )
 }

@@ -5,8 +5,7 @@
 }
 
 .transaction:hover {
-    background-color: black;
-    color: #909090;
+    background-color: lightgray;
 }
 
 .date{

@@ -6,12 +6,8 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import {useHistory} from "react-router-dom";
 import axios from "axios";
+import Footer from "./components/footer/footer"
 
-const Footer = () => (
-  <div className="footer">
-    <p>LifeNote2021</p>
-  </div>
-);
 
 function App() {
   const [data, setData] = useState([]);
@@ -48,7 +44,7 @@ function App() {
       </a>
       <div>
         <h></h>
-       <h> Most Recent Transaction</h>
+       <h1> Most Recent Transaction</h1>
        <button onClick={() => history.goBack()}>Go Back</button>
       </div>
         <div style={{ width: '100%', height: '70%' }}>

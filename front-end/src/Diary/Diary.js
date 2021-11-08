@@ -10,17 +10,6 @@ const Diary = () => {
     const [content, setContent] = useState([])
     const [pickedDate, setPickedDate] = React.useState(new Date());
 
-    useEffect(async() => {
-        try{
-            const diaries = await request()
-            console.log(diaries)
-            setContent(diaries)
-        }
-        catch{
-            console.log("No Data Found")
-        }
-    });
-
     return (
         <div className="Diary">
             <DiaryStack pickedDate={pickedDate}></DiaryStack>    

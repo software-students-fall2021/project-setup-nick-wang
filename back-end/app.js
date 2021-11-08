@@ -1,19 +1,35 @@
-// import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
-// we will put some server logic here later...
-// export the express app we created to make it available to other modules
+const path = require("path")
+
+// import some useful middleware
+const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
+const axios = require("axios") // middleware for making requests to APIs
+// require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+const morgan = require("morgan")
+// require cors
+const cors = require("cors")
+
+const diaryWordCloud = require("./routes/Diary/Overview")
 
 
+// use the morgan middleware to log all incoming http requests
+app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
+// use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+// make 'public' directory publicly readable with static content
+app.use("/static", express.static("public"))
+// use cors
+app.use(cors())
 
+// ==============================================================
+// route for HTTP GET requests to the root document
+app.use("/", diaryWordCloud)
 
-// listens for any HTTP GET request for the / path, 
-// and responds with the plain text, 'Hello!'
 app.get("/", (req, res) => {
-    res.send("Hello!")
-  })
+  res.send("Hello world!")
+})
 
 // search transaction function; post from client
 app.post("/post-search", (req, res) => {
@@ -47,11 +63,11 @@ app.post("/post-add", (req, res) => {
   })
 
 // proxy requests to/from an API
-app.get("/proxy-example", (req, res, next) => {
-    // use axios to make a request to an API for animal data
-    axios
-      .get("http://localhost:3001/post-search")
-      .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-      .catch(err => next(err)) // pass any errors to express
-  })
+// app.get("/proxy-example", (req, res, next) => {
+//     // use axios to make a request to an API for animal data
+//     axios
+//       .get("http://localhost:3001/post-search")
+//       .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
+//       .catch(err => next(err)) // pass any errors to express
+//   })
 module.exports = app
