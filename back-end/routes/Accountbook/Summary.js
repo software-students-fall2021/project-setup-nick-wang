@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const limitInit = 1000;
+
 var summary = {    
-    monthlyLimit: 4000,
+    monthlyLimit: limitInit,
     monthlySpending: 0
 }
 
@@ -20,6 +22,7 @@ transactions.forEach(item => {
 
 router.get('/get-monthly-budget', (req, res) => {
     res.json(summary)
+    res.status(200)
 })
   
 router.post("/set-monthly-budget",(req, res) => {

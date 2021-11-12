@@ -62,11 +62,11 @@ app.get("/", (req, res) => {
 
 // send static file
 const mockFile = [
-  { name: "Steak", date: "11/4/2021", amount: 13, type: "Food", "color": "orange"},
-  { name: "iphone", date: "11/4/2021", amount: 1000, type: "School", "color": "green"},
-  { name: "macbook pro", date: "11/4/2021", amount: 2000, type: "office", "color": "brown"},
-  { name: "pencil", date: "11/4/2021", amount: 1.9, type: "School", "color": "green" },
-  { name: "shirt", date: "11/4/2021", amount: 50, type: "Clothing", "color": "navy" },
+  { name: "Steak", date: "11/4/2021", amount: 13, type: "Food", color: "orange"},
+  { name: "iphone", date: "11/4/2021", amount: 1000, type: "School", color: "brown"},
+  { name: "macbook pro", date: "11/4/2021", amount: 2000, type: "office", color: "red"},
+  { name: "pencil", date: "11/4/2021", amount: 1.9, type: "School", color: "brown" },
+  { name: "shirt", date: "11/4/2021", amount: 100, type: "Clothing", color: "navy" },
 ]
 app.get("/Account_transaction_data", (req, res, next) => {
   // insert the environmental variable into the URL we're requesting

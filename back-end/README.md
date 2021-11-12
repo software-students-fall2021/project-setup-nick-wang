@@ -6,13 +6,13 @@ Letian Ye: Basic framework and database setup, DiaryOverview(WordCloud), User Au
 
 Zhuofeng Wang: 
 
-Susan Liu: 
+Susan Liu: Diary Detail GET and PUT request - Detail.js , GET and PUT test file - DetailService.spec.js
 
 Yiming Yu: 
 
-Yaolin Zhang: 
+Yaolin Zhang: Account Book Main page's searching and adding functions - app.js. Get and Post unit test - AccBookMainTest.spec.js
 
-Product Owner: 
+Product Owner: Yaolin Zhang
 
-Scrum Master: 
+Scrum Master: Yiming Yu
 
