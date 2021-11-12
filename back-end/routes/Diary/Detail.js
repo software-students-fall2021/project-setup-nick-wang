@@ -28,6 +28,7 @@ const diaries = [
     const targetDiary = diaries.filter(diaries => diaries.date === req.params.date);
     targetDiary[0].content = req.body.content;
     res.status(200);
+    res.send();
   });
 
   module.exports = router
