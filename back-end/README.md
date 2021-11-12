@@ -10,9 +10,9 @@ Susan Liu: Diary Detail GET and PUT request - Detail.js , GET and PUT test file 
 
 Yiming Yu: 
 
-Yaolin Zhang: 
+Yaolin Zhang: Account Book Main page's searching and adding functions - app.js. Get and Post unit test - AccBookMainTest.spec.js
 
-Product Owner: 
+Product Owner: Yaolin Zhang
 
-Scrum Master: 
+Scrum Master: Yiming Yu
 
