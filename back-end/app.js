@@ -1,32 +1,38 @@
-const express = require("express") // CommonJS import style!
-const app = express() // instantiate an Express object
-const path = require("path")
+const express = require("express"); // CommonJS import style!
+const app = express(); // instantiate an Express object
+const path = require("path");
+require("dotenv").config({ silent: true }); // Load env variables
 
 // BodyParser
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 
 // import some useful middleware
-const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
-const axios = require("axios") // middleware for making requests to APIs
-require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
-const morgan = require("morgan")
+const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
+const axios = require("axios"); // middleware for making requests to APIs
+require("dotenv").config({ silent: true }); // load environmental variables from a hidden file named .env
+const morgan = require("morgan");
 // require cors
 const cors = require("cors")
-//const axios = require("axios")
 
 // use the morgan middleware to log all incoming http requests
-app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
+app.use(morgan("dev")); // morgan has a few logging default styles - dev is a nice concise color-coded style
 // use express's builtin body-parser middleware to parse any data included in a request
-app.use(express.json()) // decode JSON-formatted incoming POST data
-app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-app.use(cors())
+app.use(express.json()); // decode JSON-formatted incoming POST data
+app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
+// make 'public' directory publicly readable with static content
+app.use("/static", express.static("public"));
+// use cors
+app.use(cors());
 
-// mark the public directory as all static files that do not require pre-processing
-app.use("/static", express.static("public"))
+//Database
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB_URL);
 
 // listens for any HTTP GET request for the / path,
 // and responds with the plain text, 'Hello!'
@@ -36,13 +42,14 @@ const loginRouter = require("./routes/User/Login")
 const diaryDetailRouter = require("./routes/Diary/Detail")
 const accountSummaryRouter = require("./routes/Accountbook/Summary")
 
-
 // ==============================================================
+// Users function
+app.use("/users", require("./routes/users"));
 // router for Login (Basic)
-app.use("/", loginRouter)
+app.use("/", loginRouter);
 
 // router for HTTP GET requests to the root document
-app.use("/", diaryWordCloudRouter)
+app.use("/", diaryWordCloudRouter);
 
 app.use("/", diaryDetailRouter)
 
@@ -50,8 +57,8 @@ app.use("/", accountSummaryRouter)
 
 // Test
 app.get("/", (req, res) => {
-  res.send("Hello!")
-})
+  res.send("Hello world!");
+});
 
 // send static file
 const mockFile = [
@@ -65,9 +72,9 @@ app.get("/Account_transaction_data", (req, res, next) => {
   // insert the environmental variable into the URL we're requesting
   axios
     .get(`${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}&num=10`)
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-    .catch(err => next(err)) // pass any errors to express
-})
+    .then((apiResponse) => res.json(apiResponse.data)) // pass data along directly to client
+    .catch((err) => next(err)); // pass any errors to express
+});
 
 app.get("/static-file", (req, res) => {
   // axios
