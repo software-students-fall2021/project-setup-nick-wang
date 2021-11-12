@@ -22,6 +22,7 @@ transactions.forEach(item => {
 
 router.get('/get-monthly-budget', (req, res) => {
     res.json(summary)
+    res.status(200)
 })
   
 router.post("/set-monthly-budget",(req, res) => {
