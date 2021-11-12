@@ -6,7 +6,7 @@ Letian Ye: Basic framework and database setup, DiaryOverview(WordCloud), User Au
 
 Zhuofeng Wang: 
 
-Susan Liu: 
+Susan Liu: Diary Detail GET and PUT request - Detail.js , GET and PUT test file - DetailService.spec.js
 
 Yiming Yu: 
 
