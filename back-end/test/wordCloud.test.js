@@ -28,6 +28,8 @@ describe("DiaryOverview", function () {
         expect(words).to.be.an("array");
   
         words.forEach(words => {
+          expect(words).have.a.property("text");
+          expect(words).have.a.property("value");
           expect(words.text).to.be.a("string");
           expect(words.value).to.be.a("number");
         });
