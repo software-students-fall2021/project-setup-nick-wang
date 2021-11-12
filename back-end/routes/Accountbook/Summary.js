@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const limitInit = 1000;
+
 var summary = {    
-    monthlyLimit: 4000,
+    monthlyLimit: limitInit,
     monthlySpending: 0
 }
 
