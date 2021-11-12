@@ -76,13 +76,6 @@ app.get("/Account_transaction_data", (req, res, next) => {
     .catch((err) => next(err)); // pass any errors to express
 });
 
-// ==============================================================
-// export the express app we created to make it available to other modules
-module.exports = app; // CommonJS export style!
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-    .catch(err => next(err)) // pass any errors to express
-})
-
 app.get("/static-file", (req, res) => {
   // axios
   //   .get("transcation.json")
