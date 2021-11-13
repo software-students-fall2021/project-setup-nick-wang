@@ -31,8 +31,8 @@ app.use("/static", express.static("public"));
 app.use(cors());
 
 //Database
-const mongoose = require("mongoose");
-mongoose.connect(process.env.DB_URL);
+//const mongoose = require("mongoose");
+//mongoose.connect(process.env.DB_URL);
 
 // listens for any HTTP GET request for the / path,
 // and responds with the plain text, 'Hello!'
@@ -41,6 +41,7 @@ const diaryWordCloudRouter = require("./routes/Diary/Overview")
 const loginRouter = require("./routes/User/Login")
 const diaryDetailRouter = require("./routes/Diary/Detail")
 const accountSummaryRouter = require("./routes/Accountbook/Summary")
+const transactionRouter = require("./routes/Account_book_trancsaction/transaction_display")
 
 // ==============================================================
 // Users function
@@ -55,6 +56,8 @@ app.use("/", diaryDetailRouter)
 
 app.use("/", accountSummaryRouter)
 
+app.use("/", transactionRouter)
+
 // Test
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -68,13 +71,6 @@ const mockFile = [
   { name: "pencil", date: "11/4/2021", amount: 1.9, type: "School", color: "brown" },
   { name: "shirt", date: "11/4/2021", amount: 100, type: "Clothing", color: "navy" },
 ]
-app.get("/Account_transaction_data", (req, res, next) => {
-  // insert the environmental variable into the URL we're requesting
-  axios
-    .get(`${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}&num=10`)
-    .then((apiResponse) => res.json(apiResponse.data)) // pass data along directly to client
-    .catch((err) => next(err)); // pass any errors to express
-});
 
 app.get("/static-file", (req, res) => {
   // axios
