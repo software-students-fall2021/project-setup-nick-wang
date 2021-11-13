@@ -4,7 +4,7 @@
 
 Letian Ye: Basic framework and database setup, DiaryOverview(WordCloud), User Authentication
 
-Zhuofeng Wang: 
+Zhuofeng Wang: Account Book transaction page's GET and PUT request, Test For Account Book transaction
 
 Susan Liu: Diary Detail GET and PUT request - Detail.js , GET and PUT test file - DetailService.spec.js
 
