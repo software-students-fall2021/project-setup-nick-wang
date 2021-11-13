@@ -31,8 +31,8 @@ app.use("/static", express.static("public"));
 app.use(cors());
 
 //Database
-//const mongoose = require("mongoose");
-//mongoose.connect(process.env.DB_URL);
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB_URL);
 
 // listens for any HTTP GET request for the / path,
 // and responds with the plain text, 'Hello!'
