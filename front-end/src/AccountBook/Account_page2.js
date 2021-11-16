@@ -21,7 +21,7 @@ function App() {
       // axios is a 3rd-party module for fetching data from servers
       const result = await axios(
         // retrieving some mock data about animals for sale
-        "https://my.api.mockaroo.com/test1.json?key=34da9040"
+        url
       );
       // set the state variable
       // this will cause a re-render of this component
