@@ -19,6 +19,8 @@ require("dotenv").config({ silent: true }); // load environmental variables from
 const morgan = require("morgan");
 // require cors
 const cors = require("cors")
+// require passport
+const passport = require("passport")
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -28,7 +30,9 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
 // use cors
-app.use(cors());
+app.use(cors())
+// use passport
+app.use(passport.initialize())
 
 //Database
 const mongoose = require("mongoose");

@@ -1,10 +1,10 @@
-const JWT = require("jsonwebtoken");
-const User = require("../../models/user");
+const JWT = require('jsonwebtoken');
+const User = require('../../models/user');
 
 signToken = (user) => {
   return JWT.sign(
     {
-      iss: "LifeNote",
+      iss: 'LifeNote',
       sub: user,
       iat: new Date().getTime(),
       exp: new Date().setDate(new Date().getDate() + 3),
@@ -22,7 +22,7 @@ module.exports = {
     // Check if there is a user with the same email;
     const findUser = await User.findOne({ username });
     if (findUser) {
-      return res.status(403).json({ error: "Account already exists!" });
+      return res.status(403).json({ error: 'Account already exists!' });
     }
 
     // Create a new user
@@ -39,10 +39,11 @@ module.exports = {
 
   signIn: async (req, res, next) => {
     // Generate token
-    res.send("UsersController.signIn() called!");
+    const token = signToken(req.user);
+    res.status(200).json({ token });
   },
 
   secret: async (req, res, next) => {
-    res.send("Here");
+    res.json({ secret: "resource" });
   },
 };
