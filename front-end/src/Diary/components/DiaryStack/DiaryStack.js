@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import { CardActionArea, CardContent, Grid } from '@mui/material';
+import { CardActionArea, Grid } from '@mui/material';
 import { Typography } from '@mui/material';
-import { typography } from '@mui/system';
 
 export default function DiaryStack(props) {
     

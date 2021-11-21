@@ -1,34 +1,50 @@
 const express = require("express");
 const router = express.Router();
 
-const diaries = [
-    {
-        date: '11-1-2021',
-        content: 'today is 11-1-2021'
-    },
-    {
-        date: '11-2-2021',
-        content: 'today is 11-2-2021'
-    },
-    {
-        date: '01-03-2021',
-        content: 'today is 01-03-2021'
-    },
-    {
-        date: '01-04-2021',
-        content: 'today is 01-04-2021'
-    }
-  ]
+require('dotenv').config()
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB_URL);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
+const diarySchema = new mongoose.Schema({
+  date: String,
+  content: String
+});
+
+const Diary = mongoose.model('Diary', diarySchema);
 
   router.get('/Details/:date',(req, res) => {
-    res.json(diaries.filter(diaries => diaries.date === req.params.date));
+    Diary.find({date: req.params.date}, (err, result)=>{
+      if(err) return console.error(err);
+      if(result.length === 0){
+        res.json([{
+          date: req.params.date,
+          content: ""
+        }])
+      }
+      else{
+        res.json(result);
+      }
+    })
   });
   
   router.put('/Details/:date',(req, res) => {
-    const targetDiary = diaries.filter(diaries => diaries.date === req.params.date);
-    targetDiary[0].content = req.body.content;
-    res.status(200);
-    res.send();
+    Diary.deleteMany({date: req.params.date},() =>{
+      const newDiary = new Diary({
+        date: req.params.date,
+        content: req.body.content
+      });
+      newDiary.save(function (err) {
+        if (err) return console.error(err);
+        res.status(200);
+        res.send();
+      });
+    })
   });
 
   module.exports = router
