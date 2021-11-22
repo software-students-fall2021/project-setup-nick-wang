@@ -179,7 +179,7 @@ function AccountBookMain() {
             data={data.map(item => ({
               title: item.type,
               value: item.amount,
-              color: item.color,
+              color: Math.floor(Math.random()*16777215).toString(16),
             }))}
             label={({ dataEntry }) => dataEntry.title}
             labelStyle={{
