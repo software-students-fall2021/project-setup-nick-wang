@@ -8,7 +8,7 @@ Zhuofeng Wang: Account Book transaction page's GET and PUT request, Test For Acc
 
 Susan Liu: Diary Detail GET and PUT request - Detail.js , GET and PUT test file - DetailService.spec.js
 
-Yiming Yu: 
+Yiming Yu: AccountBook summary charts, GET and PUT request for monthly budget value, and the corresponding test file.
 
 Yaolin Zhang: Account Book Main page's searching and adding functions - app.js. Get and Post unit test - AccBookMainTest.spec.js
 
