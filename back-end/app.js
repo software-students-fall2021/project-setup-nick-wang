@@ -86,22 +86,22 @@ const transactionSchema = new mongoose.Schema({
 
 const Transaction = mongoose.model('Transactions', transactionSchema);
 
-// send static file
-const mockFile = [
-  { name: "Steak", date: "11/4/2021", amount: 13, type: "Food", color: "orange"},
-  { name: "iphone", date: "11/4/2021", amount: 1000, type: "School", color: "brown"},
-  { name: "macbook pro", date: "11/4/2021", amount: 2000, type: "office", color: "red"},
-  { name: "pencil", date: "11/4/2021", amount: 1.9, type: "School", color: "brown" },
-  { name: "shirt", date: "11/4/2021", amount: 100, type: "Clothing", color: "navy" },
-]
-
 // get recent transactions from db and sent them back to front-end
-app.get("/static-file", (req, res) => {
-  // axios
-  //   .get("transcation.json")
-  //   .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-  //   .catch(err => next(err)) // pass any errors to express
-  res.json(mockFile)
+app.get("/recent-trsc", (req, res) => {
+  Transaction.find({}, (err, docs) => {
+    if(err) return console.error(err);
+
+    console.log(docs.length)
+
+    if (docs.length > 5)
+    {
+      console.log(docs[docs.length-1])
+      res.json([docs[docs.length-1], docs[docs.length-2], docs[docs.length-3], 
+        docs[docs.length-4], docs[docs.length-5]])
+    }
+    else
+      res.json(docs);
+  })
 })
 
 // search transaction function; post from client
