@@ -35,6 +35,7 @@ app.use(cors())
 app.use(passport.initialize())
 
 //Database
+require('dotenv').config()
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DB_URL);
 
@@ -45,7 +46,8 @@ const diaryWordCloudRouter = require("./routes/Diary/Overview")
 const loginRouter = require("./routes/User/Login")
 const diaryDetailRouter = require("./routes/Diary/Detail")
 const accountSummaryRouter = require("./routes/Accountbook/Summary")
-const transactionRouter = require("./routes/Account_book_trancsaction/transaction_display")
+const transactionRouter = require("./routes/Account_book_trancsaction/transaction_display");
+const internal = require("stream");
 
 // ==============================================================
 // Users function
@@ -67,6 +69,23 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
+// database for accout book main page
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:!!!'));
+db.once('open', function() {
+  // we're connected!
+  console.log("hi database conntected")
+});
+
+const transactionSchema = new mongoose.Schema({
+  name: String,
+  date: String,
+  amount: Number,
+  type: String
+});
+
+const Transaction = mongoose.model('Transactions', transactionSchema);
+
 // send static file
 const mockFile = [
   { name: "Steak", date: "11/4/2021", amount: 13, type: "Food", color: "orange"},
@@ -76,6 +95,7 @@ const mockFile = [
   { name: "shirt", date: "11/4/2021", amount: 100, type: "Clothing", color: "navy" },
 ]
 
+// get recent transactions from db and sent them back to front-end
 app.get("/static-file", (req, res) => {
   // axios
   //   .get("transcation.json")
@@ -87,34 +107,37 @@ app.get("/static-file", (req, res) => {
 // search transaction function; post from client
 app.post("/post-search", (req, res) => {
   console.log(JSON.stringify(req.body, null, 2))
-  // now do something amazing with the data we received from the client
-  const data = {
-    status: "amazing success!",
-    message:
-      "congratulations on searching this transaction: " + req.body.search,
-    your_data: {
-      search: req.body.search,
-    },
-  }
-  res.json(data)
+
+  Transaction.find({name: req.body.search}, (err, result)=>{
+    if(err) return console.error(err);
+    if(result.length === 0){
+      res.json([])
+    }
+    else{
+      console.log(result)
+      res.json(result);
+    }
+  })
+
 })
 
 // add transaction function; post from client
 app.post("/post-add", (req, res) => {
-  // console.log(req.body.trscName)
   console.log(`post data: ${JSON.stringify(req.body, null, 2)}`)
-  // now do something amazing with the data we received from the client
-  const data = {
-    status: "amazing success!",
-    message: "congratulations on adding the transaction!",
 
-    your_data: {
-      trscName: req.body.trscName,
-      trscAmount: req.body.trscAmount,
-      trscType: req.body.trscType,
-    },
-  }
-  res.json(data)
+  const newDate = new Date()
+  const today = 1+newDate.getUTCMonth() + '/' + newDate.getDate() +'/'+ newDate.getUTCFullYear()
+  const newTrsc = new Transaction ({
+    name: req.body.trscName,
+    date: today,
+    amount: req.body.trscAmount,
+    type: req.body.trscType,
+  })
+
+  console.log(newTrsc)
+  newTrsc.save().then(() => console.log("new transaction added"))
+  //res.json(data)
+  res.send();
 })
 
 // proxy requests to/from an API

@@ -33,13 +33,12 @@ function AccountBookMain() {
   const [statusSubmit, setStatusSubmit] = useState(false)
   const [statusSubmit2, setStatusSubmit2] = useState(false)
 
-  const [statusAdd, setStatusAdd] = useState({})
+  const [statusSearch, setStatusSearch] = useState({})
 
   const handleSubmitSearch = async e => {
     // prevent html form from submiting and reloading
     e.preventDefault()
 
-    setStatusSubmit(true)
     try {
       // send a post request to the server
       const requestData = {
@@ -52,16 +51,18 @@ function AccountBookMain() {
 
       console.log(response.data)
       console.log("new search made")
-      setStatusAdd(response.data)
+      
 
-      //setStatusSubmit(false)
+      setStatusSearch(response.data)
+      setStatusSubmit(true)
+
     } catch (err) {
       // throw an error
       throw new Error(err)
     }
   }
 
-  const [statusSearch, setStatusSearch] = useState({})
+  const [statusAdd, setStatusAdd] = useState({})
 
   const handleSubmitAdd = async e => {
     // prevent html form from submiting and reloading
@@ -80,7 +81,7 @@ function AccountBookMain() {
       )
 
       console.log(response.data)
-      setStatusSearch(response.data)
+      setStatusAdd(response.data)
     } catch (err) {
       // throw an error
       throw new Error(err)
@@ -102,13 +103,26 @@ function AccountBookMain() {
             type="text"
             id="search"
             name="search"
-            placeholder="Search an transaction"
+            placeholder="Search a transaction"
           ></input>
+          <p></p>
+          <input type="submit" name="submit" value="Search"></input>
+          
           {statusSubmit && 
             <p>There is your result:</p>
           }
+          {statusSubmit &&
+            <section className="">
+            {statusSearch.map(item => (
+              <Transaction key={item.id} details={item} />
+            ))}
+            </section>
+          }
         </div>
       </form>
+      
+      <div className="output"></div>
+
       <form onSubmit={handleSubmitAdd}>
         <div className="add">
           <h2>Add a transaction</h2>
