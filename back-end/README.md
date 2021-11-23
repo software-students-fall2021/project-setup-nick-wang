@@ -24,7 +24,7 @@ Letian Ye:
 
 Zhuofeng Wang: 
 
-Susan Liu: 
+Susan Liu: Responsible for database connection of diary-details page
 
 Yiming Yu: 
 
