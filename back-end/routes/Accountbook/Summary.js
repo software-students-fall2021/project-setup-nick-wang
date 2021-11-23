@@ -7,21 +7,12 @@ require('dotenv').config()
 mongoose.connect(process.env.DB_URL);
 mongoose.connection.on('error', err => {logError(err);});
 
-Summary.deleteMany({ userName: '' }, function (err) {
-  if(err) console.log(err);
-  //console.log("Successful deletion");
-});
-
-const summary = new Summary({
-  userName: 'random',
-  monthlyLimit: 4000,
-  monthlySpending: 2500
-});
-summary.save();
+Summary.deleteOne({monthlyLimit: null})
 
 router.get('/get-monthly-budget', (req, res) => {
 
     Summary.find({}, (err, result)=>{
+      console.log(result);
         if(err) return console.error(err);
         if(result.length === 0){
           res.json([{
@@ -30,7 +21,7 @@ router.get('/get-monthly-budget', (req, res) => {
           }])
         }
         else{
-          res.json(result);
+          res.json(result[0]);
           res.status(200)
         }
     })
