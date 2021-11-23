@@ -43,7 +43,6 @@ mongoose.connect(process.env.DB_URL);
 // and responds with the plain text, 'Hello!'
 // Api
 const diaryWordCloudRouter = require("./routes/Diary/Overview")
-const loginRouter = require("./routes/User/Login")
 const diaryDetailRouter = require("./routes/Diary/Detail")
 const accountSummaryRouter = require("./routes/Accountbook/Summary")
 const transactionRouter = require("./routes/Account_book_trancsaction/transaction_display");
@@ -52,8 +51,6 @@ const internal = require("stream");
 // ==============================================================
 // Users function
 app.use("/users", require("./routes/users"));
-// router for Login (Basic)
-app.use("/", loginRouter);
 
 // router for HTTP GET requests to the root document
 app.use("/", diaryWordCloudRouter);

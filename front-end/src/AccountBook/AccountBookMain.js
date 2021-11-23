@@ -4,13 +4,13 @@ import { Link } from "react-router-dom"
 import Transaction from './components/transactions/Transaction'
 import "./AccountBookMain.css"
 import axios from "axios"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Footer from "./components/footer/footer"
 
 function AccountBookMain() {
   const [data, setData] = useState([])
   const [limit, setLimit] = useState([])
-  const history = useHistory()
+  const history = useNavigate()
 
   useEffect(() => {
     async function fetchData() {

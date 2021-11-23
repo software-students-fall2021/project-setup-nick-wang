@@ -4,14 +4,14 @@ import { render } from 'react-dom';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Footer from "./components/footer/footer"
 
 
 function App() {
   const [data, setData] = useState([]);
-  const history = useHistory();
+  const history = useNavigate();
 
   const url = 'http://localhost:9000/transaction_data';
 

@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const Footer = () => (
@@ -15,7 +15,7 @@ const Footer = () => (
 
 function App() {
   const [data, setData] = useState([]);
-  const history = useHistory();
+  const history = useNavigate();
 
   const url = 'https://my.api.mockaroo.com/users.json?key=34da9040';
 

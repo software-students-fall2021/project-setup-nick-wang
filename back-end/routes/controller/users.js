@@ -7,7 +7,7 @@ signToken = (user) => {
       iss: 'LifeNote',
       sub: user,
       iat: new Date().getTime(),
-      exp: new Date().setDate(new Date().getDate() + 3),
+      // exp: new Date().setDate(new Date().getDate() + 3),
     },
     process.env.JWT_SECRET
   );
@@ -17,12 +17,13 @@ module.exports = {
   signUp: async (req, res, next) => {
     // const username = req.value.body.username;
     // const password = req.value.body.password;
+
     const { username, password } = req.body;
 
     // Check if there is a user with the same email;
     const findUser = await User.findOne({ username });
     if (findUser) {
-      return res.status(403).json({ error: 'Account already exists!' });
+      return res.status(403).json('Account already exists!');
     }
 
     // Create a new user
@@ -34,16 +35,21 @@ module.exports = {
 
     // Respond with token
     // res.json({ user: "Created!" });
+
     res.status(200).json({ token });
+
+    // const checkreq = req.body;
+    // res.status(200).json({ checkreq });
   },
 
   signIn: async (req, res, next) => {
     // Generate token
-    const token = signToken(req.user);
+    const token = signToken(req.user.id);
+    // console.log(req.user.id)
     res.status(200).json({ token });
   },
 
   secret: async (req, res, next) => {
-    res.json({ secret: "resource" });
+    res.json({ username: req.user.username, user_id: req.user.id });
   },
 };
