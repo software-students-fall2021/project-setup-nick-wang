@@ -104,6 +104,13 @@ app.get("/recent-trsc", (req, res) => {
   })
 })
 
+app.get("/transaction_data", (req, res) => {
+  Transaction.find({}, (err, docs) => {
+    if(err) return console.error(err);
+    res.json(docs);
+  })
+})
+
 // search transaction function; post from client
 app.post("/post-search", (req, res) => {
   console.log(JSON.stringify(req.body, null, 2))

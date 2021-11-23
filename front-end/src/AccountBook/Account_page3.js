@@ -25,7 +25,7 @@ function App() {
       // axios is a 3rd-party module for fetching data from servers
       const result = await axios(
         // retrieving some mock data about animals for sale
-        "http://localhost:9000/Account_transaction_data"
+        "http://localhost:9000/transaction_data"
       );
       // set the state variable
       // this will cause a re-render of this component
@@ -66,9 +66,9 @@ function App() {
                 
                 <AgGridReact
                   rowData={data}>
-                  <AgGridColumn field="Name" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
-                  <AgGridColumn field="Amount"  sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
-                  <AgGridColumn field="Date" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
+                  <AgGridColumn field="name" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
+                  <AgGridColumn field="amount"  sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
+                  <AgGridColumn field="date" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
               </AgGridReact>
               </div>
             </div>

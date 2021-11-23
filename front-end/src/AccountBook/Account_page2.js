@@ -13,7 +13,7 @@ function App() {
   const [data, setData] = useState([]);
   const history = useHistory();
 
-  const url = 'https://my.api.mockaroo.com/users.json?key=34da9040';
+  const url = 'http://localhost:9000/transaction_data';
 
   useEffect(() => {
     // a nested function that fetches the data
@@ -62,9 +62,10 @@ function App() {
                 
                 <AgGridReact
                   rowData={data}>
-                  <AgGridColumn field="Name"  ></AgGridColumn>
-                  <AgGridColumn field="Amount"   ></AgGridColumn>
-                  <AgGridColumn field="Date" sortable={ true } ></AgGridColumn>
+                  <AgGridColumn field="name"  ></AgGridColumn>
+                  <AgGridColumn field="amount"   ></AgGridColumn>
+                  <AgGridColumn field="date" sortable={ true } ></AgGridColumn>
+                  <AgGridColumn field="type"   ></AgGridColumn>
               </AgGridReact>
               </div>
             </div>
