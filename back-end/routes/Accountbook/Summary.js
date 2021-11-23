@@ -1,34 +1,78 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const Summary = require("../../models/summary");
 const router = express.Router();
 
-const limitInit = 1000;
+require('dotenv').config()
+mongoose.connect(process.env.DB_URL);
+mongoose.connection.on('error', err => {logError(err);});
 
-var summary = {    
-    monthlyLimit: limitInit,
-    monthlySpending: 0
-}
+Summary.deleteOne({monthlyLimit: null})
 
-const transactions = [
-    {"name":"Steak", "date": "11/4/2021", "amount": 13, "type": "Food"},
-    {"name":"iphone", "date": "11/4/2021", "amount": 1000, "type": "School"},
-    {"name":"macbook pro", "date": "11/4/2021", "amount": 2000, "type": "School"},
-    {"name":"pencil", "date": "11/4/2021", "amount": 1.9, "type": "School"},
-    {"name":"shirt", "date": "11/4/2021", "amount": 50, "type": "Clothing"}
-]
+const summary = new Summary({
+  userName: 'random',
+  monthlyLimit: 4000,
+  monthlySpending: 2500
+});
+//summary.save();
 
-transactions.forEach(item => {
-    summary.monthlySpending += item.amount
-})
 
 router.get('/get-monthly-budget', (req, res) => {
-    res.json(summary)
-    res.status(200)
-})
+
+    Summary.findOne({monthlyLimit: 4000}, (err, result)=>{
+        if(err) return console.error(err);
+        if(result.length === 0){
+          res.json([{
+            monthlyLimit: 0,
+            monthlySpending: 0
+          }])
+        }
+        else{
+          res.json(result);
+          res.status(200)
+        }
+    })
+});
   
 router.post("/set-monthly-budget",(req, res) => {
-    summary.monthlyLimit = req.body.amount
-    res.redirect('http://localhost:3000/account_book');
-    res.status(200)
+    Summary.updateMany({}, {monthlyLimit: req.body.amount}, (err, result)=>{
+        if(err) return console.error(err);
+        else{
+            res.redirect('http://localhost:3000/account_book');
+            res.status(200)
+        }
+    })
+
 })
+
+
+/*
+router.get('/:username/get-monthly-budget', (req, res) => {
+    summary.find({username: req.params.username}, (err, result)=>{
+        if(err) return console.error(err);
+        if(result.length === 0){
+          res.json([{
+            monthlyLimit: 0,
+            monthlySpending: 0
+          }])
+        }
+        else{
+          res.json(result);
+          res.status(200)
+        }
+    })
+});
+  
+router.post("/:username/set-monthly-budget",(req, res) => {
+    summary.updateOne({username: req.params.username}, {monthlyLimit: req.body.amount}, (err, result)=>{
+        if(err) return console.error(err);
+        else{
+            res.redirect('http://localhost:3000/account_book');
+            res.status(200)
+        }
+    })
+
+})
+*/
 
 module.exports = router
