@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const summarySchema = mongoose.Schema({
+const summarySchema = new mongoose.Schema({
     username: String,
     monthlyLimit: Number,
     monthlySpending: Number
