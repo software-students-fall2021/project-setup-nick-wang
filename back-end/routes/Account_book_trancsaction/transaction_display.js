@@ -3,6 +3,15 @@ const router = express.Router();
 const axios = require("axios"); // middleware for making requests to APIs
 require("dotenv").config({ silent: true }); // Load env variables
 
+//Database
+require('dotenv').config()
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB_URL);
+
+// database for accout book Transaction Page
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:!!!'));
+
 
 router.get("/Account_transaction_data", (req, res, next) => {
     // insert the environmental variable into the URL we're requesting
