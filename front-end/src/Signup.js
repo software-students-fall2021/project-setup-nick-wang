@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navigate, useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
 import {
@@ -11,9 +11,10 @@ import {
   Menu,
   Container,
 } from "semantic-ui-react";
-// import { TokenContext } from "./TokenContext";
+// import TokenContext from "./TokenContext";
 
-const Login = (props) => {
+const Signup = (props) => {
+  // const { tokenState, setTokenState } = useContext(TokenContext);
   const tokenState = props.tokenState;
   const setTokenState = props.setTokenState;
   let [urlSearchParams] = useSearchParams(); // get access to the URL query string parameters
@@ -52,17 +53,24 @@ const Login = (props) => {
         password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
       };
       // send a POST request with the data to the server api to authenticate
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/users/signin`,
-        requestData
-      );
-      // store the response data into the data state variable
-      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`);
-      setResponse(response.data);
+      const response = await axios
+        .post(`${process.env.REACT_APP_BACKEND}/users/signup`, requestData)
+        .then((response) => {
+          // store the response data into the data state variable
+          console.log(
+            `Server response: ${JSON.stringify(response.data, null, 0)}`
+          );
+          setResponse(response.data);
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data); // => the response payload
+            setErrorMessage(error.response.data);
+          }
+        });
       // window.location.reload();
     } catch (err) {
       // request failed... user entered invalid credentials
-      setErrorMessage("Login Failed! Check you username or password!");
     }
   };
 
@@ -81,11 +89,11 @@ const Login = (props) => {
           textAlign="center"
           style={{ height: "100vh" }}
           verticalAlign="middle"
-          className="LoginForm"
+          className="SignupForm"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              Log-in to your account
+              Sign-up your account
             </Header>
             {errorMessage ? <Message negative>{errorMessage}</Message> : ""}
             <Form size="large" onSubmit={handleSubmit}>
@@ -112,7 +120,7 @@ const Login = (props) => {
               </Segment>
             </Form>
             <Message>
-              New to us? <Link to="/signup"> Sign Up </Link>
+              Already have an account? <Link to="/login"> Log In </Link>
             </Message>
           </Grid.Column>
         </Grid>
@@ -120,12 +128,7 @@ const Login = (props) => {
     );
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect to a page that shows content only available to logged-in users
-  else
-    return (
-      <>
-        <Navigate to="/" />
-      </>
-    );
+  else return <Navigate to="/" />;
 };
 
-export default Login;
+export default Signup;

@@ -1,11 +1,11 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 module.exports = {
   validateBody: (schema) => {
     return (req, res, next) => {
-      const result = Joi.valid(req.body, schema);
+      const result = schema.validate(req.body);
       if (result.error) {
-        return res.status(400).json(result.error);
+        return res.status(400).json(result.error.details[0].message);
       }
       // // rea.value.body instead req.body
       // if (!req.value) {
@@ -17,8 +17,8 @@ module.exports = {
   },
   schemas: {
     authSchema: Joi.object().keys({
-      username: Joi.string().required(),
-      password: Joi.string().required()
+      username: Joi.string().alphanum().min(3).max(12).required(),
+      password: Joi.string().alphanum().min(3).max(12).required(),
     }),
   },
 };

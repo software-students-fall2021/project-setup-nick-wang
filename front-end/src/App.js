@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { TokenContext } from "./TokenContext";
 // import PrimaryNav from './PrimaryNav'
 // import Home from './Home'
 
@@ -11,55 +11,34 @@ import AccountBookMain from "./AccountBook/AccountBookMain";
 import Account_page2 from "./AccountBook/Account_page2";
 import Account_page3 from "./AccountBook/Account_page3";
 import DiaryOverview from "./Diary/DiaryOverview";
-
+import Logout from "./Logout";
 import Diary from "./Diary/Diary";
 import DiaryDetail from "./Diary/components/DiaryDetail/DiaryDetail";
+import Signup from "./Signup";
 import "./App.css";
 
 function App() {
+  const [tokenState, setTokenState] = useState(false);
+  // const tokenContext = useContext(TokenContext);
   return (
-    <Router>
-      <Switch>
-        <Route path="/account_book/category">
-          <StickyNav />
-          <Account_page3 />
-        </Route>
+    <>
+      <Router>
+        <StickyNav tokenState={tokenState}/>
 
-        <Route path="/account_book/overview">
-          <StickyNav />
-          <Account_page2 />
-        </Route>
-
-        <Route path="/login">
-          <Login />
-        </Route>
-
-        <Route path="/Diary">
-          <StickyNav />
-          <Diary />
-        </Route>
-
-        <Route path="/Detail/:date">
-          <StickyNav />
-          <DiaryDetail />
-        </Route>
-
-        <Route path="/diary_overview">
-          <StickyNav />
-          <DiaryOverview />
-        </Route>
-
-        <Route path="/account_book">
-          <StickyNav />
-          <AccountBookMain />
-        </Route>
-
-        <Route path="/">
-          <StickyNav />
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/account_book" element={<AccountBookMain />} />
+          <Route path="/account_book/category" element={<Account_page3 />} />
+          <Route path="/account_book/overview" element={<Account_page2 />} />
+          <Route path="/Diary" element={<Diary />} />
+          <Route path="/Detail/:date" element={<DiaryDetail />} />
+          <Route path="/diary_overview" element={<DiaryOverview />} />
+          <Route path="/login" element={<Login tokenState={tokenState} setTokenState={setTokenState}/>} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/signup" element={<Signup tokenState={tokenState} setTokenState={setTokenState}/>} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
