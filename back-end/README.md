@@ -16,3 +16,20 @@ Product Owner: Yaolin Zhang
 
 Scrum Master: Yiming Yu
 
+# LifeNote DataBase
+
+### Contribution:
+
+Letian Ye: 
+
+Zhuofeng Wang: 
+
+Susan Liu: 
+
+Yiming Yu: 
+
+Yaolin Zhang: 
+
+Product Owner: Yiming Yu
+
+Scrum Master: Zhuofeng Wang
