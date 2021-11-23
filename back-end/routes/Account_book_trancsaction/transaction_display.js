@@ -14,7 +14,7 @@ db.once('open', function() {
 
 Transaction.deleteMany({ type: '' }, function (err) {
   if(err) console.log(err);
-  console.log("Successful deletion");
+  //console.log("Successful deletion");
 });
 
 router.get("/Transaction_data", (req, res) => {
