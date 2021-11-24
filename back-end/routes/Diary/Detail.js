@@ -1,4 +1,5 @@
 const express = require("express");
+const Diary = require("../../models/detail");
 const router = express.Router();
 
 require('dotenv').config()
@@ -10,13 +11,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
 });
-
-const diarySchema = new mongoose.Schema({
-  date: String,
-  content: String
-});
-
-const Diary = mongoose.model('Diary', diarySchema);
 
   router.get('/Details/:date',(req, res) => {
     Diary.find({date: req.params.date}, (err, result)=>{
