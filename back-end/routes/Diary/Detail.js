@@ -1,4 +1,5 @@
 const express = require("express");
+const Diary = require("../../models/detail");
 const router = express.Router();
 
 require('dotenv').config()
@@ -10,13 +11,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
 });
-
-const diarySchema = new mongoose.Schema({
-  date: String,
-  content: String
-});
-
-const Diary = mongoose.model('Diary', diarySchema);
 
   router.get('/Details/:date',(req, res) => {
     Diary.find({date: req.params.date}, (err, result)=>{
@@ -44,6 +38,72 @@ const Diary = mongoose.model('Diary', diarySchema);
         res.status(200);
         res.send();
       });
+    })
+  });
+
+  router.get('/overview/:year',(req, res) => {
+    const selectedYear = new RegExp('.*-' + req.params.year);
+    Diary.find({date: selectedYear}, (err, result)=>{
+      if(err) return console.error(err);
+      if(result.length === 0){
+        res.json([]);
+      }
+      else{
+        const searchResult = {};
+        for(var i = 0; i < result.length; i++){
+          const splitedResult = result[i].content.split(" ");
+          for(var j = 0; j < splitedResult.length; j++){
+            if(searchResult[splitedResult[j]] == null){
+              searchResult[splitedResult[j]] = 1;
+            }
+            else{
+              searchResult[splitedResult[j]] = searchResult[splitedResult[j]] + 1;
+            }
+          }
+        }
+        //console.log(searchResult);
+        const modifiedResult = [];
+        for (var key in searchResult) {
+          modifiedResult.push({
+            text:key,
+            value:searchResult[key]
+          });
+        }
+        res.json(modifiedResult);
+      }
+    })
+  });
+
+  router.get('/overview/:month/:year',(req, res) => {
+    const selectedMonth = new RegExp(req.params.month + '.*-' + req.params.year);
+    Diary.find({date: selectedMonth}, (err, result)=>{
+      if(err) return console.error(err);
+      if(result.length === 0){
+        res.json([]);
+      }
+      else{
+        const searchResult = {};
+        for(var i = 0; i < result.length; i++){
+          const splitedResult = result[i].content.split(" ");
+          for(var j = 0; j < splitedResult.length; j++){
+            if(searchResult[splitedResult[j]] == null){
+              searchResult[splitedResult[j]] = 1;
+            }
+            else{
+              searchResult[splitedResult[j]] = searchResult[splitedResult[j]] + 1;
+            }
+          }
+        }
+        //console.log(searchResult);
+        const modifiedResult = [];
+        for (var key in searchResult) {
+          modifiedResult.push({
+            text:key,
+            value:searchResult[key]
+          });
+        }
+        res.json(modifiedResult);
+      }
     })
   });
 

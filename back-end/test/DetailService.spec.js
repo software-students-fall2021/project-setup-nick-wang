@@ -31,7 +31,7 @@ describe("API Test", () => {
       const date = "11-1-2021";
       const newDiary = {
         date: date,
-        content: "new content",
+        content: "today is 11-1-2021",
     }
       chai
         .request(server)
