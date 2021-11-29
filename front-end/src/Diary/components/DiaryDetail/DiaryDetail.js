@@ -13,7 +13,7 @@ export default function DiaryDetail(props) {
     const [value, setValue] = React.useState("");
     const [unSaveValue, setUnSaveValue] = React.useState("");
 
-    const apiUrl = "http://localhost:9000/Details/" + date
+    const apiUrl = "http://localhost:9000/Details/" + date;
 
     useEffect(() => {
         axios.get(apiUrl)
@@ -54,7 +54,6 @@ export default function DiaryDetail(props) {
         }}>
             <TextField
                 label="HOW IS YOUR DAY?"
-                //onChange={handleEdit}
                 variant="outlined"
                 multiline={true}
                 maxRows={10}

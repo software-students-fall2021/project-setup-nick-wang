@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import HomeButton from './components/HomeButton/HomeButton'
+import React, {useState} from 'react'
 import DiaryStack from './components/DiaryStack/DiaryStack'
 import BottomNav from './components/BottomNav/BottomNav'
 import "./Diary.css"
 
 const Diary = () => {
 
-    const [content, setContent] = useState([])
-    const [pickedDate, setPickedDate] = React.useState(new Date());
+    const [pickedDate, setPickedDate] = useState(new Date());
 
     return (
         <div className="Diary">
