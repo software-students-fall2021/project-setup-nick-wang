@@ -4,7 +4,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "test": "nyc mocha ./test/ --timeout=3000",
+    "test": "nyc mocha ./test/ --exit",
     "dev": "nodemon server.js"
   },
   "dependencies": {
