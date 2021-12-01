@@ -20,6 +20,7 @@ function App() {
 
   const { type } = useParams();
   const url = "http://localhost:9000/Transaction_data/" + type;
+  const apiUrl = "http://localhost:9000/save_transaction_data";
 
   useEffect(() => {
     // a nested function that fetches the data
@@ -41,6 +42,14 @@ function App() {
     // the blank array below causes this callback to be executed only once on component load
   }, []);
 
+
+  const handleDone = (e) =>{
+    console.log(data)
+    axios.put(apiUrl, data)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
 	return (
     
     <div>
@@ -51,8 +60,11 @@ function App() {
       </a>
       <div>
       <h></h>
-      <h1> Most Recent Transaction</h1>
+      <h1>  Transaction of {type}</h1>
        <button onClick={() => history(-1)}>Go Back</button>
+      </div>
+      <div>
+        <button onClick={(handleDone)}>Save</button>
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
@@ -68,7 +80,7 @@ function App() {
               >
                 
                 <AgGridReact
-                  rowData={data}>
+                  rowData={data} rowSelection={"single"}>
                   <AgGridColumn field="name" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="amount"  sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="date" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
