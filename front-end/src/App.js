@@ -28,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account_book" element={<AccountBookMain />} />
-          <Route path="/account_book/category" element={<Account_page3 />} />
+          <Route path="/account_book/:type" element={<Account_page3 />} />
           <Route path="/account_book/overview" element={<Account_page2 />} />
           <Route path="/Diary" element={<Diary />} />
           <Route path="/Detail/:date" element={<DiaryDetail />} />
