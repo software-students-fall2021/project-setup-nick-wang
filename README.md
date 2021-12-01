@@ -1,17 +1,23 @@
-# Project Repository
+# Life Note
 
-This repository will be used for team projects.
+# Description of project
+The project Life Notes is a web app the helps people to take four main types of records of their life altogether in one app, and also provides visualization and some intelligence features.
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+The minimum viable product would be a app that enables user to write their diaries and record their transactions. Additional features in diaries enable users to tag their diaries, and generate the most frequently used tags. For the part of account book, additional features include allowing users to search for their transactions, generating a chart pies based on the users' spendings, and sorting the spendings based on dates or amounts.
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-1a-project-setup.md)
+# Core team members
+[Zhuofeng Wang](https://github.com/zw2922), [Yaolin Zhang](https://github.com/YaolinZhang), [Tianle Ye](https://github.com/Cirrhosis233), [Susan Liu](https://github.com/Susan0223), [Yiming Yu](https://github.com/yym1928)
 
-1. See the [Sprint Planning instructions](instructions-1b-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+# History of the Lifenote
+[Link to the contributing.md](https://github.com/software-students-fall2021/project-setup-nick-wang/blob/master/CONTRIBUTING.md)
 
-1. See the [Front-End Development instructions](./instructions-2-front-end.md) for the requirements of the initial Front-End Development.
+It's kind of too tedious to have so many different apps to manage in our life. Therefore, we had this idea to create an app to merge things like diary and account book into one.
+The project idea was proposed for the class Software Engineering in September 2021. 
 
-1. See the [Back-End Development instructions](./instructions-3-back-end.md) for the requirements of the initial Back-End Development.
+# Instructions for building and testing the project 
 
-1. See the [Database Integration instructions](./instructions-4-database.md) for the requirements of integrating a database into the back-end.
 
-1. See the [Deployment instructions](./instructions-5-deployment.md) for the requirements of deploying an app.
+# Links to any additional Markdown documents
+[Reading about how to build an online account book](https://vilmate.com/blog/how-to-create-accounting-custom-software)
+
+# Other important things
