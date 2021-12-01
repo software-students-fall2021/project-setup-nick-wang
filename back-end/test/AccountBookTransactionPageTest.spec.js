@@ -10,13 +10,14 @@ describe("Account Book Transaction Page Test", () => {
       it("It should GET transaction data for the transaction pages", (done) => {
         chai
           .request(server)
-          .get("/Account_transaction_data")
+          .get("/Transaction_data")
           .end((err, response) => {
             if (err) throw err;
             response.should.have.status(200);
-            response.body[0].should.have.property("Name");
-            response.body[0].should.have.property("Date");
-            response.body[0].should.have.property("Amount");
+            response.body[0].should.have.property("name");
+            response.body[0].should.have.property("date");
+            response.body[0].should.have.property("amount");
+            response.body[0].should.have.property("type");
             done();
           });
       });
