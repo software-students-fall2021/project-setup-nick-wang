@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Account_page2.css";
 import { render } from 'react-dom';
+import { useParams } from "react-router";
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -17,7 +18,8 @@ function App() {
   const [data, setData] = useState([]);
   const history = useNavigate();
 
-  const url = 'https://my.api.mockaroo.com/users.json?key=34da9040';
+  const { type } = useParams();
+  const url = "http://localhost:9000/Transaction_data/" + type;
 
   useEffect(() => {
     // a nested function that fetches the data
@@ -25,8 +27,9 @@ function App() {
       // axios is a 3rd-party module for fetching data from servers
       const result = await axios(
         // retrieving some mock data about animals for sale
-        "http://localhost:9000/transaction_data"
+        url
       );
+      
       // set the state variable
       // this will cause a re-render of this component
       setData(result.data);

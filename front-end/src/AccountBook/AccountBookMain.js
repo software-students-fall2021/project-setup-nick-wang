@@ -219,29 +219,29 @@ function AccountBookMain() {
       <div className="allTypes">
         <h2>Categories</h2>
         <div className="typeRow">
-          <Link className="type" to="/account_book/category">
-            Type 1
+          <Link className="type" to="/account_book/housing">
+          Housing
           </Link>
-          <Link className="type" to="/account_book/category">
-            Type 2
-          </Link>
-        </div>
-
-        <div className="typeRow">
-          <Link className="type" to="/account_book/category">
-            Type 3
-          </Link>
-          <Link className="type" to="/account_book/category">
-            Type 4
+          <Link className="type" to="/account_book/transportation">
+          Transportation
           </Link>
         </div>
 
         <div className="typeRow">
-          <Link className="type" to="/account_book/category">
-            Type 5
+          <Link className="type" to="/account_book/food">
+            Food
           </Link>
-          <Link className="type" to="/account_book/category">
-            Type 6
+          <Link className="type" to="/account_book/health">
+            Health
+          </Link>
+        </div>
+
+        <div className="typeRow">
+          <Link className="type" to="/account_book/utilities">
+          Utilities    
+          </Link>
+          <Link className="type" to="/account_book/miscellaneous">
+          Miscellaneous
           </Link>
         </div>
       </div>

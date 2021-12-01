@@ -24,6 +24,13 @@ router.get("/Transaction_data", (req, res) => {
       })
 });
 
+router.get("/Transaction_data/:type", (req, res) => {
+  Transaction.find({type: req.params.type}, (err, docs) => {
+      if(err) return console.error(err);
+      res.json(docs);
+    })
+});
+
 
 
 router.post("/edit_transaction_data",(req, res) => {
