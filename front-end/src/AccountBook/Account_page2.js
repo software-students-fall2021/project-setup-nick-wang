@@ -45,7 +45,7 @@ function App() {
       <div>
         <h></h>
        <h1> Most Recent Transaction</h1>
-       <button onClick={() => history.goBack()}>Go Back</button>
+       <button onClick={() => history(-1)}>Go Back</button>
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
