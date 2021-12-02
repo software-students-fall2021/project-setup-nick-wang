@@ -32,18 +32,19 @@ router.get("/Transaction_data/:type", (req, res) => {
 });
 
 router.put("/save_transaction_data",(req, res) => {
-  for(var i=0; i<req.body.length; i++){
-    //console.log(req.body.length);
-    Transaction.findOneAndUpdate({_id:req.body[i]._id}, 
-      {name:req.body[i].name, amount:req.body[i].amount, date:req.body[i].date}, null, function (err, docs) {
-      if (err){
-          console.log(err)
-      }
-      else{
-          console.log("Original Doc : ",docs);
-      }
-  })
-}
+  //var i = 1;
+    for(var i=0; i<req.body.length; i++){
+      console.log(req.body.length);
+      Transaction.findOneAndUpdate({_id:req.body[i]._id}, 
+        {name:req.body[i].name, amount:req.body[i].amount, date:req.body[i].date}, null, function (err, docs) {
+        if (err){
+            console.log(err)
+        }
+        else{
+            console.log("Original Doc : ",docs);
+        }
+    })
+  }
   /*
   findOne({ _id:req.body[i]._id }, function (err, doc){
       doc.name = req.body[i].name;
