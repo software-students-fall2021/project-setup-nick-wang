@@ -22,9 +22,6 @@ describe("Account Book Transaction Page Test", () => {
           });
       });
     });
-  });
-
-  describe("Account Book Transaction Categoty Page Test", () => {
     describe("GET get transactions data", () => {
       it("It should GET transaction data for the transaction pages", (done) => {
         const type = "meat"
@@ -42,4 +39,6 @@ describe("Account Book Transaction Page Test", () => {
           });
       });
     });
+
+    
   });
