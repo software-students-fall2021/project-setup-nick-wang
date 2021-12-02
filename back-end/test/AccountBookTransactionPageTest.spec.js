@@ -40,5 +40,23 @@ describe("Account Book Transaction Page Test", () => {
       });
     });
 
-    
+    describe("PUT /save_transaction_data", () => {
+      it("It should update transaction data", (done) => {
+        const transac = [{
+          name: "steak",
+          type: "food",
+          amount: "11",
+          date:"11/23/2021",
+      }]
+        chai
+          .request(server)
+          .put("/save_transaction_data")
+          .send(transac)
+          .end((err, response) => {
+            if (err) throw err;
+            response.should.have.status(200);
+            done();
+          });
+      });
+    });
   });
