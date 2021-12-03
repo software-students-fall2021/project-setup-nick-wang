@@ -1,38 +1,37 @@
 import { Link } from "react-router-dom"
+import { Header , Button, Container, Grid, Segment } from "semantic-ui-react"
 
 
 function Categories(props){
     return(
-        <>
-            <h2>Categories</h2>
+        <Segment>
+            <Header>Categories</Header>
         
-            <div className="typeRow">
-            <Link className="type" to="/account_book/housing">
+            <Button color='orange' as={Link} to="/account_book/housing">
             Housing
-            </Link>
-            <Link className="type" to="/account_book/transportation">
+            </Button>
+
+            <Button color='green' as={Link} to="/account_book/transportation">
             Transportation
-            </Link>
-            </div>
+            </Button>
 
-            <div className="typeRow">
-            <Link className="type" to="/account_book/food">
-                Food
-            </Link>
-            <Link className="type" to="/account_book/health">
-                Health
-            </Link>
-            </div>
+            <Button color='blue' as={Link} to="/account_book/Food">
+            Food
+            </Button>
 
-            <div className="typeRow">
-            <Link className="type" to="/account_book/utilities">
+            <Button color='violet' as={Link} to="/account_book/Health">
+            Health
+            </Button>
+
+            <Button color='pink' as={Link} to="/account_book/Utilities">
             Utilities    
-            </Link>
-            <Link className="type" to="/account_book/miscellaneous">
+            </Button>
+
+            <Button color='brown' as={Link} to="/account_book/miscellaneous">
             Miscellaneous
-            </Link>
-            </div>
-        </>
+            </Button>
+
+        </Segment>
     )
 }
 

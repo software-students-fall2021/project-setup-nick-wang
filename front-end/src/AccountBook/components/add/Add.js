@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Add(props){
+    const [statusSubmit, setStatusSubmit] = useState(false)
     const [statusAdd, setStatusAdd] = useState({})
-    const [statusSubmit2, setStatusSubmit2] = useState(false)
 
     const handleSubmitAdd = async e => {
       // prevent html form from submiting and reloading
       e.preventDefault()
-      setStatusSubmit2(true)
+      
       try {
         // send a post request to the server
         const requestData = {
@@ -20,10 +20,14 @@ function Add(props){
         const response = await axios.post(
           "http://localhost:9000/post-add",
           requestData
-        )
-  
-        console.log(response.data)
-        setStatusAdd(response.data)
+          )
+          
+          console.log(response.data)
+          console.log(statusAdd)
+          setStatusAdd(response.data)
+          console.log(statusAdd)
+          setStatusSubmit(true)
+
       } catch (err) {
         // throw an error
         throw new Error(err)
@@ -58,7 +62,7 @@ function Add(props){
         
         <Form.Button type="submit" name="submit" content="Add"></Form.Button>
         
-        {statusSubmit2 && 
+        {statusSubmit && 
           <p>Your transaction is successfully added</p>
         }
     </Form>

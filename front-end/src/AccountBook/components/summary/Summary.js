@@ -1,28 +1,59 @@
-import { Header, Form, Segment, Grid, Divider, Button, FormGroup } from "semantic-ui-react"
+import { Header, Form, Segment, Grid, Button } from "semantic-ui-react"
 import { PieChart } from "react-minimal-pie-chart"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Summary(props){
-    const [limit, setLimit] = useState([])
     const [data, setData] = useState([])
-    
+    const [limit, setLimit] = useState(0)
+    const [Spending, setSpending] = useState(0)
+
     useEffect(() => {
         async function fetchData() {
             const result = await axios("http://localhost:9000/recent-trsc")
             setData(result.data)
-            
-            const budget = await axios('http://localhost:9000/get-monthly-budget')
-            setLimit(budget.data)
+              
+            const summary = await axios('http://localhost:9000/get-monthly-budget')
+            setLimit(summary.data.monthlyLimit)
+            setSpending(summary.data.monthlySpending)
         }
         fetchData()
     }, [])
 
+    const handleSubmit = async e => {
+        e.preventDefault();
+        
+        try {
+            const requestData = {
+                monthlyLimit: e.target.amount.value
+            }
+            
+            const response = await axios.put(
+                "http://localhost:9000/set-monthly-budget",
+                requestData
+            )
+                
+            setLimit(response.data)
+        } catch (err) {
+          // throw an error
+          throw new Error(err)
+        }
+    }
+
     return (
         <Segment>
-            <Header textAlign='center'>Your Spending Summary</Header>
+            <Header as='h1'>Your Spending Summary</Header>
             
             <Grid stackable verticalAlign='middle'>
+                <Grid.Row centered columns={1}>
+                    <Grid.Column>
+                    <Form onSubmit={handleSubmit}>
+                            <Form.Input type="number" name="amount" step="1" placeholder="Set Monthly Budget"></Form.Input>
+                            <Button type="submit" content="Submit"/>
+                        </Form>
+                    </Grid.Column>
+                </Grid.Row>
+
                 <Grid.Row centered columns={2}>
                     <Grid.Column>
                         <PieChart
@@ -38,16 +69,16 @@ function Summary(props){
                         fontFamily: "Arial",
                         fill: "black",
                         }}
-                        labelPosition={50}
+                        labelPosition={112}
                         />
                     </Grid.Column>
 
                     <Grid.Column>
                         <PieChart
                         radius="35"
-                        data={[{ value: limit.monthlySpending, key: 1, color: "blue" }]}
+                        data={[{ value: Spending, key: 1, color: "blue" }]}
                         startAngle={270}
-                        reveal={ limit.monthlySpending/limit.monthlyLimit * 100}
+                        reveal={ Spending/limit * 100}
                         lineWidth={30}
                         background="grey"
                         lengthAngle={360}
@@ -64,14 +95,6 @@ function Summary(props){
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row centered columns={1}>
-                    <Grid.Column>
-                        <Form action="http://localhost:9000/set-monthly-budget" method="put">
-                            <Form.Input type="number" name="amount" step="1" placeholder="Monthly Budget"></Form.Input>
-                            <Button type="submit" content="Submit"/>
-                        </Form>
-                    </Grid.Column>
-                </Grid.Row>
             </Grid>
         </Segment>
     )
