@@ -63,14 +63,14 @@ router.put("/save_transaction_data",(req, res) => {
 
 router.post("/delete_transaction",(req, res) => {
   console.log(req.body.name)
-  Transaction.deleteOne({}, {name: req.body.name}, (err, result)=>{
+  Transaction.deleteOne( {name: req.body.name}, (err, result)=>{
       if(err) return console.error(err);
       else{
         res.redirect('http://localhost:3000/account_book');
         res.status(200)
       }
   })
-
+  res.status(200)
 })
 
 router.post("/edit_transaction_data",(req, res) => {

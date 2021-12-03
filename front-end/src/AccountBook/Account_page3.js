@@ -91,10 +91,10 @@ function App() {
       <div>
       <h></h>
       <h1>  Transaction of {type}</h1>
-      <div style={{ display: "flex" }}>
+      <div style={{ position: 'absolute',left: '45%' }}>
       <form text-align="center" action="http://localhost:9000/delete_transaction" method="post">
             <input type="text" id = "name" name="name" placeholder="Name of transation"></input>
-            <input type="submit" value="Submit"/>
+            <input type="submit" value="Delete"/>
           </form>
       </div>
        <button onClick={() => history(-1)}>Go Back</button>
