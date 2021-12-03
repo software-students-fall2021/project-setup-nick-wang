@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Transaction from "../transactions/Transaction";
 import { Link } from "react-router-dom";
+import { Segment } from "semantic-ui-react";
 
 
 function RecentTransactions(props){
@@ -16,7 +17,7 @@ function RecentTransactions(props){
     }, [])
 
     return(
-        <>
+        <Segment textAlign='center'>
         <>
         <h2>Recent Transactions</h2>
         
@@ -31,7 +32,7 @@ function RecentTransactions(props){
         <Link className="moreTranscations" to="/account_book/overview">
             More Transactions
         </Link>
-        </>
+        </Segment>
     )
 }
 

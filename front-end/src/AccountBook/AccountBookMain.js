@@ -13,8 +13,8 @@ import "./AccountBookMain.css"
 function AccountBookMain() {
   return (
     <body>
-      <h1></h1>
-      <h1></h1>
+      <h1/>
+      <h1/>
       <Header as='h1'>Account Book</Header>
 
       <Segment>
@@ -29,15 +29,11 @@ function AccountBookMain() {
         </Grid>
       </Segment>
 
-      <div className="transactions">
-        <RecentTransactions/>
-      </div>
+      <RecentTransactions/>
 
       <Summary/>
 
-      <div className="allTypes">
-        <Categories/>
-      </div>
+      <Categories/>
 
       <footer className="footerABM">
         <p>&copy;2021 LifeNote Team</p>

@@ -24,10 +24,10 @@ router.get('/get-monthly-budget', (req, res) => {
 });
   
 router.put("/set-monthly-budget",(req, res) => {
-    Summary.updateMany({}, {monthlyLimit: req.body.amount}, (err, result)=>{
+    Summary.updateOne({}, {monthlyLimit: req.body.monthlyLimit}, (err, result)=>{
         if(err) return console.error(err);
         else{
-            res.send(req.body.amount)
+            res.send(req.body.monthlyLimit)
             res.status(200)
         }
     })
