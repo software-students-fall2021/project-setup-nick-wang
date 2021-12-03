@@ -33,6 +33,8 @@ router.get("/Transaction_data/:type", (req, res) => {
 
 router.put("/save_transaction_data",(req, res) => {
   //var i = 1;
+  res.status(200);
+          res.send();
     for(var i=0; i<req.body.length; i++){
       console.log(req.body.length);
       Transaction.findOneAndUpdate({_id:req.body[i]._id}, 
@@ -41,9 +43,12 @@ router.put("/save_transaction_data",(req, res) => {
             console.log(err)
         }
         else{
-            console.log("Original Doc : ",docs);
+          res.status(200);
+          res.send();
         }
     })
+    res.status(200);
+    res.send();
   }
   /*
   findOne({ _id:req.body[i]._id }, function (err, doc){
@@ -54,6 +59,18 @@ router.put("/save_transaction_data",(req, res) => {
     });
   }
   */
+})
+
+router.post("/delete_transaction",(req, res) => {
+  console.log(req.body.name)
+  Transaction.deleteOne( {name: req.body.name}, (err, result)=>{
+      if(err) return console.error(err);
+      else{
+        res.redirect('http://localhost:3000/account_book');
+        res.status(200)
+      }
+  })
+  res.status(200)
 })
 
 router.post("/edit_transaction_data",(req, res) => {
