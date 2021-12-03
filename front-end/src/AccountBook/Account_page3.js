@@ -43,6 +43,29 @@ function App() {
   }, []);
 
 
+  const handleDelete = async e => {
+    // prevent html form from submiting and reloading
+    e.preventDefault()
+
+    try {
+      // send a post request to the server
+      const requestData = {
+          name : e.target.name.value,
+      }
+      const response = await axios.post(
+        "http://localhost:9000/delete_transaction",
+        requestData
+      )
+
+      console.log(response.data)
+      console.log("new search made")
+    
+    } catch (err) {
+      // throw an error
+      throw new Error(err)
+    }
+  }
+
   const handleDone = (e) =>{
     console.log(data)
     axios.put(apiUrl, data)
@@ -50,9 +73,16 @@ function App() {
     .catch(err => console.log(err));
   }
 
+  const getSelectedRowData = (e) => {
+    let selectedNodes = this.gridApi.getSelectedNodes();
+    let selectedData = selectedNodes.map(node => node.data);
+    alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
+    return selectedData;
+  };
+
 	return (
     
-    <div>
+    <div >
       {/* Change the href to home link */}
       <a href="homepage/">
         {/* Change the image src to logo */}
@@ -61,10 +91,18 @@ function App() {
       <div>
       <h></h>
       <h1>  Transaction of {type}</h1>
+      <div style={{ display: "flex" }}>
+      <form text-align="center" action="http://localhost:9000/delete_transaction" method="post">
+            <input type="text" id = "name" name="name" placeholder="Name of transation"></input>
+            <input type="submit" value="Submit"/>
+          </form>
+      </div>
        <button onClick={() => history(-1)}>Go Back</button>
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <button onClick={(handleDone)}>Save</button>
+        {/* <button  style={{ marginLeft: "auto" }}  onClick={getSelectedRowData} > Get Selected Data</button>*/}
+        
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
@@ -80,7 +118,7 @@ function App() {
               >
                 
                 <AgGridReact
-                  rowData={data} rowSelection={"single"}>
+                  rowSelection="single" rowData={data} >
                   <AgGridColumn field="name" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="amount"  sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="date" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
