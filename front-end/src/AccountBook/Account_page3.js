@@ -7,6 +7,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import { Header, Form, Segment, Grid, Divider, Button, FormGroup } from "semantic-ui-react"
 
 const Footer = () => (
   <div className="footer">
@@ -91,20 +92,24 @@ function App() {
       <div>
       <h></h>
       <h1>  Transaction of {type}</h1>
-      <div style={{ position: 'absolute',left: '45%' }}>
-      <form text-align="center" action="http://localhost:9000/delete_transaction" method="post">
-            <input type="text" id = "name" name="name" placeholder="Name of transation"></input>
-            <input type="submit" value="Delete"/>
-          </form>
+      
+       <Button onClick={() => history(-1)}>Go Back</Button>
       </div>
-       <button onClick={() => history(-1)}>Go Back</button>
-      </div>
+      
       <div style={{ display: "flex" }}>
-        <button onClick={(handleDone)}>Save</button>
+        <Button onClick={(handleDone)}>Save</Button>
         {/* <button  style={{ marginLeft: "auto" }}  onClick={getSelectedRowData} > Get Selected Data</button>*/}
         
       </div>
-        <div style={{ width: '100%', height: '70%' }}>
+      <div>
+      <Grid.Column>
+      <Form text-align="center" action="http://localhost:9000/delete_transaction" method="post">
+            <Form.Input type="text" id = "name" name="name" placeholder="Name of transation"></Form.Input>
+            <Button type="submit" content="Delete"/>
+          </Form>
+          </Grid.Column>
+      </div>
+        <div style={{ width: '100%', height: '60%' }}>
           <div className="container">
             <div id="left"></div>
             <div id="center">

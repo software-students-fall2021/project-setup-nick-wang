@@ -1,20 +1,11 @@
 .body{
-    background-color: #f6f5f7;
+    background-color: white;
 }
 .backButton{
     width: 15%;
     margin: 5px;
     padding: 10px;
     color: black;
-}
-
-.header{
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid black;
-    margin: 10px;
-    background-color: white;
-    padding: 20px;
 }
 
 .homeButton{

@@ -7,12 +7,8 @@ require('dotenv').config()
 mongoose.connect(process.env.DB_URL);
 mongoose.connection.on('error', err => {logError(err);});
 
-Summary.deleteOne({monthlyLimit: null})
-
 router.get('/get-monthly-budget', (req, res) => {
-
-    Summary.find({}, (err, result)=>{
-      console.log(result);
+    Summary.find({}, (err, result) => {
         if(err) return console.error(err);
         if(result.length === 0){
           res.json([{
@@ -27,11 +23,11 @@ router.get('/get-monthly-budget', (req, res) => {
     })
 });
   
-router.post("/set-monthly-budget",(req, res) => {
+router.put("/set-monthly-budget",(req, res) => {
     Summary.updateMany({}, {monthlyLimit: req.body.amount}, (err, result)=>{
         if(err) return console.error(err);
         else{
-            res.redirect('http://localhost:3000/account_book');
+            res.send(req.body.amount)
             res.status(200)
         }
     })
