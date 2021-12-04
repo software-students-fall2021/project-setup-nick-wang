@@ -75,6 +75,8 @@ db.once('open', function() {
 });
 
 const transactionSchema = new mongoose.Schema({
+  username: String,
+
   name: String,
   date: Date,
   amount: Number,
@@ -83,9 +85,15 @@ const transactionSchema = new mongoose.Schema({
 
 const Transaction = mongoose.model('Transactions', transactionSchema);
 
+
+let userNameForSearch;
 // get recent transactions from db and sent them back to front-end
-app.get("/recent-trsc", (req, res) => {
-  Transaction.find({}, (err, docs) => {
+app.post("/recent-trsc", (req, res) => {
+  userNameForSearch = req.body.username
+  console.log("user in the backend: " +req.body.username)
+  console.log(JSON.stringify(req.body, null, 2))
+
+  Transaction.find({username: req.body.username}, (err, docs) => {
     if(err) return console.error(err);
 
     console.log(docs.length)
@@ -112,7 +120,7 @@ app.get("/transaction_data", (req, res) => {
 app.post("/post-search", (req, res) => {
   console.log(JSON.stringify(req.body, null, 2))
 
-  Transaction.find({name: req.body.search}, (err, result)=>{
+  Transaction.find({name: req.body.search, username:userNameForSearch}, (err, result)=>{
     if(err) return console.error(err);
     if(result.length === 0){
       res.json([])
@@ -131,6 +139,8 @@ app.post("/post-add", (req, res) => {
 
   const today = new Date()
   const newTrsc = new Transaction ({
+    //username added
+    username: req.body.username,
     name: req.body.trscName,
     date: today,
     amount: req.body.trscAmount,
