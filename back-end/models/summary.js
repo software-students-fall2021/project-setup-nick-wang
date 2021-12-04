@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const summarySchema = new mongoose.Schema({
+    userID: String,
     username: String,
-    monthlyLimit: Number,
-    monthlySpending: Number
+    monthlyLimit: Number
 });
 
 module.exports = mongoose.model('Summary', summarySchema);

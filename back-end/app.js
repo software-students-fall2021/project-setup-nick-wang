@@ -76,7 +76,7 @@ db.once('open', function() {
 
 const transactionSchema = new mongoose.Schema({
   name: String,
-  date: String,
+  date: Date,
   amount: Number,
   type: String
 });
@@ -129,8 +129,7 @@ app.post("/post-search", (req, res) => {
 app.post("/post-add", (req, res) => {
   console.log(`post data: ${JSON.stringify(req.body, null, 2)}`)
 
-  const newDate = new Date()
-  const today = 1+newDate.getUTCMonth() + '/' + newDate.getDate() +'/'+ newDate.getUTCFullYear()
+  const today = new Date()
   const newTrsc = new Transaction ({
     name: req.body.trscName,
     date: today,
