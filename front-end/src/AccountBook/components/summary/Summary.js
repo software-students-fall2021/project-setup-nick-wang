@@ -23,7 +23,7 @@ function Summary(props){
             setLimit(result1.data.monthlyLimit)
 
             const result2 = await axios('http://localhost:9000/get-monthly-spending')
-            setSpending(result2.data.totalAmount)
+            setSpending(result2.data.monthlySpending)
         }
         fetchData()
     }, [])
