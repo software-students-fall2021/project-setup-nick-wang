@@ -76,7 +76,6 @@ db.once('open', function() {
 
 const transactionSchema = new mongoose.Schema({
   username: String,
-
   name: String,
   date: Date,
   amount: Number,
