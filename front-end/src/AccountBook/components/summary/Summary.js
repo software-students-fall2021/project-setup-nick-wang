@@ -3,6 +3,12 @@ import { PieChart } from "react-minimal-pie-chart"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+function color(type) {
+    if(type == 'food') return '#E38627';
+    if(type == 'housing') return '#C13C37';
+    if(type == 'transportation') return '#6A2135';
+};
+
 function Summary(props){
     const [data, setData] = useState([])
     const [limit, setLimit] = useState(0)
@@ -10,12 +16,14 @@ function Summary(props){
 
     useEffect(() => {
         async function fetchData() {
-            const result = await axios("http://localhost:9000/recent-trsc")
+            const result = await axios("http://localhost:9000/get-transac-data")
             setData(result.data)
               
-            const summary = await axios('http://localhost:9000/get-monthly-budget')
-            setLimit(summary.data.monthlyLimit)
-            setSpending(summary.data.monthlySpending)
+            const result1 = await axios('http://localhost:9000/get-monthly-limit')
+            setLimit(result1.data.monthlyLimit)
+
+            const result2 = await axios('http://localhost:9000/get-monthly-spending')
+            setSpending(result2.data.totalAmount)
         }
         fetchData()
     }, [])
@@ -59,9 +67,9 @@ function Summary(props){
                         <PieChart
                         radius="30"
                         data={data.map(item => ({
-                        title: item.type,
-                        value: item.amount,
-                        color: '#' + Math.floor(Math.random()*16777215).toString(16),
+                        title: item._id,
+                        value: item.totalAmount,
+                        color: color(item._id),
                         }))}
                         label={({ dataEntry }) => dataEntry.title}
                         labelStyle={{

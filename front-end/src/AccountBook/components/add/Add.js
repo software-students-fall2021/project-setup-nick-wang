@@ -23,9 +23,7 @@ function Add(props){
           )
           
           console.log(response.data)
-          console.log(statusAdd)
           setStatusAdd(response.data)
-          console.log(statusAdd)
           setStatusSubmit(true)
 
       } catch (err) {
