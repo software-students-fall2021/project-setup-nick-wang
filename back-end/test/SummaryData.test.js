@@ -8,18 +8,44 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("Account Summary", () => {
-    describe("GET /get-monthly-budget", () => {
-        it("should get a monthly budget and expense", (done) => {
+    describe("GET /get-monthly-limit", () => {
+        it("should get a monthly limit", (done) => {
              chai.request(app)
-                 .get('/get-monthly-budget')
+                 .get('/get-monthly-limit')
                  .end((err, res) => {
                      if (err) throw err;
                      res.should.have.status(200);
                      res.body.should.have.property("monthlyLimit");
-                     res.body.should.have.property("monthlySpending");
                      done();
                   });
          });
+    });
+
+    describe("GET /get-monthly-spending", () => {
+      it("should get a monthly total spending", (done) => {
+           chai.request(app)
+               .get('/get-monthly-spending')
+               .end((err, res) => {
+                   if (err) throw err;
+                   res.should.have.status(200);
+                   res.body.should.have.property("monthlySpending");
+                   done();
+                });
+      });
+    });
+
+    describe("GET /get-transac-data", () => {
+      it("should get transactions data", (done) => {
+           chai.request(app)
+               .get('/get-transac-data')
+               .end((err, res) => {
+                   if (err) throw err;
+                   res.should.have.status(200);
+                   res.body[0].should.have.property("_id");
+                   res.body[0].should.have.property("totalAmount");
+                   done();
+                });
+      });
     });
 
     describe("PUT /set-monthly-budget", () => {

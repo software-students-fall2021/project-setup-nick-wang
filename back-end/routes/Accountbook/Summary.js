@@ -11,13 +11,16 @@ mongoose.connection.on('error', err => {logError(err);});
 router.get('/get-monthly-spending', (req, res) => {
   transactions.aggregate([
     {
-      $match : { $expr: { $eq: [ { "$month": "$date" }, { "$month": new Date() } ] } }
+      $match : { 
+        $expr: { $eq: [ { "$month": "$date" }, { "$month": new Date() } ] },
+        $expr: { $eq: [ { "$year": "$date" }, { "$year": new Date() } ] }
+      }
     },
     {
       $group: 
       {
         _id: {$month: "$date"}, 
-        totalAmount: { $sum: "$amount" } 
+        monthlySpending: { $sum: "$amount" } 
       }
     },
     {
@@ -41,7 +44,7 @@ router.get('/get-transac-data', (req, res) => {
     {
       $group: 
       {
-        _id: "$type", 
+        _id: { $toLower: "$type" }, 
         totalAmount: { $sum: "$amount" } 
       }
     }], (err, result) => {
