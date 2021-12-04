@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import ReactWordcloud from "react-wordcloud";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./DiaryOverview.css";
+import "./DiaryWordcloud.css";
 import { Container, Dropdown, Button } from "semantic-ui-react";
-
+import wordList from "./stopword.json";
 
 const testYear = [
-  { key: 2010, text: 2010, value: 2010 },
-  { key: 2011, text: 2011, value: 2011 },
-  { key: 2012, text: 2012, value: 2012 },
-  { key: 2013, text: 2013, value: 2013 },
-  { key: 2014, text: 2014, value: 2014 },
-  { key: 2015, text: 2015, value: 2015 },
   { key: 2016, text: 2016, value: 2016 },
   { key: 2017, text: 2017, value: 2017 },
   { key: 2018, text: 2018, value: 2018 },
@@ -22,6 +16,7 @@ const testYear = [
 ];
 
 const testMonth = [
+  { key: 0, text: 0, value: 0 },
   { key: 1, text: 1, value: 1 },
   { key: 2, text: 2, value: 2 },
   { key: 3, text: 3, value: 3 },
@@ -37,29 +32,77 @@ const testMonth = [
 ];
 
 const DiaryOverview = (props) => {
+  function removeST(json_array) {
+    let clean = [];
+    json_array.forEach((element) => {
+      if (element.text) {
+        let word = element.text.toLowerCase().replace(/[^\w]|_|\\n/g, "");
+        if (!wordList.stopwords.includes(word)) {
+          clean.push(Object.assign({}, element));
+        }
+      }
+    });
+    // console.log(clean)
+    return clean;
+  }
+
+  function sortByCount(json_array) {
+    return json_array.slice().sort((a, b) => b.value - a.value);
+  }
+
   const [wordCloud, setWordCloud] = useState([]);
 
-  const [year, setYear] = useState({ year: [] });
+  const [year, setYear] = useState(0);
 
-  const [month, setMonth] = useState({ month: [] });
+  const [month, setMonth] = useState(0);
 
   const handleYear = (e, { value }) => setYear(value);
 
   const handleMonth = (e, { value }) => setMonth(value);
 
   useEffect(() => {
-    async function getWordCloud(url) {
-      const response = await axios(url);
-      setWordCloud(response.data);
+    console.log("Select Year: " + year);
+    console.log("Select Month: " + month);
+    if (!year) {
+      axios
+        .get("http://localhost:9000/diary/word-cloud")
+        .then((res) => {
+          setWordCloud(res.data);
+        })
+        .catch((e) => {
+          setWordCloud([]);
+        });
+    } else if (!month) {
+      axios
+        .get("http://localhost:9000/overview/" + year)
+        .then((res) => {
+          const word_count = res.data;
+          let word_clean = removeST(word_count)
+          sortByCount(word_clean);
+          setWordCloud(word_clean.slice(0, 50));
+        })
+        .catch((e) => {
+          setWordCloud([]);
+        });
+    } else {
+      axios
+        .get("http://localhost:9000/overview/" + month + "/" + year)
+        .then((res) => {
+          const word_count = res.data;
+          let word_clean = removeST(word_count)
+          sortByCount(word_clean);
+          setWordCloud(word_clean.slice(0, 50));
+        })
+        .catch((e) => {
+          setWordCloud([]);
+        });
     }
-
-    getWordCloud("http://localhost:9000/diary/word-cloud");
     // console.log(wordCloud)
-  }, []);
+  }, [year, month]);
 
   // const size = [640, 360];
   const options = {
-    fontSizes: [12, 60],
+    fontSizes: [12, 50],
     rotations: 3,
     rotationAngles: [0, 90],
   };
@@ -86,7 +129,6 @@ const DiaryOverview = (props) => {
         <Dropdown
           onChange={handleYear}
           placeholder="Year"
-          multiple
           search
           selection
           options={testYear}
@@ -94,14 +136,14 @@ const DiaryOverview = (props) => {
         <Dropdown
           onChange={handleMonth}
           placeholder="Month"
-          multiple
           search
           selection
           options={testMonth}
         />
+        {}
       </Container>
     </>
   );
 };
 
-// export default DiaryOverview;
+export default DiaryOverview;
