@@ -11,22 +11,57 @@ function Add(props){
       e.preventDefault()
       
       try {
-        // send a post request to the server
-        const requestData = {
-          trscName: e.target.trscName.value,
-          trscAmount: e.target.trscAmount.value,
-          trscType: e.target.trscType.value,
-        }
-        const response = await axios.post(
-          "http://localhost:9000/post-add",
-          requestData
-          )
-          
-          console.log(response.data)
-          setStatusAdd(response.data)
-          setStatusSubmit(true)
+        // add trsc to the certian user
+        // by his username
+        const jwtToken = localStorage.getItem("token");
 
-      } catch (err) {
+        axios
+        .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+          headers: { authorization: jwtToken }, // pass the token, if any, to the server
+        })
+        .then((res) => {
+          console.log(res.data);
+          // send a post request to the server
+          const requestData = {
+            username: res.data.username,
+
+            trscName: e.target.trscName.value,
+            trscAmount: e.target.trscAmount.value,
+            trscType: e.target.trscType.value,
+          }
+          const response = axios.post(
+            "http://localhost:9000/post-add",
+            requestData
+            )
+            
+            console.log(response.data)
+            setStatusAdd(response.data)
+            setStatusSubmit(true)
+            
+        })
+        .catch((err) => {
+          console.log(
+            "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+          )
+        })
+      }
+
+        // // send a post request to the server
+        // const requestData = {
+        //   trscName: e.target.trscName.value,
+        //   trscAmount: e.target.trscAmount.value,
+        //   trscType: e.target.trscType.value,
+        // }
+        // const response = await axios.post(
+        //   "http://localhost:9000/post-add",
+        //   requestData
+        //   )
+          
+          // console.log(response.data)
+          // setStatusAdd(response.data)
+          // setStatusSubmit(true)
+
+       catch (err) {
         // throw an error
         throw new Error(err)
       }
