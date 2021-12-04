@@ -13,6 +13,7 @@ function Search(props){
         e.preventDefault()
     
         try {
+
           // send a post request to the server
           const requestData = {
               search : e.target.search.value,
@@ -20,7 +21,7 @@ function Search(props){
           const response = await axios.post(
             "http://localhost:9000/post-search",
             requestData
-          )
+          ) 
     
           console.log(response.data)
           console.log("new search made")

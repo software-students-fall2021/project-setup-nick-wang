@@ -6,14 +6,43 @@ import { Segment } from "semantic-ui-react";
 
 
 function RecentTransactions(props){
+    //const tokenState = props.tokenState;
+    //console.log(`Token State: ${tokenState}`);
+    // const { tokenState, setTokenState } = useContext(TokenContext);
+    const jwtToken = localStorage.getItem("token");
+    console.log(`JWT token for recent transactions: ${jwtToken}`); // debugging
+
+    // use to store user info
     const [data, setData] = useState([])
     
     useEffect(() => {
+        // get user name
+    axios
+      .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+        headers: { authorization: jwtToken }, // pass the token, if any, to the server
+      })
+      .then((res) => {
+        console.log(res.data);
         async function fetchData() {
-            const result = await axios("http://localhost:9000/recent-trsc")
+            const result = await axios.post("http://localhost:9000/recent-trsc", res.data)
             setData(result.data)
         }
         fetchData()
+        //console.log("recent transaction username: " +response.username)
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        )
+      })
+      
+
+        // async function fetchData() {
+        //     console.log("user: "+user);
+        //     const result = await axios("http://localhost:9000/recent-trsc", user)
+        //     setData(result.data)
+        // }
+        // fetchData()
     }, [])
 
     return(
