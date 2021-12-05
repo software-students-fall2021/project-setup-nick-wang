@@ -13,9 +13,29 @@ function App() {
   const [data, setData] = useState([]);
   const history = useNavigate();
 
-  const url = 'http://localhost:9000/transaction_data';
+  const jwtToken = localStorage.getItem("token");
 
   useEffect(() => {
+    axios
+         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+             headers: { authorization: jwtToken }, // pass the token, if any, to the server
+         })
+         .then((res) => {
+          const url = 'http://localhost:9000/Transaction_data_overview/' +res.data.username;
+          //console.log(res.data.username)
+             async function fetchData() {
+                 const result = await axios(url)
+                 setData(result.data)
+             }
+             fetchData()
+         })
+         .catch((err) => {
+             console.log(
+             "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+             )
+         })
+
+    /*
     // a nested function that fetches the data
     async function fetchData() {
       // axios is a 3rd-party module for fetching data from servers
@@ -32,6 +52,7 @@ function App() {
     fetchData();
     
     // the blank array below causes this callback to be executed only once on component load
+    */
   }, []);
 
 	return (

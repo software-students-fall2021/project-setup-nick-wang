@@ -12,22 +12,21 @@ db.once('open', function() {
   // we're connected!
 });
 
-Transaction.deleteMany({ type: '' }, function (err) {
-  if(err) console.log(err);
-  //console.log("Successful deletion");
-});
-
-router.get("/Transaction_data", (req, res) => {
-    Transaction.find({}, (err, docs) => {
+router.get("/Transaction_data_overview/:username", (req, res) => {
+    //console.log(req.params.username);
+    Transaction.find({username : req.params.username}, (err, docs) => {
         if(err) return console.error(err);
         res.json(docs);
+        res.status(200);
       })
 });
 
 router.get("/Transaction_data/:type", (req, res) => {
-  Transaction.find({type: req.params.type}, (err, docs) => {
+  //console.log(req.query.username);
+  Transaction.find({type: req.params.type, username: req.query.username}, (err, docs) => {
       if(err) return console.error(err);
       res.json(docs);
+      res.status(200)
     })
 });
 
@@ -62,11 +61,12 @@ router.put("/save_transaction_data",(req, res) => {
 })
 
 router.post("/delete_transaction",(req, res) => {
-  console.log(req.body.name)
-  Transaction.deleteOne( {name: req.body.name}, (err, result)=>{
+  //console.log(req.body.data)
+  Transaction.deleteOne( {username : req.body.data.username, name: req.body.data.name}, (err, result)=>{
       if(err) return console.error(err);
       else{
-        res.redirect('http://localhost:3000/account_book');
+
+        res.redirect( 'http://localhost:3000/account_book');
         res.status(200)
       }
   })
