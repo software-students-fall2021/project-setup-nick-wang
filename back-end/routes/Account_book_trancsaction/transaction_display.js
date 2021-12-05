@@ -22,10 +22,11 @@ router.get("/Transaction_data_overview/:username", (req, res) => {
 });
 
 router.get("/Transaction_data/:type", (req, res) => {
-  console.log(req.body.username);
-  Transaction.find({type: req.params.type}, (err, docs) => {
+  //console.log(req.query.username);
+  Transaction.find({type: req.params.type, username: req.query.username}, (err, docs) => {
       if(err) return console.error(err);
       res.json(docs);
+      res.status(200)
     })
 });
 

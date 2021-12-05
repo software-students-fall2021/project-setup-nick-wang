@@ -21,7 +21,7 @@ function App() {
 
   const { type } = useParams();
   var url2;
-  const url = "http://localhost:9000/Transaction_data/" + type;
+  const url = "http://localhost:9000/Transaction_data/" + type + "?username=";
   const apiUrl = "http://localhost:9000/save_transaction_data";
   const jwtToken = localStorage.getItem("token");
 
@@ -34,7 +34,8 @@ function App() {
          .then((res) => {
             username_id = res.data.username;
             //url2 = "http://localhost:9000/delete_transaction/"+username_id;
-            console.log({username_id});
+            const url = "http://localhost:9000/Transaction_data/" + type + "?username=" + username_id; 
+            console.log(1);
              async function fetchData() {
                  const result = await axios(url)
                  console.log(url);

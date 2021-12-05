@@ -27,7 +27,7 @@ describe("Account Book Transaction Page Test", () => {
         const type = "housing"
         chai
           .request(server)
-          .get("/Transaction_data/" + type)
+          .get("/Transaction_data/" + type + "?username=nickwang")
           .end((err, response) => {
             if (err) throw err;
             response.should.have.status(200);
@@ -35,6 +35,7 @@ describe("Account Book Transaction Page Test", () => {
             response.body[0].should.have.property("date");
             response.body[0].should.have.property("amount");
             response.body[0].should.have.property("type");
+            response.body[0].should.have.property("username");
             done();
           });
       });
@@ -51,7 +52,7 @@ describe("Account Book Transaction Page Test", () => {
           .send(transac)
           .end((err, response) => {
             if (err) throw err;
-            response.should.have.status(404);
+            response.should.have.status(500);
             done();
           });
       });
