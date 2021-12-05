@@ -1,3 +1,6 @@
-.MuiBox-root{
-    margin-top: 10px;
+.BottomNav{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

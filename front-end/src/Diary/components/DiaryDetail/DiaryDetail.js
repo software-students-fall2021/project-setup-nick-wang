@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router";
 import React, { useEffect } from "react";
@@ -8,12 +8,13 @@ import "./DiaryDetail.css"
 
 export default function DiaryDetail(props) {
 
+    const { username } = useParams();
     const { date } = useParams();
     const [isEditing, setIsEditing] = React.useState(false);
     const [value, setValue] = React.useState("");
     const [unSaveValue, setUnSaveValue] = React.useState("");
 
-    const apiUrl = "http://localhost:9000/Details/" + date;
+    const apiUrl = "http://localhost:9000/Details/" + username + "/" + date;
 
     useEffect(() => {
         axios.get(apiUrl)
@@ -31,6 +32,7 @@ export default function DiaryDetail(props) {
     const handleDone = (e) =>{
         setValue(unSaveValue);
         const newDiary = {
+            username: username,
             date: date,
             content: unSaveValue,
         }
@@ -52,19 +54,21 @@ export default function DiaryDetail(props) {
             marginTop:'20px',
             height:'450px'
         }}>
-            <TextField
-                label="HOW IS YOUR DAY?"
-                variant="outlined"
-                multiline={true}
-                maxRows={10}
-                defaultValue={value}
-                value={unSaveValue}
-                fullWidth={true}
-                style={{
-                    marginTop:'auto'
-                }}
-                onChange={handleEditing}
-            />
+            <Box component="form">
+                <TextField
+                    label="HOW IS YOUR DAY?"
+                    variant="outlined"
+                    multiline={true}
+                    maxRows={10}
+                    defaultValue={value}
+                    value={unSaveValue}
+                    fullWidth={true}
+                    sx={{
+                        marginTop:'auto'
+                    }}
+                    onChange={handleEditing}
+                />
+            </Box>
         </Container>
         <Button 
          size="larger"

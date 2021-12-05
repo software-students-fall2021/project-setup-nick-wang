@@ -30,8 +30,8 @@ function App() {
           <Route path="/account_book" element={<AccountBookMain />} />
           <Route path="/account_book/:type" element={<Account_page3 />} />
           <Route path="/account_book/overview" element={<Account_page2 />} />
-          <Route path="/Diary" element={<Diary />} />
-          <Route path="/Detail/:date" element={<DiaryDetail />} />
+          <Route path="/Diary" element={<Diary tokenState={tokenState} setTokenState={setTokenState}/>} />
+          <Route path="/Detail/:username/:date" element={<DiaryDetail />} />
           <Route path="/diary_overview" element={<DiaryOverview />} />
           <Route path="/login" element={<Login tokenState={tokenState} setTokenState={setTokenState}/>} />
           <Route path="/logout" element={<Logout />} />

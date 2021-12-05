@@ -1,0 +1,26 @@
+.DiaryCards{
+    margin-top: 20px;
+    background-color: antiquewhite;
+}
+
+.DiaryCard{
+    background-color:antiquewhite;
+    width:250px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.CardAction-focusHighlight{
+    color: antiquewhite;
+}
+
+.Paragraph{
+    margin: 20px;
+    height: 220px;
+    color: black;
+}
+

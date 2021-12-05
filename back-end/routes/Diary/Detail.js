@@ -12,8 +12,8 @@ db.once('open', function() {
   // we're connected!
 });
 
-  router.get('/Details/:date',(req, res) => {
-    Diary.find({date: req.params.date}, (err, result)=>{
+  router.get('/Details/:username/:date',(req, res) => {
+    Diary.find({username:req.params.username, date: req.params.date}, (err, result)=>{
       if(err) return console.error(err);
       if(result.length === 0){
         res.json([{
@@ -27,9 +27,10 @@ db.once('open', function() {
     })
   });
   
-  router.put('/Details/:date',(req, res) => {
-    Diary.deleteMany({date: req.params.date},() =>{
+  router.put('/Details/:username/:date',(req, res) => {
+    Diary.deleteMany({username: req.params.username, date: req.params.date},() =>{
       const newDiary = new Diary({
+        username: req.params.username,
         date: req.params.date,
         content: req.body.content
       });
