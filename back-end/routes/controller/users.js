@@ -35,6 +35,7 @@ module.exports = {
     // Generate token
     const token = signToken(newUser.id);
 
+    // Create new summary data
     const initalLimit = 1000;
     const newSummary = new Summary ({
       userID: newUser.id,

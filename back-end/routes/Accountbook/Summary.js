@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Summary = require("../../models/summary");
-const transactions = require("../../models/transaction");
+const Transactions = require("../../models/transaction");
 const router = express.Router();
 
 require('dotenv').config()
@@ -9,7 +9,7 @@ mongoose.connect(process.env.DB_URL);
 mongoose.connection.on('error', err => {logError(err);});
 
 router.get('/get-monthly-spending/:username', (req, res) => {
-  transactions.aggregate([
+  Transactions.aggregate([
     {
       $match : { 
         $and : [
@@ -40,7 +40,7 @@ router.get('/get-monthly-spending/:username', (req, res) => {
 })
 
 router.get('/get-transac-data/:username', (req, res) => {
-  transactions.aggregate([
+  Transactions.aggregate([
     { $match: { username : req.params.username } },
     {
       $group: 
@@ -80,11 +80,10 @@ router.get('/get-monthly-limit/:username', (req, res) => {
 });
   
 router.put("/set-monthly-budget",(req, res) => {
-  const limit = req.body.monthlyLimit;
-    Summary.updateOne({}, {monthlyLimit: req.body.monthlyLimit}, (err, result)=>{
+    Summary.updateOne({username : req.body.username}, {monthlyLimit: req.body.monthlyLimit}, (err, result)=>{
         if(err) return console.error(err);
         else{
-            res.send(limit)
+            res.send(req.body.monthlyLimit)
             res.status(200)
         }
     })

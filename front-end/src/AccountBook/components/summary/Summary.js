@@ -4,9 +4,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function color(type) {
-    if(type == 'food') return '#E38627';
-    if(type == 'housing') return '#C13C37';
-    if(type == 'transportation') return '#6A2135';
+    if(type == 'housing') return 'orange';
+    else if(type == 'transportation') return 'green';
+    else if(type == 'food') return 'blue';
+    else if(type == 'health') return 'violet';
+    else if(type == 'utilities') return 'pink';
+    else if(type == 'miscellaneous') return 'brown';
+    else return 'yellow';
 };
 
 function Summary(props){
@@ -61,6 +65,7 @@ function Summary(props){
                     "http://localhost:9000/set-monthly-budget",
                     requestData
                 )
+                
                     
                 response.then((newVal) => {setLimit(newVal.data)})
             })
@@ -93,13 +98,13 @@ function Summary(props){
                 <Grid.Row centered columns={2}>
                     <Grid.Column>
                         <PieChart
-                        radius="30"
+                        radius="40"
                         data={data.map(item => ({
                         title: item._id,
                         value: item.totalAmount,
                         color: color(item._id),
                         }))}
-                        label={({ dataEntry }) => dataEntry.title}
+                        //label={({ dataEntry }) => dataEntry.title}
                         labelStyle={{
                         fontSize: "5px",
                         fontFamily: "Arial",
@@ -111,20 +116,20 @@ function Summary(props){
 
                     <Grid.Column>
                         <PieChart
-                        radius="35"
+                        radius="40"
                         data={[{ value: Spending, key: 1, color: "blue" }]}
                         startAngle={270}
                         reveal={ Spending/limit * 100}
                         lineWidth={30}
-                        background="grey"
+                        background="#c5d3eb"
                         lengthAngle={360}
                         rounded
                         animate
-                        label={({ dataEntry }) => '$' + dataEntry.value + ', ' + limit}
+                        label={({ dataEntry }) => '$' + dataEntry.value }
                         labelStyle={{
                             fontSize: "10px",
                             fontFamily: "Impact",
-                            fill: "grey",
+                            fill: "black",
                         }}
                         labelPosition={0}
                         />

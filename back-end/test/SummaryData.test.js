@@ -8,10 +8,10 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("Account Summary", () => {
-    describe("GET /get-monthly-limit", () => {
+    describe("GET /get-monthly-limit/admin", () => {
         it("should get a monthly limit", (done) => {
              chai.request(app)
-                 .get('/get-monthly-limit')
+                 .get('/get-monthly-limit/admin')
                  .end((err, res) => {
                      if (err) throw err;
                      res.should.have.status(200);
@@ -21,10 +21,10 @@ describe("Account Summary", () => {
          });
     });
 
-    describe("GET /get-monthly-spending", () => {
+    describe("GET /get-monthly-spending/admin", () => {
       it("should get a monthly total spending", (done) => {
            chai.request(app)
-               .get('/get-monthly-spending')
+               .get('/get-monthly-spending/admin')
                .end((err, res) => {
                    if (err) throw err;
                    res.should.have.status(200);
@@ -34,10 +34,10 @@ describe("Account Summary", () => {
       });
     });
 
-    describe("GET /get-transac-data", () => {
+    describe("GET /get-transac-data/admin", () => {
       it("should get transactions data", (done) => {
            chai.request(app)
-               .get('/get-transac-data')
+               .get('/get-transac-data/admin')
                .end((err, res) => {
                    if (err) throw err;
                    res.should.have.status(200);
