@@ -20,19 +20,24 @@ function App() {
   const history = useNavigate();
 
   const { type } = useParams();
+  var url2;
   const url = "http://localhost:9000/Transaction_data/" + type;
   const apiUrl = "http://localhost:9000/save_transaction_data";
   const jwtToken = localStorage.getItem("token");
 
+  var username_id;
   useEffect(() => {
     axios
          .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
              headers: { authorization: jwtToken }, // pass the token, if any, to the server
          })
          .then((res) => {
-
+            username_id = res.data.username;
+            //url2 = "http://localhost:9000/delete_transaction/"+username_id;
+            console.log({username_id});
              async function fetchData() {
                  const result = await axios(url)
+                 console.log(url);
                  setData(result.data)
              }
              fetchData()
@@ -106,6 +111,62 @@ function App() {
     return selectedData;
   };
 
+  //const [statusSubmit, setStatusSubmit] = useState(false)
+    //const [statusAdd, setStatusAdd] = useState({})
+
+    const handleSubmitDelete = async e => {
+      // prevent html form from submiting and reloading
+      e.preventDefault()
+      axios
+         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+             headers: { authorization: jwtToken }, // pass the token, if any, to the server
+         })
+         .then((res) => {
+            username_id = res.data.username;
+            const data = {
+              username: username_id,
+              name: e.target.name.value,
+            }
+            const response = axios.post('http://localhost:9000/delete_transaction',
+              {data}
+            )
+            async function fetchData() {
+              const result = await axios(url)
+              setData(result.data)
+          }
+          fetchData()
+            /*
+            .then(function (response) {
+              if (response.data.redirect == 'http://localhost:3000/account_book') {
+                  window.location = "http://localhost:3000/account_book"
+              } else if (response.data.redirect == 'http://localhost:3000/account_book'){
+                  window.location = "http://localhost:3000/account_book"
+              }
+          })
+            */
+         })
+         
+  
+
+        // // send a post request to the server
+        // const requestData = {
+        //   trscName: e.target.trscName.value,
+        //   trscAmount: e.target.trscAmount.value,
+        //   trscType: e.target.trscType.value,
+        // }
+        // const response = await axios.post(
+        //   "http://localhost:9000/post-add",
+        //   requestData
+        //   )
+          
+          // console.log(response.data)
+          // setStatusAdd(response.data)
+          // setStatusSubmit(true)
+
+       
+      
+    }
+
 	return (
     
     <div >
@@ -128,8 +189,12 @@ function App() {
       </div>
       <div>
       <Grid.Column>
-      <Form text-align="center" action="http://localhost:9000/delete_transaction" method="post">
-            <Form.Input type="text" id = "name" name="name" placeholder="Name of transation"></Form.Input>
+      <Form text-align="center" onSubmit={handleSubmitDelete}>
+            <Form.Input type="text" 
+            id = "name" 
+            name="name"
+            placeholder="Name of transation">
+            </Form.Input>
             <Button type="submit" content="Delete"/>
           </Form>
           </Grid.Column>

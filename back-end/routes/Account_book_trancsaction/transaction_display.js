@@ -12,8 +12,8 @@ db.once('open', function() {
   // we're connected!
 });
 
-router.get("/Transaction_data/:username", (req, res) => {
-    console.log(req.params.username);
+router.get("/Transaction_data_overview/:username", (req, res) => {
+    //console.log(req.params.username);
     Transaction.find({username : req.params.username}, (err, docs) => {
         if(err) return console.error(err);
         res.json(docs);
@@ -23,7 +23,7 @@ router.get("/Transaction_data/:username", (req, res) => {
 
 router.get("/Transaction_data/:type", (req, res) => {
   console.log(req.body.username);
-  Transaction.find({username : req.body.username, type: req.params.type}, (err, docs) => {
+  Transaction.find({type: req.params.type}, (err, docs) => {
       if(err) return console.error(err);
       res.json(docs);
     })
@@ -60,11 +60,12 @@ router.put("/save_transaction_data",(req, res) => {
 })
 
 router.post("/delete_transaction",(req, res) => {
-  console.log(req.body.name)
-  Transaction.deleteOne( {username : req.body.username, name: req.body.name}, (err, result)=>{
+  //console.log(req.body.data)
+  Transaction.deleteOne( {username : req.body.data.username, name: req.body.data.name}, (err, result)=>{
       if(err) return console.error(err);
       else{
-        res.redirect('http://localhost:3000/account_book');
+
+        res.redirect( 'http://localhost:3000/account_book');
         res.status(200)
       }
   })

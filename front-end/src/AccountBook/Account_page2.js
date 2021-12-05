@@ -21,7 +21,7 @@ function App() {
              headers: { authorization: jwtToken }, // pass the token, if any, to the server
          })
          .then((res) => {
-          const url = 'http://localhost:9000/transaction_data/' +res.data.username;
+          const url = 'http://localhost:9000/Transaction_data_overview/' +res.data.username;
           //console.log(res.data.username)
              async function fetchData() {
                  const result = await axios(url)
