@@ -115,7 +115,7 @@ const Signup = (props) => {
                 />
 
                 <Button color="teal" fluid size="large" type="submit">
-                  Login
+                  Signup
                 </Button>
               </Segment>
             </Form>
