@@ -12,17 +12,15 @@ import './BottomNav.css';
 const BottomNav = (props) => {
     const [value, setValue] = React.useState(0);
     return(
-        <div className="navBox">
-        <Box sx={{ position:'fixed', bottom: 0, left: 0, right: 0}}>
+        <Box className="BottomNav">
             <BottomNavigation
                 showLabels
                 value={value}
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}
-                sx={{height:'70px'}}
             >
-                <Box sx={{marginTop:'10px'}}>
+                <Box>
                     <BasicDatePicker pickedDate={props.pickedDate} setPickedDate={props.setPickedDate}></BasicDatePicker>
                 </Box>
                 <BottomNavigationAction label="Search" icon={<SearchIcon />} />
@@ -30,7 +28,6 @@ const BottomNav = (props) => {
                 <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
             </BottomNavigation>
         </Box>
-        </div>
     )
 }
 
