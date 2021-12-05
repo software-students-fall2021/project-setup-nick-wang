@@ -84,7 +84,6 @@ const transactionSchema = new mongoose.Schema({
 
 const Transaction = mongoose.model('Transactions', transactionSchema);
 
-
 let userNameForSearch;
 // get recent transactions from db and sent them back to front-end
 app.post("/recent-trsc", (req, res) => {
