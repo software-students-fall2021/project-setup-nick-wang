@@ -13,6 +13,10 @@ import {
 } from "semantic-ui-react";
 
 const Home = (props) => {
+
+  const date = new Date();
+  const month = parseInt(date.getMonth()) + 1;
+  const diaryAPI = "/Diary" + "/" + month + "/" + date.getFullYear();
   return (
     <>
       <Container as={Link} to="/" className="AppLogo" text>
@@ -28,7 +32,7 @@ const Home = (props) => {
           <Divider vertical>Or</Divider>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-              <Header icon as={Link} to="/Diary">
+              <Header icon as={Link} to={diaryAPI}>
                 <Icon name="pencil alternate" />
                 Diary
               </Header>

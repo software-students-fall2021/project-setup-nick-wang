@@ -13,8 +13,13 @@ export default function DiaryDetail(props) {
     const [isEditing, setIsEditing] = React.useState(false);
     const [value, setValue] = React.useState("");
     const [unSaveValue, setUnSaveValue] = React.useState("");
+    
 
     const apiUrl = "http://localhost:9000/Details/" + username + "/" + date;
+    const month = date.substring(0, date.indexOf("-"));
+    const year = date.substring(date.length, date.length - 4);
+    const lastDairies = "/Diary/" + month + "/" + year;
+    console.log(lastDairies);
 
     useEffect(() => {
         axios.get(apiUrl)
@@ -45,7 +50,7 @@ export default function DiaryDetail(props) {
     if(isEditing){
     return (
         <div className="DiaryDetail">
-        <Button className="button1" href="/Diary">
+        <Button className="button1" href={lastDairies}>
             BACK
         </Button>
         <Container sx={{ 
@@ -89,7 +94,7 @@ export default function DiaryDetail(props) {
     }
     return (
         <div className="DiaryDetail">
-            <Button variant='contained' href="/Diary"
+            <Button variant='contained' href={lastDairies}
                     sx={{
                         backgroundColor:'lightskyblue',
                         marginTop:'20px',
