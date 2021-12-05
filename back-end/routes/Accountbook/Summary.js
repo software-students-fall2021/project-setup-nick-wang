@@ -8,12 +8,15 @@ require('dotenv').config()
 mongoose.connect(process.env.DB_URL);
 mongoose.connection.on('error', err => {logError(err);});
 
-router.get('/get-monthly-spending', (req, res) => {
+router.get('/get-monthly-spending/:username', (req, res) => {
   transactions.aggregate([
     {
       $match : { 
-        $expr: { $eq: [ { "$month": "$date" }, { "$month": new Date() } ] },
-        $expr: { $eq: [ { "$year": "$date" }, { "$year": new Date() } ] }
+        $and : [
+          { username : req.params.username},
+          { $expr: { $eq: [ { "$month": "$date" }, { "$month": new Date() } ] } },
+          { $expr: { $eq: [ { "$year": "$date" }, { "$year": new Date() } ] } }
+        ]
       }
     },
     {
@@ -22,9 +25,6 @@ router.get('/get-monthly-spending', (req, res) => {
         _id: {$month: "$date"}, 
         monthlySpending: { $sum: "$amount" } 
       }
-    },
-    {
-      $sort: {_id: -1}
     }], (err, result) => {
       if(err) return console.error(err);
       if(result.length === 0){
@@ -39,8 +39,9 @@ router.get('/get-monthly-spending', (req, res) => {
     });
 })
 
-router.get('/get-transac-data', (req, res) => {
+router.get('/get-transac-data/:username', (req, res) => {
   transactions.aggregate([
+    { $match: { username : req.params.username } },
     {
       $group: 
       {
@@ -63,8 +64,8 @@ router.get('/get-transac-data', (req, res) => {
     });
 })
 
-router.get('/get-monthly-limit', (req, res) => {
-    Summary.find({}, (err, result) => {
+router.get('/get-monthly-limit/:username', (req, res) => {
+    Summary.find({username : req.params.username}, (err, result) => {
         if(err) return console.error(err);
         if(result.length === 0){
           res.json([{
@@ -79,44 +80,15 @@ router.get('/get-monthly-limit', (req, res) => {
 });
   
 router.put("/set-monthly-budget",(req, res) => {
+  const limit = req.body.monthlyLimit;
     Summary.updateOne({}, {monthlyLimit: req.body.monthlyLimit}, (err, result)=>{
         if(err) return console.error(err);
         else{
-            res.send(req.body.monthlyLimit)
+            res.send(limit)
             res.status(200)
         }
     })
 
 })
-
-
-/*
-router.get('/:username/get-monthly-budget', (req, res) => {
-    summary.find({username: req.params.username}, (err, result)=>{
-        if(err) return console.error(err);
-        if(result.length === 0){
-          res.json([{
-            monthlyLimit: 0,
-            monthlySpending: 0
-          }])
-        }
-        else{
-          res.json(result);
-          res.status(200)
-        }
-    })
-});
-  
-router.post("/:username/set-monthly-budget",(req, res) => {
-    summary.updateOne({username: req.params.username}, {monthlyLimit: req.body.amount}, (err, result)=>{
-        if(err) return console.error(err);
-        else{
-            res.redirect('http://localhost:3000/account_book');
-            res.status(200)
-        }
-    })
-
-})
-*/
 
 module.exports = router

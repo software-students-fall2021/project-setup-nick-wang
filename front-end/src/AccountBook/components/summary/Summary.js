@@ -10,38 +10,66 @@ function color(type) {
 };
 
 function Summary(props){
+    const jwtToken = localStorage.getItem("token");
+
     const [data, setData] = useState([])
     const [limit, setLimit] = useState(0)
     const [Spending, setSpending] = useState(0)
 
     useEffect(() => {
-        async function fetchData() {
-            const result = await axios("http://localhost:9000/get-transac-data")
-            setData(result.data)
+        axios
+        .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+            headers: { authorization: jwtToken }, // pass the token, if any, to the server
+        })
+        .then((res) => {
+            
+            async function fetchData() {
+                const result = await axios("http://localhost:9000/get-transac-data/" + res.data.username)
+                setData(result.data)
               
-            const result1 = await axios('http://localhost:9000/get-monthly-limit')
-            setLimit(result1.data.monthlyLimit)
+                const result1 = await axios('http://localhost:9000/get-monthly-limit/' + res.data.username)
+                setLimit(result1.data.monthlyLimit)
 
-            const result2 = await axios('http://localhost:9000/get-monthly-spending')
-            setSpending(result2.data.monthlySpending)
-        }
-        fetchData()
+                const result2 = await axios('http://localhost:9000/get-monthly-spending/' + res.data.username)
+                setSpending(result2.data.monthlySpending)
+            }
+            fetchData()
+        })
+        .catch((err) => {
+            console.log(
+            "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+            )
+        })
+
     }, [])
 
     const handleSubmit = async e => {
         e.preventDefault();
         
         try {
-            const requestData = {
-                monthlyLimit: e.target.amount.value
-            }
-            
-            const response = await axios.put(
-                "http://localhost:9000/set-monthly-budget",
-                requestData
-            )
+            axios
+            .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+              headers: { authorization: jwtToken }, // pass the token, if any, to the server
+            })
+            .then((res) => {
+                const requestData = {
+                    username: res.data.username,
+                    monthlyLimit: e.target.amount.value
+                }
                 
-            setLimit(response.data)
+                const response = axios.put(
+                    "http://localhost:9000/set-monthly-budget",
+                    requestData
+                )
+                    
+                response.then((newVal) => {setLimit(newVal.data)})
+            })
+            .catch((err) => {
+                console.log(
+                  "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+                )
+            })
+
         } catch (err) {
           // throw an error
           throw new Error(err)
@@ -92,7 +120,7 @@ function Summary(props){
                         lengthAngle={360}
                         rounded
                         animate
-                        label={({ dataEntry }) => '$' + dataEntry.value}
+                        label={({ dataEntry }) => '$' + dataEntry.value + ', ' + limit}
                         labelStyle={{
                             fontSize: "10px",
                             fontFamily: "Impact",

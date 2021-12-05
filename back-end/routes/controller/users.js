@@ -1,5 +1,7 @@
 const JWT = require('jsonwebtoken');
 const User = require('../../models/user');
+const Summary = require('../../models/summary');
+
 
 signToken = (user) => {
   return JWT.sign(
@@ -32,6 +34,15 @@ module.exports = {
 
     // Generate token
     const token = signToken(newUser.id);
+
+    const initalLimit = 1000;
+    const newSummary = new Summary ({
+      userID: newUser.id,
+      username: username,
+      monthlyLimit: initalLimit
+    });
+    
+    await newSummary.save().then();
 
     // Respond with token
     // res.json({ user: "Created!" });

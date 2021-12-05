@@ -76,7 +76,6 @@ db.once('open', function() {
 
 const transactionSchema = new mongoose.Schema({
   username: String,
-
   name: String,
   date: Date,
   amount: Number,
@@ -84,7 +83,6 @@ const transactionSchema = new mongoose.Schema({
 });
 
 const Transaction = mongoose.model('Transactions', transactionSchema);
-
 
 let userNameForSearch;
 // get recent transactions from db and sent them back to front-end
