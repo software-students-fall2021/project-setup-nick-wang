@@ -6,11 +6,10 @@ import "./DiaryStack.css";
 export default function DiaryStack(props) {
     
     let diaries = []
-    const numOfDates = monthToNumOfDates(props.pickedDate);
-    const year = props.pickedDate.getYear() + 1900;
-    const month = props.pickedDate.getMonth() + 1;
+    const year = props.pickedYear;
+    const month = props.pickedMonth;
+    const numOfDates = monthToNumOfDates(parseInt(year), parseInt(month) - 1);
     const username = props.username;
-    //console.log(userName);
 
     let diariesContent = []
     for(var i = 0; i < numOfDates; i++){
@@ -53,16 +52,14 @@ export default function DiaryStack(props) {
     );
 }
 
-const monthToNumOfDates = (date) => { 
-    const year = date.getYear()
-    const month = date.getMonth()
+function monthToNumOfDates(selectedYear, selectedMonth){ 
     const numOfDates = [31, 28, 31, 30,31,30,31,31,30,31,30,31];
     let result = 0;
-    if(year % 4 != 0 ){
-        result = numOfDates[month]
+    if(selectedYear % 4 != 0 ){
+        result = numOfDates[selectedMonth]
     }
     else{
-        if(month != 1) result = numOfDates[month]
+        if(selectedMonth != 1) result = numOfDates[selectedMonth]
         else
             result = 29
     }

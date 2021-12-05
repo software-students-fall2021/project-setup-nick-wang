@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useParams } from "react-router";
 import DiaryStack from './components/DiaryStack/DiaryStack'
 import { Link } from "react-router-dom";
 import BottomNav from './components/BottomNav/BottomNav'
@@ -10,10 +11,13 @@ import { Menu } from '@mui/material';
 
 const Diary = (props) => {
 
+    const { month } = useParams();
+    const { year } = useParams();
     const tokenState = props.tokenState;
     const jwtToken = localStorage.getItem("token");
     const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    //console.log(date);
 
 
     React.useEffect(() => {
@@ -37,8 +41,11 @@ const Diary = (props) => {
           });
       }, [tokenState]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const [pickedDate, setPickedDate] = useState(new Date());
+    const tempMonth = parseInt(month) - 1;
+    const [pickedDate, setPickedDate] = useState(new Date(year , tempMonth));
+    //console.log(pickedDate);
     const [username, setUsername] = useState("");
+    const diaryAPI = "/Diary" + "/" + month + "/" + year;
 
     const handleLogout = (e) => {
         setIsLoggedIn(false);
@@ -48,7 +55,7 @@ const Diary = (props) => {
       <>
       <Menu fixed="top">
         <Container>
-          <Menu.Item as={Link} to="/Diary" header>
+          <Menu.Item as={Link} to={diaryAPI} header>
             LifeNote
           </Menu.Item>
             {isLoggedIn ? (
@@ -72,7 +79,7 @@ const Diary = (props) => {
             )}
         </Container>
       </Menu>
-      <DiaryStack pickedDate={pickedDate} username={username}></DiaryStack>    
+      <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>    
       <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
     </>
     )
