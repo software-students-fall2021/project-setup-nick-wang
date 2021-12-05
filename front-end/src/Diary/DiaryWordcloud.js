@@ -72,6 +72,14 @@ const DiaryOverview = (props) => {
   useEffect(() => {
     // console.log("Select Year: " + year);
     // console.log("Select Month: " + month);
+    axios
+      .get(`${process.env.REACT_APP_BACKEND}/overview/yearlist`)
+      .then((res) => {
+        setYearList(res.data);
+      })
+      .catch((e) => {
+        setYearList([]);
+      });
     if (!yearList.length) {
       setYearJsonList(getYear(testYear));
     } else {
@@ -79,7 +87,7 @@ const DiaryOverview = (props) => {
     }
     if (!year) {
       axios
-        .get("http://localhost:9000/diary/word-cloud")
+        .get(`${process.env.REACT_APP_BACKEND}/diary/word-cloud`)
         .then((res) => {
           setWordCloud(res.data);
         })
@@ -88,7 +96,7 @@ const DiaryOverview = (props) => {
         });
     } else if (!month) {
       axios
-        .get("http://localhost:9000/overview/" + year)
+        .get(`${process.env.REACT_APP_BACKEND}/overview/${year}`)
         .then((res) => {
           const word_count = res.data;
           let word_clean = removeST(word_count);
@@ -100,7 +108,7 @@ const DiaryOverview = (props) => {
         });
     } else {
       axios
-        .get("http://localhost:9000/overview/" + month + "/" + year)
+        .get(`${process.env.REACT_APP_BACKEND}/overview/${month}/${year}`)
         .then((res) => {
           const word_count = res.data;
           let word_clean = removeST(word_count);
