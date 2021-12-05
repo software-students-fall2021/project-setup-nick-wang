@@ -22,8 +22,27 @@ function App() {
   const { type } = useParams();
   const url = "http://localhost:9000/Transaction_data/" + type;
   const apiUrl = "http://localhost:9000/save_transaction_data";
+  const jwtToken = localStorage.getItem("token");
 
   useEffect(() => {
+    axios
+         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+             headers: { authorization: jwtToken }, // pass the token, if any, to the server
+         })
+         .then((res) => {
+
+             async function fetchData() {
+                 const result = await axios(url)
+                 setData(result.data)
+             }
+             fetchData()
+         })
+         .catch((err) => {
+             console.log(
+             "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+             )
+         })
+    /*
     // a nested function that fetches the data
     async function fetchData() {
       // axios is a 3rd-party module for fetching data from servers
@@ -41,6 +60,7 @@ function App() {
     fetchData();
     
     // the blank array below causes this callback to be executed only once on component load
+    */
   }, []);
 
 
@@ -57,9 +77,14 @@ function App() {
         "http://localhost:9000/delete_transaction",
         requestData
       )
-
-      console.log(response.data)
-      console.log("new search made")
+      const jwtToken = localStorage.getItem("token");
+      axios
+         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+           headers: { authorization: jwtToken }, // pass the token, if any, to the server
+         })
+      console.log(jwtToken)
+      //console.log(response.data)
+      //console.log("new search made")
     
     } catch (err) {
       // throw an error

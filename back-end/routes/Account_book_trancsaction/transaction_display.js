@@ -12,20 +12,18 @@ db.once('open', function() {
   // we're connected!
 });
 
-Transaction.deleteMany({ type: '' }, function (err) {
-  if(err) console.log(err);
-  //console.log("Successful deletion");
-});
-
-router.get("/Transaction_data", (req, res) => {
-    Transaction.find({}, (err, docs) => {
+router.get("/Transaction_data/:username", (req, res) => {
+    console.log(req.params.username);
+    Transaction.find({username : req.params.username}, (err, docs) => {
         if(err) return console.error(err);
         res.json(docs);
+        res.status(200);
       })
 });
 
 router.get("/Transaction_data/:type", (req, res) => {
-  Transaction.find({type: req.params.type}, (err, docs) => {
+  console.log(req.body.username);
+  Transaction.find({username : req.body.username, type: req.params.type}, (err, docs) => {
       if(err) return console.error(err);
       res.json(docs);
     })
@@ -63,7 +61,7 @@ router.put("/save_transaction_data",(req, res) => {
 
 router.post("/delete_transaction",(req, res) => {
   console.log(req.body.name)
-  Transaction.deleteOne( {name: req.body.name}, (err, result)=>{
+  Transaction.deleteOne( {username : req.body.username, name: req.body.name}, (err, result)=>{
       if(err) return console.error(err);
       else{
         res.redirect('http://localhost:3000/account_book');
