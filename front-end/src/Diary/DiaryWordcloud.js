@@ -6,14 +6,7 @@ import "./DiaryWordcloud.css";
 import { Container, Dropdown, Button } from "semantic-ui-react";
 import wordList from "./stopword.json";
 
-const testYear = [
-  { key: 2016, text: 2016, value: 2016 },
-  { key: 2017, text: 2017, value: 2017 },
-  { key: 2018, text: 2018, value: 2018 },
-  { key: 2019, text: 2019, value: 2019 },
-  { key: 2020, text: 2020, value: 2020 },
-  { key: 2021, text: 2021, value: 2021 },
-];
+const testYear = [2016, 2017, 2018, 2019, 2020, 2021];
 
 const testMonth = [
   { key: 0, text: 0, value: 0 },
@@ -50,7 +43,23 @@ const DiaryOverview = (props) => {
     return json_array.slice().sort((a, b) => b.value - a.value);
   }
 
+  function getYear(yearList) {
+    let yearJson = { key: 0, text: 0, value: 0 };
+    let yearJsonList = [];
+    yearList.forEach(function (year) {
+      yearJson.key = year;
+      yearJson.text = year;
+      yearJson.value = year;
+      yearJsonList.push(Object.assign({}, yearJson));
+    });
+    return yearJsonList;
+  }
+
   const [wordCloud, setWordCloud] = useState([]);
+
+  const [yearList, setYearList] = useState([]);
+
+  const [yearJsonList, setYearJsonList] = useState([]);
 
   const [year, setYear] = useState(0);
 
@@ -61,8 +70,13 @@ const DiaryOverview = (props) => {
   const handleMonth = (e, { value }) => setMonth(value);
 
   useEffect(() => {
-    console.log("Select Year: " + year);
-    console.log("Select Month: " + month);
+    // console.log("Select Year: " + year);
+    // console.log("Select Month: " + month);
+    if (!yearList.length) {
+      setYearJsonList(getYear(testYear));
+    } else {
+      setYearJsonList(getYear(yearList));
+    }
     if (!year) {
       axios
         .get("http://localhost:9000/diary/word-cloud")
@@ -77,7 +91,7 @@ const DiaryOverview = (props) => {
         .get("http://localhost:9000/overview/" + year)
         .then((res) => {
           const word_count = res.data;
-          let word_clean = removeST(word_count)
+          let word_clean = removeST(word_count);
           sortByCount(word_clean);
           setWordCloud(word_clean.slice(0, 50));
         })
@@ -89,7 +103,7 @@ const DiaryOverview = (props) => {
         .get("http://localhost:9000/overview/" + month + "/" + year)
         .then((res) => {
           const word_count = res.data;
-          let word_clean = removeST(word_count)
+          let word_clean = removeST(word_count);
           sortByCount(word_clean);
           setWordCloud(word_clean.slice(0, 50));
         })
@@ -131,7 +145,7 @@ const DiaryOverview = (props) => {
           placeholder="Year"
           search
           selection
-          options={testYear}
+          options={yearJsonList}
         />
         <Dropdown
           onChange={handleMonth}
