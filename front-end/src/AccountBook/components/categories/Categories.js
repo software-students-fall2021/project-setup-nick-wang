@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Header , Button, Container, Grid, Segment } from "semantic-ui-react"
+import { Header , Button, Segment } from "semantic-ui-react"
 
 
 function Categories(props){

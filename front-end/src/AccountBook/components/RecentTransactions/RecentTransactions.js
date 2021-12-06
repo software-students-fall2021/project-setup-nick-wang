@@ -24,7 +24,7 @@ function RecentTransactions(props){
       .then((res) => {
         console.log(res.data);
         async function fetchData() {
-            const result = await axios.post("http://localhost:9000/recent-trsc", res.data)
+            const result = await axios.post("/recent-trsc", res.data)
             setData(result.data)
         }
         fetchData()
