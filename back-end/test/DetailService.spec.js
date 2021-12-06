@@ -22,7 +22,7 @@ describe("API Test", () => {
           response.body[0].should.have.property("date").eq("12-1-2021");
           response.body[0].should.have
             .property("content")
-            .eq("12345");
+            .eq("");
           done();
         });
     });
