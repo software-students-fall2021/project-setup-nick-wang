@@ -28,7 +28,7 @@ function App() {
   var username_id;
   useEffect(() => {
     axios
-         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+         .get(`/users/secret`, {
              headers: { authorization: jwtToken }, // pass the token, if any, to the server
          })
          .then((res) => {
@@ -85,7 +85,7 @@ function App() {
       )
       const jwtToken = localStorage.getItem("token");
       axios
-         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+         .get(`/users/secret`, {
            headers: { authorization: jwtToken }, // pass the token, if any, to the server
          })
       console.log(jwtToken)
@@ -119,7 +119,7 @@ function App() {
       // prevent html form from submiting and reloading
       e.preventDefault()
       axios
-         .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+         .get(`/users/secret`, {
              headers: { authorization: jwtToken }, // pass the token, if any, to the server
          })
          .then((res) => {
