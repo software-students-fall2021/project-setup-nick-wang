@@ -53,7 +53,7 @@ const Login = (props) => {
       };
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/users/signin`,
+        `/users/signin`,
         requestData
       );
       // store the response data into the data state variable

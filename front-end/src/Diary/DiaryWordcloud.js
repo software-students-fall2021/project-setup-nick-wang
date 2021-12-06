@@ -80,14 +80,14 @@ const DiaryOverview = (props) => {
     // console.log("Select Year: " + year);
     // console.log("Select Month: " + month)
     axios
-      .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+      .get(`/users/secret`, {
         headers: { authorization: jwtToken }, // pass the token, if any, to the server
       })
       .then((res) => {
         const username = res.data.username;
         // console.log("Username: " + username);
         axios
-          .get(`${process.env.REACT_APP_BACKEND}/overview/yearlist/${username}`)
+          .get(`/overview/yearlist/${username}`)
           .then((res) => {
             setYearList(res.data);
           })
@@ -101,7 +101,7 @@ const DiaryOverview = (props) => {
         }
         if (!year) {
           axios
-            .get(`${process.env.REACT_APP_BACKEND}/diary/word-cloud`)
+            .get(`/diary/word-cloud`)
             .then((res) => {
               setWordCloud(res.data);
             })
@@ -111,7 +111,7 @@ const DiaryOverview = (props) => {
         } else if (!month) {
           axios
             .get(
-              `${process.env.REACT_APP_BACKEND}/overview/${username}/${year}`
+              `/overview/${username}/${year}`
             )
             .then((res) => {
               const word_count = res.data;
@@ -125,7 +125,7 @@ const DiaryOverview = (props) => {
         } else {
           axios
             .get(
-              `${process.env.REACT_APP_BACKEND}/overview/${username}/${month}/${year}`
+              `/overview/${username}/${month}/${year}`
             )
             .then((res) => {
               const word_count = res.data;
