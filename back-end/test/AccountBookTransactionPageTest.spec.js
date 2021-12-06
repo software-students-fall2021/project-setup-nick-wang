@@ -43,16 +43,17 @@ describe("Account Book Transaction Page Test", () => {
 
     describe("Post /delete_transaction", () => {
       it("It should delete transaction data", (done) => {
-        const transac = {
+        const data = {
           name: "steak",
+          username: "nickwang",
       }
         chai
           .request(server)
           .post("/delete_transaction")
-          .send(transac)
+          .send({data})
           .end((err, response) => {
             if (err) throw err;
-            response.should.have.status(500);
+            response.should.have.status(404);
             done();
           });
       });
