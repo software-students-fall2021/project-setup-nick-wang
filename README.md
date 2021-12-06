@@ -1,7 +1,7 @@
 # Life Note
 
 # Live URL
-http://162.243.168.215:9000/
+http://162.243.168.215:3000/
 # Description of project
 The project Life Notes is a web app the helps people to take four main types of records of their life altogether in one app, and also provides visualization and some intelligence features.
 
