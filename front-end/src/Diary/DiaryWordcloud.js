@@ -3,7 +3,14 @@ import ReactWordcloud from "react-wordcloud";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./DiaryWordcloud.css";
-import { Container, Dropdown, Button } from "semantic-ui-react";
+import {
+  Container,
+  Dropdown,
+  Button,
+  Dimmer,
+  Loader,
+  Image,
+} from "semantic-ui-react";
 import wordList from "./stopword.json";
 import { Navigate } from "react-router-dom";
 
@@ -76,6 +83,8 @@ const DiaryOverview = (props) => {
 
   const jwtToken = localStorage.getItem("token");
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     // console.log("Select Year: " + year);
     // console.log("Select Month: " + month)
@@ -84,6 +93,7 @@ const DiaryOverview = (props) => {
         headers: { authorization: jwtToken }, // pass the token, if any, to the server
       })
       .then((res) => {
+        setIsLoggedIn(true);
         const username = res.data.username;
         // console.log("Username: " + username);
         axios
@@ -110,9 +120,7 @@ const DiaryOverview = (props) => {
             });
         } else if (!month) {
           axios
-            .get(
-              `/overview/${username}/${year}`
-            )
+            .get(`/overview/${username}/${year}`)
             .then((res) => {
               const word_count = res.data;
               let word_clean = removeST(word_count);
@@ -124,9 +132,7 @@ const DiaryOverview = (props) => {
             });
         } else {
           axios
-            .get(
-              `/overview/${username}/${month}/${year}`
-            )
+            .get(`/overview/${username}/${month}/${year}`)
             .then((res) => {
               const word_count = res.data;
               let word_clean = removeST(word_count);
@@ -142,7 +148,9 @@ const DiaryOverview = (props) => {
         console.log(
           "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
         );
+        setIsLoggedIn(false);
       });
+    console.log("isLoggedIn" + isLoggedIn);
     // console.log(wordCloud)
   }, [year, month]);
 
@@ -152,44 +160,55 @@ const DiaryOverview = (props) => {
     rotations: 3,
     rotationAngles: [0, 90],
   };
-
-  return (
-    <>
-      <div id="Back">
-        <Container>
-          <Button
-            as={Link}
-            to={diaryAPI}
-            content="Back"
-            icon="left arrow"
-            labelPosition="left"
+  if (isLoggedIn) {
+    return (
+      <>
+        <div id="Back">
+          <Container>
+            <Button
+              as={Link}
+              to={diaryAPI}
+              content="Back"
+              icon="left arrow"
+              labelPosition="left"
+            />
+          </Container>
+        </div>
+        <div id="WordCloud">
+          <Container fluid text textAlign="center">
+            <ReactWordcloud words={wordCloud} options={options} />
+          </Container>
+        </div>
+        <Container text textAlign="center">
+          <Dropdown
+            onChange={handleYear}
+            placeholder="Year"
+            search
+            selection
+            options={yearJsonList}
           />
+          <Dropdown
+            onChange={handleMonth}
+            placeholder="Month"
+            search
+            selection
+            options={testMonth}
+          />
+          {}
         </Container>
-      </div>
-      <div id="WordCloud">
-        <Container fluid text textAlign="center">
-          <ReactWordcloud words={wordCloud} options={options} />
-        </Container>
-      </div>
-      <Container text textAlign="center">
-        <Dropdown
-          onChange={handleYear}
-          placeholder="Year"
-          search
-          selection
-          options={yearJsonList}
-        />
-        <Dropdown
-          onChange={handleMonth}
-          placeholder="Month"
-          search
-          selection
-          options={testMonth}
-        />
-        {}
-      </Container>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Dimmer active inverted>
+          <Loader size="large">Loading</Loader>
+        </Dimmer>
+
+        {/* <Image src="/images/wireframe/paragraph.png" /> */}
+      </>
+    );
+  }
 };
 
 export default DiaryOverview;
