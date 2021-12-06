@@ -11,6 +11,7 @@ import Footer from "./components/footer/footer"
 import "./AccountBookMain.css"
 
 function AccountBookMain() {
+  const [statusAdd, setStatusAdd] = useState(false)
   return (
     <body>
       <h1/>
@@ -24,12 +25,12 @@ function AccountBookMain() {
           <Grid.Row verticalAlign='middle'>
             <Grid.Column><Search/></Grid.Column>
             
-            <Grid.Column><Add/></Grid.Column>
+            <Grid.Column><Add setStatus={setStatusAdd} status={statusAdd}/></Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
 
-      <RecentTransactions/>
+      <RecentTransactions status={statusAdd}/>
 
       <Summary/>
 

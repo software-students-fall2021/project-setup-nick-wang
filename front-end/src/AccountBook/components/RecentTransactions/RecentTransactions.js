@@ -43,7 +43,7 @@ function RecentTransactions(props){
         //     setData(result.data)
         // }
         // fetchData()
-    }, [])
+    }, [props.status])
 
     return(
         <Segment textAlign='center'>
