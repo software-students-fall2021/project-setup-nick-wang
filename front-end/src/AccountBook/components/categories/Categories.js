@@ -15,15 +15,15 @@ function Categories(props){
             Transportation
             </Button>
 
-            <Button color='blue' as={Link} to="/account_book/Food">
+            <Button color='blue' as={Link} to="/account_book/food">
             Food
             </Button>
 
-            <Button color='violet' as={Link} to="/account_book/Health">
+            <Button color='violet' as={Link} to="/account_book/health">
             Health
             </Button>
 
-            <Button color='pink' as={Link} to="/account_book/Utilities">
+            <Button color='pink' as={Link} to="/account_book/utilities">
             Utilities    
             </Button>
 

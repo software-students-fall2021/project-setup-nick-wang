@@ -131,11 +131,13 @@ function App() {
             const response = axios.post('http://localhost:9000/delete_transaction',
               {data}
             )
+            var url3 =  "http://localhost:9000/Transaction_data/" + type + "?username=" +username_id;
             async function fetchData() {
-              const result = await axios(url)
+              const result = await axios(url3)
               setData(result.data)
           }
           fetchData()
+          console.log(data);
             /*
             .then(function (response) {
               if (response.data.redirect == 'http://localhost:3000/account_book') {
