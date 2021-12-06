@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import { CardActionArea } from '@mui/material';
 import { Typography } from '@mui/material';
@@ -8,15 +8,17 @@ import './DiaryCard.css';
 
 export default function DiaryCards(props){
 
-    const [content, setContent] = React.useState("");
+    const [content, setContent] = useState("");
+    const [username, setUsername] = useState(props.username);
 
     const completeDate = props.username + "/" +  props.month + "-" + props.date + "-" + props.year;
     const apiUrl = "/Details/" + completeDate;
 
     useEffect(() => {
+        setUsername(props.username);
         axios.get(apiUrl)
         .then((response) => {setContent(response.data[0].content)})
-    });
+    },[props.username]);
     
     return(
         <Card className="DiaryCard" fullWidth={true} sx={{backgroundColor: 'antiquewhite'}}>
