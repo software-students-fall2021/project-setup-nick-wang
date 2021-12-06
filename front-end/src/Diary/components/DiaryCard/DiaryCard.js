@@ -11,7 +11,7 @@ export default function DiaryCards(props){
     const [content, setContent] = React.useState("");
 
     const completeDate = props.username + "/" +  props.month + "-" + props.date + "-" + props.year;
-    const apiUrl = "http://localhost:9000/Details/" + completeDate;
+    const apiUrl = "/Details/" + completeDate;
 
     useEffect(() => {
         axios.get(apiUrl)

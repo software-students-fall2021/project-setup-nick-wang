@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import "./DiaryDetail.css"
+import Footer from "../Footer/Footer";
 
 export default function DiaryDetail(props) {
 
@@ -15,7 +16,7 @@ export default function DiaryDetail(props) {
     const [unSaveValue, setUnSaveValue] = React.useState("");
     
 
-    const apiUrl = "http://localhost:9000/Details/" + username + "/" + date;
+    const apiUrl = "/Details/" + username + "/" + date;
     const month = date.substring(0, date.indexOf("-"));
     const year = date.substring(date.length, date.length - 4);
     const lastDairies = "/Diary/" + month + "/" + year;
@@ -89,6 +90,7 @@ export default function DiaryDetail(props) {
         }}>
             Done
         </Button>
+        <Footer />
         </div>
     );
     }
@@ -130,6 +132,7 @@ export default function DiaryDetail(props) {
             }}>
                 Edit
             </Button>
+            <Footer />
         </div>
     )
   }

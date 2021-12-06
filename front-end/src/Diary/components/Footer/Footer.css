@@ -1,0 +1,9 @@
+.footer{
+    text-align:center;
+    font-size: small;
+    margin-top: 10px;
+    height: auto;
+    margin-bottom: auto;
+    background-color: lightgray;
+    width: 100%;
+  }
