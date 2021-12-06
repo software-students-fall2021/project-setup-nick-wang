@@ -68,9 +68,9 @@ db.once('open', function() {
     })
   });
 
-  router.get('/overview/:year',(req, res) => {
+  router.get('/overview/:username/:year',(req, res) => {
     const selectedYear = new RegExp('.*-' + req.params.year);
-    Diary.find({date: selectedYear}, (err, result)=>{
+    Diary.find({username: req.params.username, date: selectedYear}, (err, result)=>{
       if(err) return console.error(err);
       if(result.length === 0){
         res.json([]);
@@ -101,9 +101,9 @@ db.once('open', function() {
     })
   });
 
-  router.get('/overview/:month/:year',(req, res) => {
+  router.get('/overview/:username/:month/:year',(req, res) => {
     const selectedMonth = new RegExp(req.params.month + '.*-' + req.params.year);
-    Diary.find({date: selectedMonth}, (err, result)=>{
+    Diary.find({username: req.params.username, date: selectedMonth}, (err, result)=>{
       if(err) return console.error(err);
       if(result.length === 0){
         res.json([]);
