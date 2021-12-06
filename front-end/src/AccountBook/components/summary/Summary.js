@@ -22,7 +22,7 @@ function Summary(props){
 
     useEffect(() => {
         axios
-        .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+        .get(`/users/secret`, {
             headers: { authorization: jwtToken }, // pass the token, if any, to the server
         })
         .then((res) => {
