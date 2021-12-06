@@ -5,6 +5,7 @@ import axios from "axios";
 import "./DiaryWordcloud.css";
 import { Container, Dropdown, Button } from "semantic-ui-react";
 import wordList from "./stopword.json";
+import { Navigate } from "react-router-dom";
 
 const testYear = [2016, 2017, 2018, 2019, 2020, 2021];
 
@@ -25,6 +26,10 @@ const testMonth = [
 ];
 
 const DiaryOverview = (props) => {
+  const date = new Date();
+  const now_month = parseInt(date.getMonth()) + 1;
+  const diaryAPI = "/Diary" + "/" + now_month + "/" + date.getFullYear();
+
   function removeST(json_array) {
     let clean = [];
     json_array.forEach((element) => {
@@ -69,56 +74,75 @@ const DiaryOverview = (props) => {
 
   const handleMonth = (e, { value }) => setMonth(value);
 
+  const jwtToken = localStorage.getItem("token");
+
   useEffect(() => {
     // console.log("Select Year: " + year);
-    // console.log("Select Month: " + month);
+    // console.log("Select Month: " + month)
     axios
-      .get(`${process.env.REACT_APP_BACKEND}/overview/yearlist`)
-      .then((res) => {
-        setYearList(res.data);
+      .get(`${process.env.REACT_APP_BACKEND}/users/secret`, {
+        headers: { authorization: jwtToken }, // pass the token, if any, to the server
       })
-      .catch((e) => {
-        setYearList([]);
+      .then((res) => {
+        const username = res.data.username;
+        // console.log("Username: " + username);
+        axios
+          .get(`${process.env.REACT_APP_BACKEND}/overview/yearlist/${username}`)
+          .then((res) => {
+            setYearList(res.data);
+          })
+          .catch((e) => {
+            setYearList([]);
+          });
+        if (!yearList.length) {
+          setYearJsonList(getYear(testYear));
+        } else {
+          setYearJsonList(getYear(yearList));
+        }
+        if (!year) {
+          axios
+            .get(`${process.env.REACT_APP_BACKEND}/diary/word-cloud`)
+            .then((res) => {
+              setWordCloud(res.data);
+            })
+            .catch((e) => {
+              setWordCloud([]);
+            });
+        } else if (!month) {
+          axios
+            .get(
+              `${process.env.REACT_APP_BACKEND}/overview/${username}/${year}`
+            )
+            .then((res) => {
+              const word_count = res.data;
+              let word_clean = removeST(word_count);
+              sortByCount(word_clean);
+              setWordCloud(word_clean.slice(0, 50));
+            })
+            .catch((e) => {
+              setWordCloud([]);
+            });
+        } else {
+          axios
+            .get(
+              `${process.env.REACT_APP_BACKEND}/overview/${username}/${month}/${year}`
+            )
+            .then((res) => {
+              const word_count = res.data;
+              let word_clean = removeST(word_count);
+              sortByCount(word_clean);
+              setWordCloud(word_clean.slice(0, 50));
+            })
+            .catch((e) => {
+              setWordCloud([]);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
       });
-    if (!yearList.length) {
-      setYearJsonList(getYear(testYear));
-    } else {
-      setYearJsonList(getYear(yearList));
-    }
-    if (!year) {
-      axios
-        .get(`${process.env.REACT_APP_BACKEND}/diary/word-cloud`)
-        .then((res) => {
-          setWordCloud(res.data);
-        })
-        .catch((e) => {
-          setWordCloud([]);
-        });
-    } else if (!month) {
-      axios
-        .get(`${process.env.REACT_APP_BACKEND}/overview/${year}`)
-        .then((res) => {
-          const word_count = res.data;
-          let word_clean = removeST(word_count);
-          sortByCount(word_clean);
-          setWordCloud(word_clean.slice(0, 50));
-        })
-        .catch((e) => {
-          setWordCloud([]);
-        });
-    } else {
-      axios
-        .get(`${process.env.REACT_APP_BACKEND}/overview/${month}/${year}`)
-        .then((res) => {
-          const word_count = res.data;
-          let word_clean = removeST(word_count);
-          sortByCount(word_clean);
-          setWordCloud(word_clean.slice(0, 50));
-        })
-        .catch((e) => {
-          setWordCloud([]);
-        });
-    }
     // console.log(wordCloud)
   }, [year, month]);
 
@@ -135,7 +159,7 @@ const DiaryOverview = (props) => {
         <Container>
           <Button
             as={Link}
-            to="/Diary"
+            to={diaryAPI}
             content="Back"
             icon="left arrow"
             labelPosition="left"
