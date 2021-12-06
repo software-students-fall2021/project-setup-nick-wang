@@ -30,7 +30,7 @@ function Add(props){
             trscType: e.target.trscType.value,
           }
           const response = axios.post(
-            "http://localhost:9000/post-add",
+            "/post-add",
             requestData
             )
             

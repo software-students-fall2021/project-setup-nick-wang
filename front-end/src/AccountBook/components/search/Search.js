@@ -19,7 +19,7 @@ function Search(props){
               search : e.target.search.value,
           }
           const response = await axios.post(
-            "http://localhost:9000/post-search",
+            "/post-search",
             requestData
           ) 
     

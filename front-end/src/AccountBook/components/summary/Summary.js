@@ -28,13 +28,13 @@ function Summary(props){
         .then((res) => {
             
             async function fetchData() {
-                const result = await axios("http://localhost:9000/get-transac-data/" + res.data.username)
+                const result = await axios("/get-transac-data/" + res.data.username)
                 setData(result.data)
               
-                const result1 = await axios('http://localhost:9000/get-monthly-limit/' + res.data.username)
+                const result1 = await axios('/get-monthly-limit/' + res.data.username)
                 setLimit(result1.data.monthlyLimit)
 
-                const result2 = await axios('http://localhost:9000/get-monthly-spending/' + res.data.username)
+                const result2 = await axios('/get-monthly-spending/' + res.data.username)
                 setSpending(result2.data.monthlySpending)
             }
             fetchData()
@@ -62,7 +62,7 @@ function Summary(props){
                 }
                 
                 const response = axios.put(
-                    "http://localhost:9000/set-monthly-budget",
+                    '/set-monthly-budget',
                     requestData
                 )
                 
