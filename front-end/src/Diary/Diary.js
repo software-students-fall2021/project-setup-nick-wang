@@ -8,6 +8,7 @@ import axios from 'axios'
 import { Button, Container, Icon } from 'semantic-ui-react'
 import Login from '../Login';
 import { Menu } from '@mui/material';
+import Footer from './components/Footer/Footer';
 
 const Diary = (props) => {
 
@@ -52,7 +53,7 @@ const Diary = (props) => {
     };
 
     return (
-      <>
+      <div className="Diary">
       <Menu fixed="top">
         <Container>
           <Menu.Item as={Link} to={diaryAPI} header>
@@ -79,9 +80,10 @@ const Diary = (props) => {
             )}
         </Container>
       </Menu>
-      <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>    
+      <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>
       <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
-    </>
+      <Footer />
+      </div>
     )
 }
 
