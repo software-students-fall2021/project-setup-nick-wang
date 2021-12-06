@@ -42,6 +42,32 @@ db.once('open', function() {
     })
   });
 
+  router.get('/overview/yearList/:username',(req, res) => {
+    Diary.find({username:req.params.username}, (err, result)=>{
+      if(err) return console.error(err);
+      if(result.length === 0){
+        res.json([{}]);
+      }
+      else{
+        const yearList = [];
+        for(var i = 0; i < result.length; i++){
+          const date = result[i].date;
+          const searchedYear = date.substring(date.length, date.length - 4);
+          if(yearList.includes(searchedYear) === false){
+            yearList.push(searchedYear);
+          }
+        }
+        const modifiedResult = [];
+        for (var key in yearList) {
+          modifiedResult.push({
+            year: yearList[key]
+          });
+        }
+        res.json(modifiedResult);
+      }
+    })
+  });
+
   router.get('/overview/:year',(req, res) => {
     const selectedYear = new RegExp('.*-' + req.params.year);
     Diary.find({date: selectedYear}, (err, result)=>{
