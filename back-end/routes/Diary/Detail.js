@@ -57,13 +57,7 @@ db.once('open', function() {
             yearList.push(searchedYear);
           }
         }
-        const modifiedResult = [];
-        for (var key in yearList) {
-          modifiedResult.push({
-            year: yearList[key]
-          });
-        }
-        res.json(modifiedResult);
+        res.json(yearList);
       }
     })
   });
