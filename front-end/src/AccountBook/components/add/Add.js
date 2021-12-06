@@ -4,7 +4,7 @@ import axios from "axios";
 
 function Add(props){
     const [statusSubmit, setStatusSubmit] = useState(false)
-    const [statusAdd, setStatusAdd] = useState({})
+    //const [statusAdd, setStatusAdd] = useState({})
 
     const handleSubmitAdd = async e => {
       // prevent html form from submiting and reloading
@@ -35,8 +35,10 @@ function Add(props){
             )
             
             console.log(response.data)
-            setStatusAdd(response.data)
+            //setStatusAdd(response.data)
             setStatusSubmit(true)
+
+            props.setStatus(!props.status)
             
         })
         .catch((err) => {
@@ -76,6 +78,7 @@ function Add(props){
           id="trscName"
           name="trscName"
           placeholder="Description"
+          required
           ></Form.Input>
         
         <Form.Input
@@ -84,6 +87,7 @@ function Add(props){
           name="trscAmount"
           step=".01"
           placeholder="$ Amount"
+          required
           ></Form.Input>
         
         <Form.Input
@@ -91,6 +95,7 @@ function Add(props){
           id="trscType"
           name="trscType"
           placeholder="Type"
+          required
         ></Form.Input>
         
         <Form.Button type="submit" name="submit" content="Add"></Form.Button>
