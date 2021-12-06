@@ -21,8 +21,8 @@ function App() {
 
   const { type } = useParams();
   var url2;
-  const url = "http://localhost:9000/Transaction_data/" + type + "?username=";
-  const apiUrl = "http://localhost:9000/save_transaction_data";
+  const url = "/Transaction_data/" + type + "?username=";
+  const apiUrl = "/save_transaction_data";
   const jwtToken = localStorage.getItem("token");
 
   var username_id;
@@ -34,7 +34,7 @@ function App() {
          .then((res) => {
             username_id = res.data.username;
             //url2 = "http://localhost:9000/delete_transaction/"+username_id;
-            const url = "http://localhost:9000/Transaction_data/" + type + "?username=" + username_id; 
+            const url = "/Transaction_data/" + type + "?username=" + username_id; 
             console.log(1);
              async function fetchData() {
                  const result = await axios(url)
@@ -80,7 +80,7 @@ function App() {
           name : e.target.name.value,
       }
       const response = await axios.post(
-        "http://localhost:9000/delete_transaction",
+        "/delete_transaction",
         requestData
       )
       const jwtToken = localStorage.getItem("token");
@@ -128,10 +128,10 @@ function App() {
               username: username_id,
               name: e.target.name.value,
             }
-            const response = axios.post('http://localhost:9000/delete_transaction',
+            const response = axios.post('/delete_transaction',
               {data}
             )
-            var url3 =  "http://localhost:9000/Transaction_data/" + type + "?username=" +username_id;
+            var url3 =  "/Transaction_data/" + type + "?username=" +username_id;
             async function fetchData() {
               const result = await axios(url3)
               setData(result.data)
