@@ -1,10 +1,5 @@
-.DiaryCards{
-    margin-top: 20px;
-    background-color: antiquewhite;
-}
-
 .DiaryCard{
-    background-color:antiquewhite;
+    background-color:antiquewhite !important;
     width:250px;
     height: 250px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -18,9 +13,13 @@
     color: antiquewhite;
 }
 
+.CardAction{
+    height: 100%;
+}
+
 .Paragraph{
     margin: 20px;
-    height: 220px;
+    height: 100%;
     color: black;
 }
 

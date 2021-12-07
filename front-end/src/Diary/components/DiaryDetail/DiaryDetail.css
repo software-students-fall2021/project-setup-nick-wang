@@ -1,9 +1,30 @@
 .DiaryDetail{
-    margin-top: 40px;
+    margin-top: 60px;
     margin-left: 50px;
     margin-right: 50px;
 }
 
-.button1{
-    color:lightcoral;
+.EditButton{
+    margin-top: 20px !important;
+}
+.DoneButton{
+    margin-top: 20px !important;
+}
+
+.textField{
+    margin:auto;
+}
+
+.Content{
+    background-color: #FFFAF0;
+    padding:10px;
+    margin-Top:20px;
+    height: 70vh;
+    width: 85vw;
+}
+
+.Paragraph{
+    word-wrap: "break-word";
+    overflow: hidden;
+    height: 100%;
 }

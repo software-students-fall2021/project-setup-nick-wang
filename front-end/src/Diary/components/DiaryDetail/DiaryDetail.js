@@ -20,11 +20,11 @@ export default function DiaryDetail(props) {
     const month = date.substring(0, date.indexOf("-"));
     const year = date.substring(date.length, date.length - 4);
     const lastDairies = "/Diary/" + month + "/" + year;
-    console.log(lastDairies);
+    //console.log(lastDairies);
 
     useEffect(() => {
         axios.get(apiUrl)
-        .then((response) => {setValue(response.data[0].content)})
+        .then((response) => {setValue(response.data[0].content); setUnSaveValue(response.data[0].content)})
     },[]);
 
     const allowEdit = () => {
@@ -48,20 +48,20 @@ export default function DiaryDetail(props) {
         setIsEditing((b) => !b)
     }
 
+    const handleBack = () =>{
+        window.location = lastDairies;
+    }
+
     if(isEditing){
     return (
-        <div className="DiaryDetail">
-        <Button className="button1" href={lastDairies}>
+        <div class="DiaryDetail">
+        <Button className="BackButton" variant="contained" onClick={handleBack}>
             BACK
         </Button>
-        <Container sx={{ 
-            backgroundColor: '#FFFAF0',
-            padding:'10px',
-            marginTop:'20px',
-            height:'450px'
-        }}>
+        <Container className="Content" fixed={true}>
             <Box component="form">
                 <TextField
+                    className="textField"
                     label="HOW IS YOUR DAY?"
                     variant="outlined"
                     multiline={true}
@@ -69,25 +69,14 @@ export default function DiaryDetail(props) {
                     defaultValue={value}
                     value={unSaveValue}
                     fullWidth={true}
-                    sx={{
-                        marginTop:'auto'
-                    }}
                     onChange={handleEditing}
                 />
             </Box>
         </Container>
         <Button 
-         size="larger"
+         className="DoneButton"
          onClick={handleDone} 
-         variant='contained' 
-         sx={{
-            backgroundColor: 'lightskyblue',
-            fontWeight: 'bold',
-            marginTop: '20px',
-            marginLeft: '91.5%',
-            marginRight: '20px',
-            size:'larger'
-        }}>
+         variant='contained' >
             Done
         </Button>
         <Footer />
@@ -96,40 +85,18 @@ export default function DiaryDetail(props) {
     }
     return (
         <div className="DiaryDetail">
-            <Button variant='contained' href={lastDairies}
-                    sx={{
-                        backgroundColor:'lightskyblue',
-                        marginTop:'20px',
-                        marginLeft:'40px',
-                    }}
-            >
+            <Button variant='contained' onClick={handleBack}>
                 BACK
             </Button>
-            <Container 
-            fixed={true}
-            sx={{ 
-                backgroundColor: '#FFFAF0',
-                height:'450px',
-                marginTop:'20px',
-                padding:'10px',
-            }}>
-                <Typography 
-                 paragraph={true}
-                >
+            <Container className="Content">
+                <Typography className="Paragraph" paragraph={true}>
                     {value}
                 </Typography>
             </Container>
             <Button 
+             className="EditButton"
              onClick={allowEdit} 
-             variant='contained' 
-             sx={{
-                 backgroundColor: 'lightskyblue',
-                 fontWeight: 'bold',
-                 marginTop: '20px',
-                 marginLeft: '91.5%',
-                 marginRight: '20px',
-                 size:'larger'
-            }}>
+             variant='contained'>
                 Edit
             </Button>
             <Footer />

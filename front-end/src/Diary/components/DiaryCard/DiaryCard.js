@@ -21,7 +21,7 @@ export default function DiaryCards(props){
     },[props.username]);
     
     return(
-        <Card className="DiaryCard" fullWidth={true} sx={{backgroundColor: 'antiquewhite'}}>
+        <Card className="DiaryCard" fullWidth={true}>
             <CardActionArea className="CardAction" href={"/Detail/" + completeDate}>
                 <CardContent>
                     <Typography gutterBottom color="black" variant="h5" component="div">
