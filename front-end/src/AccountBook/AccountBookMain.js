@@ -1,17 +1,14 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
 import { Header, Segment, Grid, Divider } from "semantic-ui-react"
-import Transaction from './components/transactions/Transaction'
 import Summary from "./components/summary/Summary"
 import Search from "./components/search/Search"
 import Add from "./components/add/Add"
-import Categories from "./components/categories/Categories"
 import RecentTransactions from "./components/RecentTransactions/RecentTransactions"
-import Footer from "./components/footer/footer"
 import "./AccountBookMain.css"
 
 function AccountBookMain() {
   const [statusAdd, setStatusAdd] = useState(false)
+
   return (
     <body>
       <h1/>
@@ -32,9 +29,7 @@ function AccountBookMain() {
 
       <RecentTransactions status={statusAdd}/>
 
-      <Summary/>
-
-      <Categories/>
+      <Summary status={statusAdd}/>
 
       <footer className="footerABM">
         <p>&copy;2021 LifeNote Team</p>
