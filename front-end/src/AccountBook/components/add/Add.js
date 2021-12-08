@@ -1,10 +1,25 @@
 import { Header, Form } from "semantic-ui-react"
 import React, { useState } from "react";
 import axios from "axios";
+import { set } from "mongoose";
+
+const options = [
+  { key: 'h', text: 'Housing', value: 'housing' },
+  { key: 't', text: 'Transportation', value: 'transportation' },
+  { key: 'f', text: 'Food', value: 'food' },
+  { key: 'h', text: 'Health', value: 'health' },
+  { key: 'u', text: 'Utilities', value: 'utilities' },
+  { key: 'm', text: 'Miscellaneous', value: 'miscellaneous' }
+]
 
 function Add(props){
     const [statusSubmit, setStatusSubmit] = useState(false)
     //const [statusAdd, setStatusAdd] = useState({})
+    const [state, setState] = useState({trscType: ""})
+
+    const handleOnChange = (e, value) => {
+      setState({trscType : value});
+     };
 
     const handleSubmitAdd = async e => {
       // prevent html form from submiting and reloading
@@ -22,12 +37,13 @@ function Add(props){
         .then((res) => {
           console.log(res.data);
           // send a post request to the server
+
           const requestData = {
             username: res.data.username,
 
             trscName: e.target.trscName.value,
             trscAmount: e.target.trscAmount.value,
-            trscType: e.target.trscType.value,
+            trscType: state.trscType.value
           }
           const response = axios.post(
             "/post-add",
@@ -90,13 +106,15 @@ function Add(props){
           required
           ></Form.Input>
         
-        <Form.Input
-          type="text"
+        <Form.Select
+          fluid
           id="trscType"
           name="trscType"
+          options={options}
           placeholder="Type"
+          onChange={handleOnChange}
           required
-        ></Form.Input>
+        ></Form.Select>
         
         <Form.Button type="submit" name="submit" content="Add"></Form.Button>
         

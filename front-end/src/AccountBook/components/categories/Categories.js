@@ -1,37 +1,25 @@
 import { Link } from "react-router-dom"
-import { Header , Button, Segment } from "semantic-ui-react"
+import { Button } from "semantic-ui-react"
 
+function Color(type) {
+    if(type == 'housing') return 'orange';
+    else if(type == 'transportation') return 'green';
+    else if(type == 'food') return 'blue';
+    else if(type == 'health') return 'violet';
+    else if(type == 'utilities') return 'pink';
+    else if(type == 'miscellaneous') return 'brown';
+};
+
+//capitalize first letter
+function displayType(type){
+    return type.charAt(0).toUpperCase() + type.slice(1);
+}
 
 function Categories(props){
     return(
-        <Segment>
-            <Header>Categories</Header>
-        
-            <Button color='orange' as={Link} to="/account_book/housing">
-            Housing
-            </Button>
-
-            <Button color='green' as={Link} to="/account_book/transportation">
-            Transportation
-            </Button>
-
-            <Button color='blue' as={Link} to="/account_book/food">
-            Food
-            </Button>
-
-            <Button color='violet' as={Link} to="/account_book/health">
-            Health
-            </Button>
-
-            <Button color='pink' as={Link} to="/account_book/utilities">
-            Utilities    
-            </Button>
-
-            <Button color='brown' as={Link} to="/account_book/miscellaneous">
-            Miscellaneous
-            </Button>
-
-        </Segment>
+        <>
+            <Button color={Color(props.type)} as={Link} to={"/account_book/"+props.type} content={displayType(props.type)}/>
+        </>
     )
 }
 

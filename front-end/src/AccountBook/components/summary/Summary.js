@@ -1,17 +1,8 @@
-import { Header, Form, Segment, Grid, Button } from "semantic-ui-react"
+import { Header, Form, Segment, Grid, Button, Label, Item } from "semantic-ui-react"
 import { PieChart } from "react-minimal-pie-chart"
+import Categories from "../categories/Categories";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-function color(type) {
-    if(type == 'housing') return 'orange';
-    else if(type == 'transportation') return 'green';
-    else if(type == 'food') return 'blue';
-    else if(type == 'health') return 'violet';
-    else if(type == 'utilities') return 'pink';
-    else if(type == 'miscellaneous') return 'brown';
-    else return 'yellow';
-};
 
 function Summary(props){
     const jwtToken = localStorage.getItem("token");
@@ -45,7 +36,27 @@ function Summary(props){
             )
         })
 
-    }, [])
+    }, [props.status])
+
+    const TypeColor = (type) => {
+        if(type == 'housing') return 'orange';
+        else if(type == 'transportation') return 'green';
+        else if(type == 'food') return 'blue';
+        else if(type == 'health') return 'violet';
+        else if(type == 'utilities') return 'pink';
+        else if(type == 'miscellaneous') return 'brown';
+    };
+    
+
+    const Reveal = () => {
+        if(Spending > limit) return 100;
+        else return Spending/limit*100;
+    }
+
+    const RevealColor = () => {
+        if(Spending > limit) return "red";
+        else return "blue";
+    };
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -86,40 +97,14 @@ function Summary(props){
             <Header as='h1'>Your Spending Summary</Header>
             
             <Grid stackable verticalAlign='middle'>
-                <Grid.Row centered columns={1}>
-                    <Grid.Column>
-                    <Form onSubmit={handleSubmit}>
-                            <Form.Input type="number" name="amount" step="1" placeholder="Set Monthly Budget"></Form.Input>
-                            <Button type="submit" content="Submit"/>
-                        </Form>
-                    </Grid.Column>
-                </Grid.Row>
 
                 <Grid.Row centered columns={2}>
                     <Grid.Column>
                         <PieChart
-                        radius="40"
-                        data={data.map(item => ({
-                        title: item._id,
-                        value: item.totalAmount,
-                        color: color(item._id),
-                        }))}
-                        //label={({ dataEntry }) => dataEntry.title}
-                        labelStyle={{
-                        fontSize: "5px",
-                        fontFamily: "Arial",
-                        fill: "black",
-                        }}
-                        labelPosition={112}
-                        />
-                    </Grid.Column>
-
-                    <Grid.Column>
-                        <PieChart
-                        radius="40"
-                        data={[{ value: Spending, key: 1, color: "blue" }]}
+                        radius="30"
+                        data={[{ value: Spending, key: 1, color: RevealColor() }]}
                         startAngle={270}
-                        reveal={ Spending/limit * 100}
+                        reveal={ Reveal()}
                         lineWidth={30}
                         background="#c5d3eb"
                         lengthAngle={360}
@@ -134,8 +119,52 @@ function Summary(props){
                         labelPosition={0}
                         />
                     </Grid.Column>
+                        
+                    <Grid.Column>
+                        <PieChart
+                        radius="30"
+                        data={data.map(item => ({
+                            title: item._id,
+                            value: item.totalAmount,
+                            color: TypeColor(item._id),
+                        }))}
+                        labelStyle={{
+                            fontSize: "5px",
+                            fontFamily: "Arial",
+                            fill: "black",
+                        }}
+                        labelPosition={112}
+                        />
+                    </Grid.Column>
+
                 </Grid.Row>
 
+                <Grid.Row centered columns={2}>
+                    <Grid.Column verticalAlign='middle'>
+                        <Form onSubmit={handleSubmit}>
+                            <Header>Total Spending in current month: ${Spending} <br/> Your monthly budget: ${limit}</Header>
+                            
+                                <Form.Input 
+                                    required
+                                    type="number" 
+                                    name="amount" 
+                                    step="1" 
+                                    placeholder="Set Monthly Budget">
+                                </Form.Input>
+
+                                <Button type="submit" content="Submit"/>
+
+                        </Form>
+                    </Grid.Column>
+
+                    <Grid.Column verticalAlign='middle'>
+                        <Header>Categories of your transactions</Header>
+
+                        {data.map(item =>(
+                            <Categories type={item._id}/>
+                        ))}
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
         </Segment>
     )
