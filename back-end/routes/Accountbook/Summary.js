@@ -28,9 +28,10 @@ router.get('/get-monthly-spending/:username', (req, res) => {
     }], (err, result) => {
       if(err) return console.error(err);
       if(result.length === 0){
-        res.json([{
+        res.json({
+          _id: "",
           monthlySpending: 0
-        }])
+        })
       }
       else{
         res.json(result[0]);
@@ -48,13 +49,15 @@ router.get('/get-transac-data/:username', (req, res) => {
         _id: { $toLower: "$type" }, 
         totalAmount: { $sum: "$amount" } 
       }
+    },
+    {
+      $sort : { totalAmount: -1 }
     }], (err, result) => {
       if(err) return console.error(err);
       if(result.length === 0){
         res.json([{
-          title: "",
-          value: 0,
-          color: '#FFFFFF'
+          _id: "It's currently empty",
+          totalAmount: 0.01,
         }])
       }
       else{
@@ -68,9 +71,9 @@ router.get('/get-monthly-limit/:username', (req, res) => {
     Summary.find({username : req.params.username}, (err, result) => {
         if(err) return console.error(err);
         if(result.length === 0){
-          res.json([{
+          res.json({
             monthlyLimit: 0
-          }])
+          })
         }
         else{
           res.json(result[0]);

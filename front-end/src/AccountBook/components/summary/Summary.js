@@ -1,4 +1,4 @@
-import { Header, Form, Segment, Grid, Button, Label, Item } from "semantic-ui-react"
+import { Header, Form, Segment, Grid, Button } from "semantic-ui-react"
 import { PieChart } from "react-minimal-pie-chart"
 import Categories from "../categories/Categories";
 import React, { useEffect, useState } from "react";
@@ -7,7 +7,10 @@ import axios from "axios";
 function Summary(props){
     const jwtToken = localStorage.getItem("token");
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([{
+        _id: "It's currently empty",
+        totalAmount: 0.01,
+      }])
     const [limit, setLimit] = useState(0)
     const [Spending, setSpending] = useState(0)
 
@@ -42,9 +45,10 @@ function Summary(props){
         if(type == 'housing') return 'orange';
         else if(type == 'transportation') return 'green';
         else if(type == 'food') return 'blue';
-        else if(type == 'health') return 'violet';
-        else if(type == 'utilities') return 'pink';
+        else if(type == 'health') return 'purple';
+        else if(type == 'utilities') return 'red';
         else if(type == 'miscellaneous') return 'brown';
+        else return 'grey';
     };
     
 
@@ -57,6 +61,8 @@ function Summary(props){
         if(Spending > limit) return "red";
         else return "blue";
     };
+
+
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -126,14 +132,8 @@ function Summary(props){
                         data={data.map(item => ({
                             title: item._id,
                             value: item.totalAmount,
-                            color: TypeColor(item._id),
+                            color: TypeColor(item._id)
                         }))}
-                        labelStyle={{
-                            fontSize: "5px",
-                            fontFamily: "Arial",
-                            fill: "black",
-                        }}
-                        labelPosition={112}
                         />
                     </Grid.Column>
 
@@ -158,10 +158,10 @@ function Summary(props){
                     </Grid.Column>
 
                     <Grid.Column verticalAlign='middle'>
-                        <Header>Categories of your transactions</Header>
+                        <Header>Categories of your transactions:</Header>
 
                         {data.map(item =>(
-                            <Categories type={item._id}/>
+                            <Categories type={item._id} color={TypeColor(item._id)}/>
                         ))}
                     </Grid.Column>
                 </Grid.Row>
