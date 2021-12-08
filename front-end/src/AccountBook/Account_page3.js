@@ -179,32 +179,32 @@ function App() {
         <img src="logo01.png" className = "center"/>
       </a>
       <div>
-      <h></h>
-      <h1>  Transaction of {type}</h1>
-      
-       <Button onClick={() => history(-1)}>Go Back</Button>
+        <h></h>
+        <h1>  Transaction of {type}</h1>
+        <Segment>
+          <Button onClick={() => history(-1)}>Go Back</Button>
+          <Button style ={{float: 'right'}}onClick={(handleDone)}>Save</Button>
+        </Segment>
       </div>
       
-      <div style={{ display: "flex" }}>
-        <Button onClick={(handleDone)}>Save</Button>
-        {/* <button  style={{ marginLeft: "auto" }}  onClick={getSelectedRowData} > Get Selected Data</button>*/}
-        
-      </div>
       <div>
-      <Grid.Column>
-      <Form text-align="center" onSubmit={handleSubmitDelete}>
-            <Form.Input type="text" 
-            id = "name" 
-            name="name"
-            placeholder="Name of transation">
-            </Form.Input>
+        <Segment textAlign='center'>
+          <Grid.Column>
+            <Form text-align="center" onSubmit={handleSubmitDelete}>
+              <Form.Input type="text" 
+                id = "name" 
+                name="name"
+                placeholder="Name of transation">
+              </Form.Input>
             <Button type="submit" content="Delete"/>
-          </Form>
+            </Form>
           </Grid.Column>
+        </Segment>
       </div>
-        <div style={{ width: '100%', height: '60%' }}>
-          <div className="container">
-            <div id="left"></div>
+
+      <div style={{ width: '100%', height: '70%' }}>
+        <div className="container">
+          <div id="left"></div>
             <div id="center">
               <div
                 id="myGrid"
@@ -214,21 +214,20 @@ function App() {
                 }}
                 className="ag-theme-material"
               >
-                
                 <AgGridReact
                   rowSelection="single" rowData={data} >
                   <AgGridColumn field="name" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="amount"  sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
                   <AgGridColumn field="date" sortable={ true } filter = {true} editable = {true} ></AgGridColumn>
-              </AgGridReact>
+                </AgGridReact> 
               </div>
             </div>
-            <div id="right"></div>
-          </div>
+          <div id="right"></div>
         </div>
-        <Footer/>
       </div>
-      
+      <Footer/>
+    </div>
+  
 );
 }
 

@@ -7,6 +7,7 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Footer from "./components/footer/footer"
+import { Header, Form, Segment, Grid, Divider, Button, FormGroup } from "semantic-ui-react"
 
 
 function App() {
@@ -66,7 +67,9 @@ function App() {
       <div>
         <h></h>
        <h1> Most Recent Transaction</h1>
-       <button onClick={() => history(-1)}>Go Back</button>
+       <Segment>
+          <Button onClick={() => history(-1)}>Go Back</Button>
+        </Segment>
       </div>
         <div style={{ width: '100%', height: '70%' }}>
           <div className="container">
