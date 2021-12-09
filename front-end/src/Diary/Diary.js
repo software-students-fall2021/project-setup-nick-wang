@@ -20,7 +20,6 @@ const Diary = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     //console.log(date);
 
-
     React.useEffect(() => {
         // setToken(localStorage.getItem("token")); // the JWT token, if we have already received one and stored it in localStorage
         
@@ -54,35 +53,42 @@ const Diary = (props) => {
 
     return (
       <div className="Diary">
-      <Menu fixed="top">
-        <Container>
-          <Menu.Item as={Link} to={diaryAPI} header>
-            LifeNote
-          </Menu.Item>
-            {isLoggedIn ? (
-                <>
-                  <Menu.Item position="right">
-                    <Icon name="user circle" size="large" />
-                    <span>{response.username}</span>
-                    <Button
-                    as={Link}
-                    to="/logout"
-                    className="Logout"
-                    onClick={handleLogout}
-                    Secondary
-                    >
-                      Log out
-                    </Button>
-                  </Menu.Item>
-                </>
-            ) : (
-                <Login></Login>
-            )}
-        </Container>
-      </Menu>
-      <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>
-      <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
-      <Footer />
+        {isLoggedIn ? (
+          <>
+          <Menu fixed="top">
+            <Container>
+              <Menu.Item as={Link} to={diaryAPI} header>
+                LifeNote
+              </Menu.Item>
+              <Menu.Item position="right">
+                <Icon name="user circle" size="large" />
+                <span>{response.username}</span>
+                <Button
+                as={Link}
+                to="/logout"
+                className="Logout"
+                onClick={handleLogout}
+                Secondary
+                >
+                Log out
+                </Button>
+              </Menu.Item>
+            </Container>
+          </Menu>
+        <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>
+        <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
+        <Footer />
+        </>
+        ) : (
+          <Menu fixed="top">
+            <Container>
+              <Menu.Item as={Link} to={diaryAPI} header>
+                LifeNote
+              </Menu.Item>
+              <Login />
+            </Container>
+          </Menu>
+        )}
       </div>
     )
 }
