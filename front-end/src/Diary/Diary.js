@@ -54,34 +54,41 @@ const Diary = (props) => {
 
     return (
       <div className="Diary">
-      <Menu fixed="top">
-        <Container>
-          <Menu.Item as={Link} to={diaryAPI} header>
-            LifeNote
-          </Menu.Item>
-            {isLoggedIn ? (
-                <>
-                  <Menu.Item position="right">
-                    <Icon name="user circle" size="large" />
-                    <span>{response.username}</span>
-                    <Button
-                    as={Link}
-                    to="/logout"
-                    className="Logout"
-                    onClick={handleLogout}
-                    Secondary
-                    >
-                      Log out
-                    </Button>
-                  </Menu.Item>
-                </>
-            ) : (
+        {isLoggedIn ? (
+          <>
+          <Menu fixed="top">
+            <Container>
+              <Menu.Item as={Link} to={diaryAPI} header>
+                LifeNote
+              </Menu.Item>
+              <Menu.Item position="right">
+              <Icon name="user circle" size="large" />
+              <span>{response.username}</span>
+              <Button
+              as={Link}
+              to="/logout"
+              className="Logout"
+              onClick={handleLogout}
+              Secondary
+              >
+                Log out
+              </Button>
+              </Menu.Item>
+            </Container>
+          </Menu>
+          <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>
+          <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
+          </>
+        ) : (
+            <Menu fixed="top">
+            <Container>
+              <Menu.Item as={Link} to={diaryAPI} header>
+                LifeNote
+              </Menu.Item>
                 <Login></Login>
-            )}
-        </Container>
-      </Menu>
-      <DiaryStack pickedMonth={parseInt(pickedDate.getMonth()) + 1} pickedYear={pickedDate.getFullYear()} username={username}></DiaryStack>
-      <BottomNav pickedDate={pickedDate} setPickedDate={setPickedDate}></BottomNav>
+            </Container>
+        </Menu>
+        )}        
       <Footer />
       </div>
     )

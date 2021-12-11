@@ -18,7 +18,7 @@ export default function DiaryCards(props){
         setUsername(props.username);
         axios.get(apiUrl)
         .then((response) => {setContent(response.data[0].content)})
-    },[props.username]);
+    },[props.username, props.month]);
     
     return(
         <Card className="DiaryCard" fullWidth={true}>
