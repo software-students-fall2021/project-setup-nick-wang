@@ -46,7 +46,7 @@ const Diary = (props) => {
     const [pickedDate, setPickedDate] = useState(new Date(year , tempMonth));
     //console.log(pickedDate);
     const [username, setUsername] = useState("");
-    const diaryAPI = "/Diary" + "/" + month + "/" + year;
+    const diaryAPI = "/Diary/" + month + "/" + year;
 
     const handleLogout = (e) => {
         setIsLoggedIn(false);
